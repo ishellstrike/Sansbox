@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="MainPart">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>
+      </Extensions>
+    </Filter>
+    <Filter Include="Render">
+      <UniqueIdentifier>{18942d0f-3c4f-4f07-a845-461e1deda16d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render\Геометрия">
+      <UniqueIdentifier>{4d3e6b30-268f-4569-943f-72e9f38e1395}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MapPart">
+      <UniqueIdentifier>{d9914293-401a-432c-9ba8-2e115f0f741c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Bitmap.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageAtlas.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Render\Геометрия</Filter>
+    </ClInclude>
+    <ClInclude Include="Rectangle.h">
+      <Filter>Render\Геометрия</Filter>
+    </ClInclude>
+    <ClInclude Include="BufferArray.h">
+      <Filter>MainPart</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse.h">
+      <Filter>MainPart</Filter>
+    </ClInclude>
+    <ClInclude Include="FPSCounter.h">
+      <Filter>MainPart</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>MainPart</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMath.h">
+      <Filter>MainPart</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicText.h">
+      <Filter>MainPart</Filter>
+    </ClInclude>
+    <ClInclude Include="Keyboard.h">
+      <Filter>MainPart</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>MainPart</Filter>
+    </ClInclude>
+    <ClInclude Include="Block.h">
+      <Filter>MapPart</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTimer.h">
+      <Filter>MainPart</Filter>
+    </ClInclude>
+    <ClInclude Include="MapSector.h">
+      <Filter>MapPart</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLevel.h">
+      <Filter>MapPart</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>MapPart</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteAtlas.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Game.cpp">
+      <Filter>MainPart</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>MainPart</Filter>
+    </ClCompile>
+    <ClCompile Include="Bitmap.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageAtlas.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Render.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Keyboard.cpp">
+      <Filter>MainPart</Filter>
+    </ClCompile>
+    <ClCompile Include="Mouse.cpp">
+      <Filter>MainPart</Filter>
+    </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>Render\Геометрия</Filter>
+    </ClCompile>
+    <ClCompile Include="Rectangle.cpp">
+      <Filter>Render\Геометрия</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicText.cpp">
+      <Filter>MainPart</Filter>
+    </ClCompile>
+    <ClCompile Include="BufferArray.cpp">
+      <Filter>MainPart</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>MainPart</Filter>
+    </ClCompile>
+    <ClCompile Include="FPSCounter.cpp">
+      <Filter>MainPart</Filter>
+    </ClCompile>
+    <ClCompile Include="GameTimer.cpp">
+      <Filter>MainPart</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteAtlas.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

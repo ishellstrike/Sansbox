@@ -1,0 +1,530 @@
+{
+  "0":{
+    "Name":"???",
+    "IsWalkable":true,
+    "IsTransparent":true,
+    "MTex":"none",
+  },
+  "error":{
+    "Name":"ОШИБКА",
+    "IsWalkable":true,
+    "IsTransparent":true,
+    "MTex":"error",
+  },
+  "1":{
+    "Name":"Кирпичная кладка",
+    "MTex":"briwall1",
+    "Wallmaker":true,
+  },
+  "st_wall":{
+    "Name":"Стальная стена",
+    "MTex":"steelwall1",
+    "Wallmaker":true,
+	"AlterMtex":["steelwall6","steelwall2","steelwall3","steelwall4","steelwall5"],
+  },
+  "w2":{
+    "Name":"Стена 2",
+    "MTex":"briwall1",
+    "Wallmaker":true,
+  },
+  "w3":{
+    "Name":"Стена 3",
+    "MTex":"briwall1",
+    "Wallmaker":true,
+  },
+  "shkaf":{
+    "Name":"Шкаф",
+    "MTex":"shkaf",
+    "Flame":true,
+  },
+  "shkaf2":{
+    "Name":"Шкаф",
+    "MTex":"shkaf2",
+    "Flame":true,
+  },
+  "shkaf3":{
+    "Name":"Шкаф",
+    "MTex":"shkaf3",
+    "Flame":true,
+  },
+  "stelaj_food":{
+    "Name":"Продовольственный стелаж",
+    "MTex":"foodpolka",
+    "AlterMtex":["foodpolka1", "foodpolka2", "foodpolka3", "foodpolka4"],
+    "swide":28,
+    "SmartAction":"ActionOpenContainer",
+    "Flame":true,
+	"ItemSpawn":[
+		{
+			"Ids":["spawn_shopfood","cigarets"],
+			"Min":1,
+			"Max":3, 
+			"Prob":25, 
+			"Repeat":20
+		},
+	],
+	"Type":"BlockChest",
+  },
+  "stelaj_weapon":{
+    "Name":"Оруженый стелаж",
+    "MTex":"notex",
+    "swide":28,
+    "SmartAction":"ActionOpenContainer",
+    "Flame":true,
+  },
+  "stelaj_weapon_armored":{
+    "Name":"Бронированный стелаж с оружием",
+    "MTex":"notex",
+    "swide":28,
+    "SmartAction":"ActionOpenContainer",
+    "Flame":true,
+  },
+  "stelaj_hospital":{
+    "Name":"Cтелаж с лекарствами",
+    "MTex":"medpolka",
+    "AlterMtex":["medpolka1", "medpolka2", "medpolka3", "medpolka4"],
+    "swide":28,
+    "SmartAction":"ActionOpenContainer",
+    "Flame":true,
+	"ItemSpawn":[
+		{
+			"Ids":["pantocid", "bint1", "bint2", "cofein"],
+			"Min":10,
+			"Max":20, 
+			"Prob":25, 
+			"Repeat":1
+		},
+		{
+			"Ids":["pantocid", "bint1", "bint2", "cofein"],
+			"Min":1,
+			"Max":3, 
+			"Prob":80, 
+			"Repeat":1
+		}
+	],
+	"Type":"BlockChest",
+  },
+  "stelaj_wear":{
+    "Name":"Cтелаж с одеждой",
+    "MTex":"wearpolka",
+    "AlterMtex":["wearpolka1", "wearpolka2", "wearpolka3", "wearpolka4"],
+    "SmartAction":"ActionOpenContainer",
+    "Flame":true,
+	"IsTransparent":true,
+  },
+  "3":{
+    "Name":"Деревянная дверь (закрыта)",
+    "SmartAction":"ActionOpenClose",
+    "AfterDeathId":7,
+    "MTex":"door1",
+    "Wallmaker":true,
+    "Flame":true,
+  },
+  "6":{
+    "Name":"Деревянная дверь (закрыта)",
+    "SmartAction":"ActionOpenClose",
+    "AfterDeathId":7,
+    "MTex":"door1_open",
+    "Wallmaker":true,
+    "Flame":true,
+  },
+  "7":{
+    "Name":"Деревянная дверь (открыта)",
+    "SmartAction":"ActionOpenClose",
+    "AfterDeathId":3,
+    "IsWalkable":true,
+    "IsTransparent":true,
+    "MTex":"door1_open",
+    "Wallmaker":true,
+    "Flame":true,
+  },
+  "4":{
+    "Name":"Металлическая дверь (закрыта)",
+    "SmartAction":"ActionOpenClose",
+    "AfterDeathId":8,
+    "MTex":"door2",
+    "Wallmaker":true,
+  },
+  "5":{
+    "Name":"Металлическая дверь (закрыта)",
+    "SmartAction":"ActionOpenClose",
+    "AfterDeathId":8,
+    "MTex":"door2",
+    "Wallmaker":true,
+  },
+  "8":{
+    "Name":"Металлическая дверь (открыта)",
+    "SmartAction":"ActionOpenClose",
+    "AfterDeathId":4,
+    "IsWalkable":true,
+    "IsTransparent":true,
+    "MTex":"door2_open",
+    "Wallmaker":true,
+  },
+  "9":{
+    "Name":"Консоль",
+    "AlterMtex":["9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26"],
+    "MTex":9,
+  },
+  "10":{
+    "Name":"Кровать",
+    "AlterMtex":["bed2", "bed3", "bed4", "bed5"],
+    "IsTransparent":true,
+    "MTex":"bed1",
+    "Flame":true,
+  },
+  "scrapbox":{
+    "Name":"Ящик",
+    "SmartAction":"ActionOpenContainer",
+    "AlterMtex":["crates2", "crates3"],
+    "IsTransparent":true,
+    "MTex":"crates1",
+    "Flame":true,
+	"ItemSpawn": [
+		{
+			"Ids":["opilki", "izolenta", "skotch", "stick", "batery"],
+			"Max":2,
+			"Min":1,
+			"Prob":80,
+			"Repeat":1
+		},
+		{
+			"Ids":["nail", "smallvint"],
+			"Max":10,
+			"Min":5,
+			"Prob":10,
+			"Repeat":1
+		},
+		{
+			"Ids":["spawn_trash"],
+			"Max":1,
+			"Min":1,
+			"Prob":50,
+			"Repeat":4
+		}
+	],
+	"Type":"BlockChest",
+  },
+  "16":{
+    "Name":"Дерево",
+    "swide":16,
+    "MTex":"tree1",
+    "Flame":true,
+  },
+  "18":{
+    "Name":"Небольшое дерево",
+    "swide":16,
+    "MTex":"tree2",
+    "Flame":true,
+  },
+  "17":{
+    "Name":"Куст",
+    "swide":16,
+    "MTex":"bush1",
+    "Flame":true,
+  },
+  "19":{
+    "Name":"Окно",
+    "IsTransparent":true,
+    "MTex":"glass_hor",
+    "Wallmaker":true,
+    "Flame":true,
+  },
+  "20":{
+    "Name":"Окно",
+    "IsTransparent":true,
+    "MTex":"glass_hor",
+    "Wallmaker":true,
+    "Flame":true,
+  },
+  "flower":{
+    "Name":"Комнатный цветок",
+    "MTex":"cvet",
+	"AlterMtex":["cvet1","cvet2","cvet3"],
+    "Fame":true,
+  },
+  "21":{
+    "Name":"Прилавок",
+    "IsTransparent":true,
+    "MTex":"table_hor_mid",
+    "Flame":true,
+	"Height":0.3,
+	"Wallmaker":true,
+  },
+  "22":{
+    "Name":"Прилавок",
+    "IsTransparent":true,
+    "MTex":"table_hor_mid",
+    "Flame":true,
+	"Height":0.3,
+	"Wallmaker":true,
+  },
+  "23":{
+    "Name":"Прилавок",
+    "IsTransparent":true,
+    "MTex":"table_hor_mid",
+    "Flame":true,
+	"Height":0.3,
+	"Wallmaker":true,
+  },
+  "kustsmall":{
+    "Name":"Молодой кустарник",
+    "IsWalkable":true,
+    "IsTransparent":true,
+    "MTex":"mbush1",
+    "AlterMtex":["mbush2", "mbush3"],
+    "Flame":true,
+  },
+  "kustbig":{
+    "Name":"Густой кустарник",
+    "IsWalkable":true,
+    "IsTransparent":true,
+    "MTex":"bush1",
+    "Flame":true,
+  },
+  "bbochka":{
+    "Name":"Горящая бочка",
+    "IsTransparent":true,
+    "MTex":"bochka",
+  },
+  "bath":{
+    "Name":"Ванная",
+    "IsTransparent":true,
+    "MTex":"bath1",
+    "AlterMtex":["bath2", "bath3", "bath4", "bath5"],
+    "IsTransparent":true,
+  },
+  "smallsafe":{
+    "Name":"Небольшой сейф",
+    "IsTransparent":true,
+    "MTex":"safe1",
+	"ItemSpawn": [
+		{
+			"Ids":["spawn_money"],
+			"Max":1,
+			"Min":1,
+			"Prob":90,
+			"Repeat":4
+		},
+		{
+			"Ids":["spawn_core_lightweapon"],
+			"Max":1,
+			"Min":1,
+			"Prob":20,
+			"Repeat":1
+		}
+	],
+	"Type":"BlockChest",
+  },
+  "bigsafe":{
+    "Name":"Большой сейф",
+    "IsTransparent":true,
+    "MTex":"safe2",
+	"ItemSpawn": [
+		{
+			"Ids":["spawn_money"],
+			"Max":1,
+			"Min":1,
+			"Prob":90,
+			"Repeat":10
+		},
+		{
+			"Ids":["spawn_core_lightweapon"],
+			"Max":1,
+			"Min":1,
+			"Prob":40,
+			"Repeat":1
+		}
+	],
+	"Type":"BlockChest",
+  },
+  "stul":{
+    "Name":"Стул",
+    "IsTransparent":true,
+    "MTex":"chair1",
+    "Flame":true,
+	"BlockScript":"bs_firetest",
+  },
+  "fence_wood":{
+    "Name":"Деревянная изгородь",
+    "IsTransparent":true,
+    "MTex":"fence_w",
+	"AlterMtex":["fence_w1","fence_w2"],
+    "Flame":true,
+	"Height":0.5,
+	"Wallmaker":true,
+  },
+  "fence_steel":{
+    "Name":"Стальная изгородь",
+    "IsTransparent":true,
+    "MTex":"fence_s",
+	"AlterMtex":["fence_s1","fence_s2"],
+	"Height":0.5,
+	"Wallmaker":true,
+  },
+  "washer":{
+    "Name":"Стиральная машина",
+    "IsTransparent":true,
+    "MTex":"washer",
+    "Flame":true,
+  },
+  "fridge":{
+    "Name":"Холодильник",
+    "IsTransparent":true,
+    "MTex":"fridge1",
+    "Flame":true,
+	"ItemSpawn": [
+		{
+			"Ids":["spawn_cookedfood"],
+			"Max":1,
+			"Min":1,
+			"Prob":50,
+			"Repeat":6
+		},
+		{
+			"Ids":["spawn_shopfood"],
+			"Max":1,
+			"Min":1,
+			"Prob":50,
+			"Repeat":4
+		}
+	],
+	"Type":"BlockChest",
+  },
+  "small_fridge":{
+    "Name":"Небольшой холодильник",
+    "IsTransparent":true,
+    "MTex":"fridge2",
+    "Flame":true,
+	"ItemSpawn": [
+		{
+			"Ids":["spawn_cookedfood"],
+			"Max":1,
+			"Min":1,
+			"Prob":50,
+			"Repeat":3
+		},
+		{
+			"Ids":["spawn_shopfood"],
+			"Max":1,
+			"Min":1,
+			"Prob":50,
+			"Repeat":2
+		}
+	],
+	"Type":"BlockChest",
+  },
+  "plita":{
+  "Name":"Газовая плита",
+  "MTex":"plita",
+  "Flame":true,
+  },
+  "liq_polka":{
+    "Name":"Стелаж с алкоголем",
+    "IsTransparent":true,
+    "MTex":"liqpolka",
+	"AterMtex":["liqpolka1","liqpolka2","liqpolka3"],
+    "Flame":true,
+	"ItemSpawn": [
+		{
+			"Ids":["vodkabottlecl","vinebottlecl"],
+			"Max":2,
+			"Min":3,
+			"Prob":70,
+			"Repeat":3
+		},
+	],
+	"Type":"BlockChest",
+  },
+  "water_heater":{
+    "Name":"Водонагреватель",
+    "IsTransparent":true,
+    "MTex":"heater",
+    "Flame":true,
+  },
+  "posude_shkaf":{
+    "Name":"Стойка с посудой",
+    "IsTransparent":true,
+    "MTex":"glass_hor",
+    "Flame":true,
+	"ItemSpawn": [
+		{
+			"Ids":["spawn_posuda"],
+			"Max":5,
+			"Min":1,
+			"Prob":80,
+			"Repeat":3
+		},
+	],
+	"Type":"BlockChest",
+  },
+  "trash_can":{
+    "Name":"Мусорное ведро",
+    "IsTransparent":true,
+    "MTex":"trashcan",
+	"AlterMtex":["trashcan1"],
+    "Flame":true,
+	"ItemSpawn": [
+		{
+			"Ids":["spawn_trash"],
+			"Max":1,
+			"Min":1,
+			"Prob":50,
+			"Repeat":4
+		}
+	],
+	"Type":"BlockChest",
+  },
+  "table":{
+    "Name":"Стол",
+    "IsTransparent":true,
+    "MTex":"table1",
+    "Flame":true,
+  },
+  "tumba_televisor":{
+    "Name":"Тумбочка с телевизором",
+    "IsTransparent":true,
+    "MTex":"glass_hor",
+    "Flame":true,
+  },
+  "tumba":{
+    "Name":"Тумбочка",
+    "IsTransparent":true,
+	"AlterMtex":["tumba2"],
+    "MTex":"tumba1",
+    "Flame":true,
+	"ItemSpawn": [
+		{
+			"Ids":["paper"],
+			"Max":5,
+			"Min":1,
+			"Prob":30,
+			"Repeat":1
+		}
+	],
+	"Type":"BlockChest",
+  },
+  "rakovina":{
+    "Name":"Раковина",
+    "IsTransparent":true,
+	"AlterMtex":["rakovina2", "rakovina3", "rakovina4"],
+    "MTex":"rakovina",
+    "Flame":true,
+	"ItemSpawn": [
+		{
+			"Ids":["soap"],
+			"Max":1,
+			"Min":1,
+			"Prob":30,
+			"Repeat":1
+		}
+	],
+	"Type":"BlockChest",
+  },
+  "lavka":{
+    "Name":"Лавка",
+    "IsTransparent":true,
+    "MTex":"notex",
+    "Flame":true,
+  },
+}

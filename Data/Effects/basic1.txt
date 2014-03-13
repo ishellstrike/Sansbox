@@ -1,0 +1,121 @@
+~BuffHpUp,hpup1
+Name=Повышение здоровья +1
+Value={1}
+Duration=-1
+
+~BuffHpUp,hpup2
+Name=Временное повышение здоровья +2 (1 час)"
+Value={2}
+Duration=60
+
+~BuffHpUp,hpup5
+Name=Повышение здоровья +5
+Value={5}
+Duration=-1
+
+~BuffBurn,burn
+Name=Горим!
+Duration=-1
+
+~HealOnce,heal5
+Name=Восстанавливает 5 здоровья
+Duration=0
+Value={5}
+
+~HealOnce,heal10
+Name=Восстанавливает 10 здоровья
+Duration=0
+Value={10}
+
+~HealOnce,heal15
+Name=Восстанавливает 15 здоровья
+Duration=0
+Value={15}
+
+~HealOnce,heal25
+Name=Восстанавливает 25 здоровья
+Duration=0
+Value={25}
+
+~HealOnce,heal50
+Name=Восстанавливает 50 здоровья
+Duration=0
+Value={50}
+
+~BuffCofeine,cofeine8
+Name=Придает немного бодрости
+Duration=0
+Value={8}
+
+~MoraleModifer,test
+Name=Тестовый модификатор
+Duration=1000
+Description=А это описание тестового модификатора.
+Value={-6
+Buff={hpup5,burn}
+
+~MoraleModifer,hungry1
+Name=Несильный голод
+Duration=-1
+Description=Вы испытываете несильный голод. Пока он не оказывает на вас влияния.
+
+~MoraleModifer,hungry2
+Name=Голод
+Duration=-1
+Description=Вы испытываете голод
+Value={-5}
+
+~MoraleModifer,hungry3
+Name=Сильный голод
+Duration=-1
+Description=Вы испытываете сильный голод. Вам тяжело сосредоточиться
+Value={-30}
+
+~MoraleModifer,foodjoy1
+Name=Вкусная еда
+Duration=60
+Description=Недавно вы ели вкусную еду
+Value={5}
+
+~MoraleModifer,foodjoy2
+Name=Любимая еда
+Duration=120
+Description=Недавно вы ели свою любимую еду
+Value={15}
+
+~MoraleModifer,foodbad1
+Name=Невкусная еда
+Duration=60
+Description=Недавно вы ели невкусную еду
+Value={-5}
+
+~MoraleModifer,foodbad2
+Name=Ужасная еда
+Duration=60
+Description=Недавно вы ели ужасно невкусную еду
+Value={-15}
+
+~MoraleModifer,foodold
+Name=Испорченая еда
+Duration=60
+Description=Недавно вы ели испорченную еду
+Value={-15}
+
+~MoraleModifer,foodnot
+Name=Съел несъедобное
+Duration=60
+Description=Недавно вы съели что-то несъедобное
+Value={-30}
+
+~MoraleModifer,cigaheavysmoker
+Name=Вы недавно выкурили сигарету, которую вам так хотелось.
+Value={40}
+
+~MoraleModifer,cigasmoker
+Name=Вы недавно выкурили сигарету
+Value={60}
+
+~MoraleModifer,ciga
+Name=Вы недавно выкурили сигарету, хотя обычно не курите. Гадость
+Value={60}
+
