@@ -4,7 +4,7 @@
 #include <utf8.h>
 
 
-GraphicText::GraphicText(void) : buffer(false, true, false)
+StringBatch::StringBatch(void) : buffer(false, true, false)
 {
 	x = 0;
 	y = 0;
@@ -14,11 +14,11 @@ GraphicText::GraphicText(void) : buffer(false, true, false)
 }
 
 
-GraphicText::~GraphicText(void)
+StringBatch::~StringBatch(void)
 {
 }
 
-void GraphicText::SetText( std::string text, Font* font )
+void StringBatch::SetText( std::string text, Font* font )
 {
 	utf32text.clear();
 	utf8::utf8to32(text.begin(), text.end(), std::back_inserter(utf32text));
@@ -27,7 +27,7 @@ void GraphicText::SetText( std::string text, Font* font )
 	CreateBuffer(font);
 }
 
-void GraphicText::CreateBuffer(Font* font)
+void StringBatch::CreateBuffer(Font* font)
 {
 	JRectangle geometryRectangle;
 	FontTexture fontTexture;
@@ -52,15 +52,22 @@ void GraphicText::CreateBuffer(Font* font)
 
 }
 
-void GraphicText::SetPos( const vec3 &pos )
+void StringBatch::SetPos( const vec3 &pos )
 {
 	x = pos[0];
 	y = pos[1];
 	z = pos[2];
 }
 
-void GraphicText::Draw(Font* font)
+void StringBatch::Draw(Font* font)
 {
 	glBindTexture(GL_TEXTURE_2D, font->GetGlyphTexture(0).texture.textureId);
 	buffer.Draw();
+}
+
+void StringBatch::Draw(std::string s, int x, int y, Font* font)
+{
+	SetPos(vec3(x,y,-1));
+	SetText(s, font);
+	Draw(font);
 }

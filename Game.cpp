@@ -210,6 +210,10 @@ int Game::Run()
 	smallf->Init();
 	smallf->Create("fontsmall.json");
 
+	Font* giantf = new Font();
+	giantf->Init();
+	giantf->Create("fontgiant.json");
+
 	Map map;
 	map.CreateGeometry();
 	
@@ -226,10 +230,7 @@ int Game::Run()
 
 	FPSCounter fps;
 
-	GraphicText fpsText;
-	//GraphicText otherText;
-	fpsText.SetPos(vec3(10, 10, -1));
-	//otherText.SetPos(vec3(40,40,-1));
+	StringBatch fpsText;
 
 	while(Running && !glfwWindowShouldClose(window)) 
 	{
@@ -304,13 +305,9 @@ int Game::Run()
 
 		fps.Update(gt);
 		auto a = ToString(fps.GetCount());
-		fpsText.SetText(a, big);
-		fpsText.SetPos(vec3(10, 10, -1));
-		fpsText.Draw(big);
-
-		fpsText.SetText("Cho cho, mnogo shriftov lolol 123123123 wertyuidfghjvbn", smallf);
-		fpsText.SetPos(vec3(100, 100, -1));
-		fpsText.Draw(smallf);
+		fpsText.Draw(a, 10, 10, big);
+		fpsText.Draw("cho cho, mnogo shriftov lolol 123123123 wertyuidfghjvbn", 40, 10, smallf);
+		fpsText.Draw("giant", 100, 100, giantf);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

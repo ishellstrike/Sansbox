@@ -35,3 +35,6 @@ ipch/
 Sandbox.opensdf
 font.json.png
 fontsmall.json.png
+fontgiant.json.png
+giant.json.png
+spriteatlas.png

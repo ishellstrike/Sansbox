@@ -171,7 +171,7 @@ void BufferArray::DeleteVideoBuffer()
 		glDeleteBuffers(1, &videoindexBuffer);
 	}
 	glDeleteVertexArrays(1, &VAO);
-	VAO = 0;
+
 
 	//OPENGL_CHECK_ERRORS();
 }
