@@ -6,8 +6,12 @@
 
 class Block {
 public:
+	Block();
+	~Block();
+	virtual void Init();
 	//virtual void Update(double time, MapSector& ms);
 private:
+	static int BaseId;
 	unsigned short id;
 	unsigned short mtex;
 };

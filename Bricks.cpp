@@ -1,19 +1,18 @@
-#include "Block.h"
+#include "Bricks.h"
 #include "Registry.h"
 
-int Block::BaseId = -1;
-void Block::Init()
+void Bricks::Init()
 {
 	BaseId = Registry::RegisterBlock(*this);
 }
 
-Block::Block()
+Bricks::Bricks()
 {
 	id = 0;
 	mtex = 0;
 }
 
-Block::~Block()
+Bricks::~Bricks()
 {
 
 }

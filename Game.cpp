@@ -25,6 +25,7 @@
 #include "GameLevel.h"
 #include <boost/thread/thread.hpp>
 #include "JargShader.h"
+#include "CoreMod.h"
 
 template< typename T >
 std::string ToString( const T& val )
@@ -76,12 +77,16 @@ Game::~Game(void)
 
 }
 
+CoreMod* cm;
 int Game::Initialize()
 {
 	google::InitGoogleLogging("Jarg.exe");
 	google::SetLogDestination(google::INFO, "logs/");
 	LOG(INFO) << "Jarg initialization start";
 	glfwSetErrorCallback(errorCallbackGLFW3);
+
+	cm = new CoreMod();
+	cm->Load();
 
 	int glfwErrorCode = glfwInit();
 	if (!glfwErrorCode)
@@ -338,7 +343,7 @@ void Game::Draw()
 
 void Game::UnloadContent()
 {
-
+	cm->Unload();
 }
 
 void Game::ResizeWindow( unsigned int _width, unsigned int _height )

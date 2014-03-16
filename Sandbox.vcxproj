@@ -89,8 +89,10 @@
     <ClInclude Include="Bitmap.h" />
     <ClInclude Include="Block.h" />
     <ClInclude Include="BlockData.h" />
+    <ClInclude Include="Bricks.h" />
     <ClInclude Include="BufferArray.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CoreMod.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="FPSCounter.h" />
@@ -116,8 +118,10 @@
   <ItemGroup>
     <ClCompile Include="Bitmap.cpp" />
     <ClCompile Include="Block.cpp" />
+    <ClCompile Include="Bricks.cpp" />
     <ClCompile Include="BufferArray.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CoreMod.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FPSCounter.cpp" />

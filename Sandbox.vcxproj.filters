@@ -102,6 +102,12 @@
     <ClInclude Include="Registry.h">
       <Filter>Registry</Filter>
     </ClInclude>
+    <ClInclude Include="CoreMod.h">
+      <Filter>MapPart</Filter>
+    </ClInclude>
+    <ClInclude Include="Bricks.h">
+      <Filter>MapPart</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -172,6 +178,12 @@
     </ClCompile>
     <ClCompile Include="Registry.cpp">
       <Filter>Registry</Filter>
+    </ClCompile>
+    <ClCompile Include="CoreMod.cpp">
+      <Filter>MapPart</Filter>
+    </ClCompile>
+    <ClCompile Include="Bricks.cpp">
+      <Filter>MapPart</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
