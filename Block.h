@@ -12,6 +12,4 @@ private:
 	unsigned short mtex;
 };
 
-
-
 #endif //Block_h__

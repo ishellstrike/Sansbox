@@ -102,10 +102,12 @@
     <ClInclude Include="ImageAtlas.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="MapGeneration.h" />
     <ClInclude Include="MapSector.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="JRectangle.h" />
+    <ClInclude Include="Registry.h" />
     <ClInclude Include="Render.h" />
     <ClInclude Include="JargShader.h" />
     <ClInclude Include="SpriteAtlas.h" />
@@ -113,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bitmap.cpp" />
+    <ClCompile Include="Block.cpp" />
     <ClCompile Include="BufferArray.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Cube.cpp" />
@@ -127,8 +130,11 @@
       <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="MapGeneration.cpp" />
+    <ClCompile Include="MapSector.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="JRectangle.cpp" />
+    <ClCompile Include="Registry.cpp" />
     <ClCompile Include="Render.cpp" />
     <ClCompile Include="JargShader.cpp" />
     <ClCompile Include="SpriteAtlas.cpp" />

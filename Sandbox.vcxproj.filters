@@ -96,6 +96,12 @@
     <ClInclude Include="JargShader.h">
       <Filter>Render</Filter>
     </ClInclude>
+    <ClInclude Include="MapGeneration.h">
+      <Filter>MapPart</Filter>
+    </ClInclude>
+    <ClInclude Include="Registry.h">
+      <Filter>Registry</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -154,6 +160,18 @@
     </ClCompile>
     <ClCompile Include="JargShader.cpp">
       <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="MapGeneration.cpp">
+      <Filter>MapPart</Filter>
+    </ClCompile>
+    <ClCompile Include="MapSector.cpp">
+      <Filter>MapPart</Filter>
+    </ClCompile>
+    <ClCompile Include="Block.cpp">
+      <Filter>MapPart</Filter>
+    </ClCompile>
+    <ClCompile Include="Registry.cpp">
+      <Filter>Registry</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
