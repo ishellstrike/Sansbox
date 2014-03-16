@@ -1,6 +1,6 @@
 #include "GraphicText.h"
 #include "Font.h"
-#include "Rectangle.h"
+#include "JRectangle.h"
 #include <utf8.h>
 
 
@@ -18,18 +18,18 @@ GraphicText::~GraphicText(void)
 {
 }
 
-void GraphicText::SetText( std::string text )
+void GraphicText::SetText( std::string text, Font* font )
 {
 	utf32text.clear();
 	utf8::utf8to32(text.begin(), text.end(), std::back_inserter(utf32text));
 	buffer.Clear();
 	buffer.DeleteVideoBuffer();
-	CreateBuffer();
+	CreateBuffer(font);
 }
 
-void GraphicText::CreateBuffer()
+void GraphicText::CreateBuffer(Font* font)
 {
-	Rectangle geometryRectangle;
+	JRectangle geometryRectangle;
 	FontTexture fontTexture;
 	float glyphX = x;
 	float glyphY = y;
@@ -37,8 +37,7 @@ void GraphicText::CreateBuffer()
 
 	for(unsigned int i = 0; i < utf32text.size(); i++)
 	{
-		// if пробел, перенос строки, табуляция
-		fontTexture = Font::GetInstance()->GetGlyphTexture(utf32text[i]);
+		fontTexture = font->GetGlyphTexture(utf32text[i]);
 
 		geometryRectangle.SetPos(vec3(glyphX, glyphY + stringHeight - fontTexture.height - fontTexture.offsetDown, z));
 		geometryRectangle.SetSize((float)fontTexture.width, (float)fontTexture.height);
@@ -49,7 +48,7 @@ void GraphicText::CreateBuffer()
 		buffer.PushBack(geometryRectangle.GetBufferArray());
 	}
 
-	buffer.CreateVideoBuffer();
+	buffer.CreateVideoBuffer("GraphicText " + font->name);
 
 }
 
@@ -60,42 +59,8 @@ void GraphicText::SetPos( const vec3 &pos )
 	z = pos[2];
 }
 
-void GraphicText::Draw()
+void GraphicText::Draw(Font* font)
 {
-	glBindTexture(GL_TEXTURE_2D, Font::GetInstance()->GetGlyphTexture(97).texture.textureId);
+	glBindTexture(GL_TEXTURE_2D, font->GetGlyphTexture(0).texture.textureId);
 	buffer.Draw();
 }
-
-
-/*
-ArrayIndex &Font::Print( float x, float y, std::vector<unsigned int> text, Render *render)
-{
-	Rectangle geometryRectangle;
-	FontTexture fontTexture = glyphsTextureMap[97];
-
-	unsigned int textLenght = text.size();
-
-	float glyphX = x;
-	float glyphY = y;
-	float stringHeight = 22.0f;
-
-	for(unsigned int i = 0; i < textLenght; i++)
-	{
-		fontTexture = glyphsTextureMap[text[i]];
-
-		geometryRectangle.SetPos(vec3(glyphX, glyphY + stringHeight - fontTexture.height - fontTexture.offsetDown, -1));
-		geometryRectangle.SetSize((float)fontTexture.width, (float)fontTexture.height);
-		geometryRectangle.SetTexture(fontTexture.texture);
-
-		glyphX += fontTexture.width;
-
-		buffer.AddArray(geometryRectangle.GetBufferArrayVTI());
-	}
-
-	render->CreateBufferArrayVTI(buffer);
-	glBindTexture(GL_TEXTURE_2D, fontTexture.texture.textureId);
-
-	return buffer.arrayIndex;
-
-}
-*/

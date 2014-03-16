@@ -32,3 +32,6 @@ ipch/
 *.ttf
 *.sdf
 
+Sandbox.opensdf
+font.json.png
+fontsmall.json.png

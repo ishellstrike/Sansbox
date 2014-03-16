@@ -1,4 +1,5 @@
 #include "Cube.h"
+#include "SpriteAtlas.h"
 
 #define VERTEXCOUNT 24
 #define INDEXCOUNT 36
@@ -45,6 +46,23 @@ Cube::Cube(void) : buffer(false, true, false, VERTEXCOUNT, INDEXCOUNT)
 Cube::~Cube(void)
 {
 
+}
+
+void Cube::SetFromAtlasAllSide(int num)
+{
+	Texture _texture;
+	float us = SpriteAtlas::Instance().SpriteW;
+	float vs = SpriteAtlas::Instance().SpriteH;
+	_texture.u1 = (num%64)*us;
+	_texture.v1 = 1-(num/64.0)*vs;
+	_texture.u2 = (num%64+1)*us;
+	_texture.v2 = 1-(num/64.0+1)*vs;
+
+
+	for(unsigned int i = 0; i < 6; i++)
+	{
+		texture[i] = _texture;
+	}
 }
 
 void Cube::SetTextureAllSide(const Texture &_texture)

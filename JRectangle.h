@@ -1,11 +1,11 @@
-#ifndef Rectangle_h__
-#define Rectangle_h__
+#ifndef JRectangle_h__
+#define JRectangle_h__
 
 #include "GameMath.h"
 #include "TextureManager.h"
 #include "Render.h"
 
-class Rectangle
+class JRectangle
 {
 private:
 	Texture texture;
@@ -17,8 +17,8 @@ private:
 	BufferArray buffer;
 
 public:
-	Rectangle(void);
-	~Rectangle(void);
+	JRectangle(void);
+	~JRectangle(void);
 
 	void SetSize(float width, float height);
 	void SetPos(const vec3 &pos);
@@ -31,4 +31,4 @@ public:
 };
 
 
-#endif // Rectangle_h__
+#endif // JRectangle_h__

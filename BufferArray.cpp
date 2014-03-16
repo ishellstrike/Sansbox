@@ -1,7 +1,8 @@
-#include "BufferArray.h"
+п»ї#include "BufferArray.h"
 
 #include <glew.h>
 #include <glfw3.h>
+#include <string>
 
 BufferArray::BufferArray()
 {
@@ -25,17 +26,17 @@ BufferArray::BufferArray( bool color, bool textcoord, bool normale, unsigned int
 	if(color)
 	{
 		activeBuffers.set(BUFFER_TYPE_COLOR);
-		stride += 4;				// rgba
+		stride += 4;	// rgba
 	}
 	if(textcoord)	
 	{
 		activeBuffers.set(BUFFER_TYPE_TEXTCOORD);
-		stride += 2;				// uv
+		stride += 2;	// uv
 	}
-	if(normale)		
+	if(normale)	
 	{
 		activeBuffers.set(BUFFER_TYPE_NORMALE);
-		stride += 3;				// 
+		stride += 3;	// xyz
 	}
 
 	if(sizeVertex)
@@ -52,13 +53,12 @@ BufferArray::~BufferArray()
 {
 }
 
-void BufferArray::CreateVideoBuffer()
+void BufferArray::CreateVideoBuffer(std::string whousing)
 {
-	// создаем VAO
+	name = whousing;
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
 
-	// Создаем буфер вершин
 	glGenBuffers(1, &videoVertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, videoVertexBuffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertexBuffer[0]) * vertexBuffer.size(), &vertexBuffer[0], GL_STATIC_DRAW);
@@ -69,12 +69,12 @@ void BufferArray::CreateVideoBuffer()
 		glEnableVertexAttribArray(BUFFER_TYPE_VERTEX);
 		glVertexAttribPointer
 			(
-			BUFFER_TYPE_VERTEX,				// attribute. No particular reason for 0, but must match the layout in the shader.
-			3,								// size
-			GL_FLOAT,						// type
-			GL_FALSE,						// normalized?
-			sizeof(float) * stride,			// stride
-			0								// array buffer offset
+			BUFFER_TYPE_VERTEX,	// attribute. No particular reason for 0, but must match the layout in the shader.
+			3,	// size
+			GL_FLOAT,	// type
+			GL_FALSE,	// normalized?
+			sizeof(float) * stride,	// stride
+			0	// array buffer offset
 			);
 		count += 3;
 	}
@@ -84,11 +84,11 @@ void BufferArray::CreateVideoBuffer()
 		glEnableVertexAttribArray(BUFFER_TYPE_COLOR);
 		glVertexAttribPointer
 			(
-			BUFFER_TYPE_COLOR,				// attribute. No particular reason for 0, but must match the layout in the shader.
-			4,								// size
-			GL_FLOAT,						// type
-			GL_FALSE,						// normalized?
-			sizeof(float) * stride,			// stride
+			BUFFER_TYPE_COLOR,	// attribute. No particular reason for 0, but must match the layout in the shader.
+			4,	// size
+			GL_FLOAT,	// type
+			GL_FALSE,	// normalized?
+			sizeof(float) * stride,	// stride
 			(void*)(sizeof(float) * count)	// array buffer offset
 			);
 		count += 4;
@@ -99,12 +99,12 @@ void BufferArray::CreateVideoBuffer()
 		glEnableVertexAttribArray(BUFFER_TYPE_TEXTCOORD);
 		glVertexAttribPointer
 			(
-			BUFFER_TYPE_TEXTCOORD,				// attribute. No particular reason for 0, but must match the layout in the shader.
-			2,									// size
-			GL_FLOAT,							// type
-			GL_FALSE,							// normalized?
-			sizeof(float) * stride,				// stride
-			(void*)(sizeof(float) * count)		// array buffer offset
+			BUFFER_TYPE_TEXTCOORD,	// attribute. No particular reason for 0, but must match the layout in the shader.
+			2,	// size
+			GL_FLOAT,	// type
+			GL_FALSE,	// normalized?
+			sizeof(float) * stride,	// stride
+			(void*)(sizeof(float) * count)	// array buffer offset
 			);
 		count += 2;
 	}
@@ -114,12 +114,12 @@ void BufferArray::CreateVideoBuffer()
 		glEnableVertexAttribArray(BUFFER_TYPE_NORMALE);
 		glVertexAttribPointer
 			(
-			BUFFER_TYPE_NORMALE,				// attribute. No particular reason for 0, but must match the layout in the shader.
-			3,									// size
-			GL_FLOAT,							// type
-			GL_FALSE,							// normalized?
-			sizeof(float) * stride,				// stride
-			(void*)(sizeof(float) * count)		// array buffer offset
+			BUFFER_TYPE_NORMALE,	// attribute. No particular reason for 0, but must match the layout in the shader.
+			3,	// size
+			GL_FLOAT,	// type
+			GL_FALSE,	// normalized?
+			sizeof(float) * stride,	// stride
+			(void*)(sizeof(float) * count)	// array buffer offset
 			);
 		count += 3;
 	}
@@ -144,6 +144,7 @@ void BufferArray::DeleteVideoBuffer()
 		return;
 	}
 
+	glBindVertexArray(VAO);
 	if( activeBuffers.test(BUFFER_TYPE_VERTEX) )
 	{
 		glDisableVertexAttribArray(BUFFER_TYPE_VERTEX);
@@ -160,7 +161,7 @@ void BufferArray::DeleteVideoBuffer()
 	{
 		glDisableVertexAttribArray(BUFFER_TYPE_NORMALE);
 	}
-	
+
 	if(videoVertexBuffer)
 	{
 		glDeleteBuffers(1, &videoVertexBuffer);
@@ -170,6 +171,7 @@ void BufferArray::DeleteVideoBuffer()
 		glDeleteBuffers(1, &videoindexBuffer);
 	}
 	glDeleteVertexArrays(1, &VAO);
+	VAO = 0;
 
 	//OPENGL_CHECK_ERRORS();
 }
@@ -179,7 +181,7 @@ void BufferArray::PushBack( BufferArray &ba )
 {
 	if(ba.activeBuffers != activeBuffers)
 	{
-		//LOG_ERROR("Типы буферов не совместимы.");
+		
 		return;
 	}
 

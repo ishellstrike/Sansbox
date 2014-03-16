@@ -1,7 +1,7 @@
-#include "Rectangle.h"
+#include "JRectangle.h"
 
 
-Rectangle::Rectangle(void) : buffer(false, true, false, 4, 6)
+JRectangle::JRectangle(void) : buffer(false, true, false, 4, 6)
 {
 	x = 0.0f;
 	y = 0.0f;
@@ -24,35 +24,35 @@ Rectangle::Rectangle(void) : buffer(false, true, false, 4, 6)
 }
 
 
-Rectangle::~Rectangle(void)
+JRectangle::~JRectangle(void)
 {
 
 }
 
-void Rectangle::SetSize( float _width, float _height )
+void JRectangle::SetSize( float _width, float _height )
 {
 	width = _width;
 	height = _height;
 }
 
-void Rectangle::SetPos( const vec3 &_pos )
+void JRectangle::SetPos( const vec3 &_pos )
 {
 	x = _pos[0];
 	y = _pos[1];
 	z = _pos[2];
 }
 
-void Rectangle::SetTexture( const Texture &_texture )
+void JRectangle::SetTexture( const Texture &_texture )
 {
 	texture = _texture;
 }
 
-Texture Rectangle::GetTexture()
+Texture JRectangle::GetTexture()
 {
 	return texture;
 }
 
-BufferArray &Rectangle::GetBufferArray()
+BufferArray &JRectangle::GetBufferArray()
 {
 	// в ортогональной проекции текстура будет перевернута по оси 0X
 	// текстурные координаты v1, v2 инвертированы

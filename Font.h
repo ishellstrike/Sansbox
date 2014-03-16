@@ -14,6 +14,7 @@
 #include <map>
 #include <list>
 #include <vector>
+#include <string>
 #include "Render.h"
 
 struct FontTexture
@@ -33,6 +34,7 @@ private:
 
 	ImageAtlas glyphAtlas;
 
+
 	struct GlyphBitmap
 	{
 		Bitmap* bitmap;
@@ -46,33 +48,30 @@ private:
 		}
 	};
 
-	
+
 	std::list<GlyphBitmap> glyphsBitmapList;
 
 	std::map<unsigned int, FontTexture> glyphsTextureMap;
 
 
 private:
-	bool LoadConfig( std::string configFileName );
+	bool CreateFromConfig( std::string configFileName );
 
 	bool GenerateGlyphsList( std::string glyphList );
 	bool GenerateGlyph(unsigned int gliphNumber, GlyphBitmap &glyphBitmap);
-	bool GenerateOpenglGlyphs();
+	bool GenerateOpenglGlyphs( std::string configFileName);
 
-private:
-	static Font* instance;
-
-	Font( std::string configFileName );
-	Font(const Font& root);
-	Font& operator=(const Font&);
+	bool GenerateEmptyGlyph();
 
 public:
+	Font();
 	~Font();
+	std::string name;
 
-	static bool Init( std::string configFileName );
-	static void Finalize();
-	
-	static Font* GetInstance();
+	bool Init();
+
+	bool Create(std::string configFileName);
+	void Remove();
 
 	FontTexture GetGlyphTexture(unsigned int utf32glyph);
 

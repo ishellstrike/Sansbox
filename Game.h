@@ -1,10 +1,8 @@
 #ifndef Game_h__
 #define Game_h__
 
-//#define GLFW_INCLUDE_GLU
-//#pragma comment(lib, "glew32.lib") 
+
 #include <glog/logging.h>
-#pragma comment(lib, "libglog.lib")
 #include <glew.h>
 #include <glfw3.h>
 #include "Render.h"
@@ -21,11 +19,10 @@ protected:
 	unsigned int width;
 	unsigned int height;
 	bool fullscreen;
-	SpriteAtlas atlas;
 
-	GLFWwindow *window;
+	GLFWwindow* window;
 
-	Render *render;
+	Render* render;
 
 	unsigned int texture;
 

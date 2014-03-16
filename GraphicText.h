@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "BufferArray.h"
+#include "Font.h"
 
 class GraphicText
 {
@@ -23,12 +24,12 @@ public:
 
 	void SetPos(const vec3 &pos);
 
-	void SetText(std::string text);
+	void SetText(std::string text, Font* font );
 
-	void Draw();
+	void Draw(Font* font);
 
 private:
-	void CreateBuffer();
+	void CreateBuffer(Font* font);
 
 };
 

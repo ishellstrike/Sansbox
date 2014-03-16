@@ -19,6 +19,9 @@
     <Filter Include="MapPart">
       <UniqueIdentifier>{d9914293-401a-432c-9ba8-2e115f0f741c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Registry">
+      <UniqueIdentifier>{0988dfac-6012-4f24-ac26-bb541fe426ec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bitmap.h">
@@ -40,9 +43,6 @@
       <Filter>Render</Filter>
     </ClInclude>
     <ClInclude Include="Cube.h">
-      <Filter>Render\Геометрия</Filter>
-    </ClInclude>
-    <ClInclude Include="Rectangle.h">
       <Filter>Render\Геометрия</Filter>
     </ClInclude>
     <ClInclude Include="BufferArray.h">
@@ -87,6 +87,15 @@
     <ClInclude Include="SpriteAtlas.h">
       <Filter>Render</Filter>
     </ClInclude>
+    <ClInclude Include="JRectangle.h">
+      <Filter>Render\Геометрия</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockData.h">
+      <Filter>Registry</Filter>
+    </ClInclude>
+    <ClInclude Include="JargShader.h">
+      <Filter>Render</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -122,9 +131,6 @@
     <ClCompile Include="Cube.cpp">
       <Filter>Render\Геометрия</Filter>
     </ClCompile>
-    <ClCompile Include="Rectangle.cpp">
-      <Filter>Render\Геометрия</Filter>
-    </ClCompile>
     <ClCompile Include="GraphicText.cpp">
       <Filter>MainPart</Filter>
     </ClCompile>
@@ -141,6 +147,12 @@
       <Filter>MainPart</Filter>
     </ClCompile>
     <ClCompile Include="SpriteAtlas.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="JRectangle.cpp">
+      <Filter>Render\Геометрия</Filter>
+    </ClCompile>
+    <ClCompile Include="JargShader.cpp">
       <Filter>Render</Filter>
     </ClCompile>
   </ItemGroup>
