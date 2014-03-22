@@ -22,6 +22,9 @@
     <Filter Include="Registry">
       <UniqueIdentifier>{0988dfac-6012-4f24-ac26-bb541fe426ec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Window">
+      <UniqueIdentifier>{44de07b2-a3d1-4864-8333-5c20640bac50}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bitmap.h">
@@ -45,9 +48,6 @@
     <ClInclude Include="Cube.h">
       <Filter>Render\Геометрия</Filter>
     </ClInclude>
-    <ClInclude Include="BufferArray.h">
-      <Filter>MainPart</Filter>
-    </ClInclude>
     <ClInclude Include="Mouse.h">
       <Filter>MainPart</Filter>
     </ClInclude>
@@ -58,9 +58,6 @@
       <Filter>MainPart</Filter>
     </ClInclude>
     <ClInclude Include="GameMath.h">
-      <Filter>MainPart</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicText.h">
       <Filter>MainPart</Filter>
     </ClInclude>
     <ClInclude Include="Keyboard.h">
@@ -108,6 +105,18 @@
     <ClInclude Include="Bricks.h">
       <Filter>MapPart</Filter>
     </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="LineBatch.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="BufferArray.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicText.h">
+      <Filter>Render</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -142,12 +151,6 @@
     </ClCompile>
     <ClCompile Include="Cube.cpp">
       <Filter>Render\Геометрия</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphicText.cpp">
-      <Filter>MainPart</Filter>
-    </ClCompile>
-    <ClCompile Include="BufferArray.cpp">
-      <Filter>MainPart</Filter>
     </ClCompile>
     <ClCompile Include="Map.cpp">
       <Filter>MainPart</Filter>
@@ -184,6 +187,18 @@
     </ClCompile>
     <ClCompile Include="Bricks.cpp">
       <Filter>MapPart</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowSystem.h">
+      <Filter>Window</Filter>
+    </ClCompile>
+    <ClCompile Include="BufferArray.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicText.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="LineBatch.cpp">
+      <Filter>Render</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,5 +1,5 @@
-#ifndef JRectangle_h__
-#define JRectangle_h__
+#ifndef Rectangle_h__
+#define Rectangle_h__
 
 #include "GameMath.h"
 #include "TextureManager.h"
@@ -31,4 +31,4 @@ public:
 };
 
 
-#endif // JRectangle_h__
+#endif // Rectangle_h__

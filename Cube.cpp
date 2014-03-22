@@ -4,48 +4,58 @@
 #define VERTEXCOUNT 24
 #define INDEXCOUNT 36
 
-static const float __vertexPositions[VERTEXCOUNT][3] = 
-{	// по часовой стрелке
+static const float __vertexPositions[VERTEXCOUNT][3] =
+{	
 	{0, 0, 0}, {0, 1, 0}, {1, 1, 0}, {1, 0, 0}, // front
 	{1, 0,-1}, {1, 1,-1}, {0, 1,-1}, {0, 0,-1}, // back
 	{0, 1, 0}, {0, 1,-1}, {1, 1,-1}, {1, 1, 0}, // top
 	{0, 0,-1}, {0, 0, 0}, {1, 0, 0}, {1, 0,-1}, // bottom
 	{0, 0,-1}, {0, 1,-1}, {0, 1, 0}, {0, 0, 0}, // left
-	{1, 0, 0}, {1, 1, 0}, {1, 1,-1}, {1, 0,-1}  // right
+	{1, 0, 0}, {1, 1, 0}, {1, 1,-1}, {1, 0,-1} // right
 };
 
-static const uint32_t __vertexIndex[INDEXCOUNT] = 
+static const uint32_t __vertexIndex[INDEXCOUNT] =
 {
-	0, 3, 2,  2, 1, 0,  // front
-	4, 7, 6,  6, 5, 4,  // back
-	8,11, 10, 10,9, 8,  // top
+	0, 3, 2, 2, 1, 0, // front
+	4, 7, 6, 6, 5, 4, // back
+	8,11, 10, 10,9, 8, // top
 	12,15,14, 14,13,12, // bottom
 	16,19,18, 18,17,16, // left
-	20,23,22, 22,21,20  // right
+	20,23,22, 22,21,20 // right
 };
 
-Cube::Cube(void) : buffer(false, true, false, VERTEXCOUNT, INDEXCOUNT)
+Cube::Cube(void)
 {
+	buffer.Create(false, true, false, VERTEXCOUNT, INDEXCOUNT);
 	x = 0.0f;
 	y = 0.0f;
 	z = 0.0f;
 
 	for(unsigned int i = 0; i < VERTEXCOUNT * 3 + VERTEXCOUNT * 2; i++)
 	{
-		buffer.vertexBuffer.push_back(0); 
+		buffer.vertexBuffer.push_back(0);
 	}
 
 	for(unsigned int i = 0; i < INDEXCOUNT; i++)
 	{
 		buffer.indexBuffer.push_back(__vertexIndex[i]);
 	}
-
+	buffer.vbSize = buffer.vertexBuffer.size();
+	buffer.ibSize = buffer.indexBuffer.size();
 }
 
 
 Cube::~Cube(void)
 {
 
+}
+
+void Cube::SetTextureAllSide(const Texture &_texture)
+{
+	for(unsigned int i = 0; i < 6; i++)
+	{
+		texture[i] = _texture;
+	}
 }
 
 void Cube::SetFromAtlasAllSide(int num)
@@ -59,14 +69,6 @@ void Cube::SetFromAtlasAllSide(int num)
 	_texture.v2 = 1-(num/64.0+1)*vs;
 
 
-	for(unsigned int i = 0; i < 6; i++)
-	{
-		texture[i] = _texture;
-	}
-}
-
-void Cube::SetTextureAllSide(const Texture &_texture)
-{
 	for(unsigned int i = 0; i < 6; i++)
 	{
 		texture[i] = _texture;

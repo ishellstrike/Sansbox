@@ -4,7 +4,6 @@
 #include <vector>
 #include "GameMath.h"
 #include <bitset>
-#include <string>
 
 typedef std::vector<float>	VertexBuffer;
 typedef std::vector<uint32_t>	IndexBuffer;
@@ -24,21 +23,26 @@ private:
 
 	unsigned int stride;
 
-	unsigned int VAO;
-	unsigned int videoVertexBuffer;
-	unsigned int videoindexBuffer;
-	std::string name;
+	unsigned int	VAO;
+	unsigned int	videoVertexBuffer;
+	unsigned int	videoindexBuffer;
 
 public:
-	VertexBuffer vertexBuffer;
+	VertexBuffer	vertexBuffer;
 	IndexBuffer	indexBuffer;
+
+	unsigned int vbSize;
+	unsigned int ibSize;
 
 public:
 	BufferArray();
-	BufferArray(bool color, bool textcoord, bool normale, unsigned int sizeVertex = 0, unsigned int sizeIndex = 0);
 	~BufferArray();
 
-	void CreateVideoBuffer(std::string whousing);
+	void Create(bool color, bool textcoord, bool normale, unsigned int sizeVertex = 0, unsigned int sizeIndex = 0);
+
+	void Reset();
+
+	void CreateVideoBuffer();
 	void DeleteVideoBuffer();
 
 	void PushBack( BufferArray &bufferArray);

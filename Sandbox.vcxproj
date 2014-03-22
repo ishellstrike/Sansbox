@@ -103,6 +103,7 @@
     <ClInclude Include="GraphicText.h" />
     <ClInclude Include="ImageAtlas.h" />
     <ClInclude Include="Keyboard.h" />
+    <ClInclude Include="LineBatch.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapGeneration.h" />
     <ClInclude Include="MapSector.h" />
@@ -114,6 +115,7 @@
     <ClInclude Include="JargShader.h" />
     <ClInclude Include="SpriteAtlas.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bitmap.cpp" />
@@ -130,6 +132,7 @@
     <ClCompile Include="GraphicText.cpp" />
     <ClCompile Include="ImageAtlas.cpp" />
     <ClCompile Include="Keyboard.cpp" />
+    <ClCompile Include="LineBatch.cpp" />
     <ClCompile Include="Main.cpp">
       <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -143,6 +146,9 @@
     <ClCompile Include="JargShader.cpp" />
     <ClCompile Include="SpriteAtlas.cpp" />
     <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="WindowSystem.h">
+      <FileType>CppHeader</FileType>
+    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

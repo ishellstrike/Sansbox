@@ -2,8 +2,9 @@
 #include "SpriteAtlas.h"
 
 
-Map::Map(void) : buffer(false, true, false)
+Map::Map(void)
 {
+	buffer.Create(false, true, false);
 }
 
 
@@ -46,7 +47,7 @@ void Map::CreateGeometry()
 					buffer.PushBack(geometryCube.GetBufferArray());
 				}
 			}
-	buffer.CreateVideoBuffer("MapBuffer");
+	buffer.CreateVideoBuffer();
 }
 
 void Map::Draw()

@@ -3,13 +3,14 @@
 
 #include "MapSector.h"
 #include "Point.h"
+#include "MapSector.h"
 
 class Block {
 public:
 	Block();
 	~Block();
-	virtual void Init();
-	//virtual void Update(double time, MapSector& ms);
+	void Init();
+	//void Update(double time, MapSector* ms);
 private:
 	static int BaseId;
 	unsigned short id;

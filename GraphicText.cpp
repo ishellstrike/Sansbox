@@ -4,8 +4,9 @@
 #include <utf8.h>
 
 
-StringBatch::StringBatch(void) : buffer(false, true, false)
+StringBatch::StringBatch(void)
 {
+	buffer.Create(false, true, false);
 	x = 0;
 	y = 0;
 	z = 0;
@@ -48,7 +49,7 @@ void StringBatch::CreateBuffer(Font* font)
 		buffer.PushBack(geometryRectangle.GetBufferArray());
 	}
 
-	buffer.CreateVideoBuffer("GraphicText " + font->name);
+	buffer.CreateVideoBuffer();
 
 }
 

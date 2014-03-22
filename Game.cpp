@@ -195,9 +195,10 @@ int Game::Run()
  	tex.v2 = 1.0f;
  	geometryRectangle.SetTexture(tex);
 
-	BufferArray ba(false, true, false);
+	BufferArray ba;
+	ba.Create(false, true, false);
 	ba.PushBack(geometryRectangle.GetBufferArray());
-	ba.CreateVideoBuffer("RectText");
+	ba.CreateVideoBuffer();
 
 //	Cube geometryCube;
 //	geometryCube.SetTextureAllSide(tex);
@@ -310,13 +311,14 @@ int Game::Run()
 
 		fps.Update(gt);
 		auto a = ToString(fps.GetCount());
+		glfwSetWindowTitle(window, a.c_str());
 		fpsText.Draw(a, 10, 10, big);
-		fpsText.Draw("cho cho, mnogo shriftov lolol 123123123 wertyuidfghjvbn", 40, 10, smallf);
-		fpsText.Draw("giant", 100, 100, giantf);
+		//fpsText.Draw("cho cho, mnogo shriftov lolol 123123123 wertyuidfghjvbn", 40, 10, smallf);
+		//fpsText.Draw("giant", 100, 100, giantf);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
-		boost::this_thread::sleep_for(boost::chrono::milliseconds(16));
+		//boost::this_thread::sleep_for(boost::chrono::milliseconds(16));
 	}
 	
 

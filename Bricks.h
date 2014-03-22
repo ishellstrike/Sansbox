@@ -1,10 +1,12 @@
 #ifndef Bricks_h__
 #define Bricks_h__
+#include "Block.h"
 
-class Bricks : public Block(){
+class Bricks : public Block{
 public:
+	static int BaseId;
 	Bricks();
 	~Bricks();
-	override void Init();
+	void Init();
 };
 #endif // Bricks_h__
