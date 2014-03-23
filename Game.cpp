@@ -55,6 +55,7 @@ void errorCallbackGLFW3(int error, const char* description)
 
 Game::Game(void)
 {
+	srand(1);
 	Running = true;
 
 	title = "Game";
@@ -73,6 +74,7 @@ Game::~Game(void)
 CoreMod* cm;
 int Game::Initialize()
 {
+
 	google::InitGoogleLogging("Jarg.exe");
 	google::SetLogDestination(google::INFO, "logs/");
 	LOG(INFO) << "Jarg initialization start";
@@ -302,15 +304,22 @@ int Game::Run()
 		glUniformMatrix4fv(mvpID, 1, GL_FALSE, &MVP[0][0]);
 		glUniform1i(textureLocation, 1);
 
-		ba.Draw();
+		//ba.Draw();
 
 		glBindTexture(GL_TEXTURE_2D, 2);
-		sb.Render();
+
+		for(int i =0;i<100;i++){
+			for(int j =0;j<100;j++){
+			sb.DrawQuad(Vector2(rand()%500,rand()%500));
+			}
+		}
+		int dc = sb.RenderFinally();
 
 		fps.Update(gt);
-		auto a = ToString(fps.GetCount());
-		glfwSetWindowTitle(window, a.c_str());
-		fpsText.Draw(a, 10, 10, big);
+		std::stringstream iss;
+		iss << fps.GetCount() << " SbDC = " << dc;
+		glfwSetWindowTitle(window, iss.str().c_str());
+		//fpsText.Draw(a, 10, 10, big);
 		//fpsText.Draw("cho cho, mnogo shriftov lolol 123123123 wertyuidfghjvbn", 40, 10, smallf);
 		//fpsText.Draw("giant", 100, 100, giantf);
 
