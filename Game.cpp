@@ -26,6 +26,7 @@
 #include <boost/thread/thread.hpp>
 #include "JargShader.h"
 #include "CoreMod.h"
+#include "SpriteBatch.h"
 
 void KeyCallbackGLFW3(GLFWwindow *win, int key, int scancode, int action, int mods)
 {
@@ -214,7 +215,9 @@ int Game::Run()
 
 	Map map;
 	map.CreateGeometry();
-	
+
+    SpriteBatch sb;
+	sb.Init();
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -300,6 +303,9 @@ int Game::Run()
 		glUniform1i(textureLocation, 1);
 
 		ba.Draw();
+
+		glBindTexture(GL_TEXTURE_2D, 2);
+		sb.Render();
 
 		fps.Update(gt);
 		auto a = ToString(fps.GetCount());

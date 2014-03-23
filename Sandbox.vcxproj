@@ -151,6 +151,7 @@
     <ClCompile Include="SpriteAtlas.cpp" />
     <ClCompile Include="SpriteBatch.cpp" />
     <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="Vector.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="WindowSystem.h">
       <FileType>CppHeader</FileType>

@@ -10,5 +10,6 @@ public:
 	~SpriteBatch();
 
 	void Render();
+	void Init();
 };
 #endif // SpriteBatch_h__

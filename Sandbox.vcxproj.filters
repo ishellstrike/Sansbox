@@ -215,5 +215,8 @@
     <ClCompile Include="SpriteBatch.cpp">
       <Filter>Render</Filter>
     </ClCompile>
+    <ClCompile Include="Vector.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
