@@ -18,7 +18,7 @@
 #include "FPSCounter.h"
 #include "SpriteAtlas.h"
 
-#include <sstream>
+#include <ostream>
 #include "GraphicText.h"
 #include <fstream>
 #include "glog/logging.h"
@@ -26,14 +26,6 @@
 #include <boost/thread/thread.hpp>
 #include "JargShader.h"
 #include "CoreMod.h"
-
-template< typename T >
-std::string ToString( const T& val )
-{
-	std::stringstream iss;
-	iss << val;
-	return iss.str();
-}
 
 void KeyCallbackGLFW3(GLFWwindow *win, int key, int scancode, int action, int mods)
 {

@@ -117,6 +117,15 @@
     <ClInclude Include="GraphicText.h">
       <Filter>Render</Filter>
     </ClInclude>
+    <ClInclude Include="DrawableComponent.h">
+      <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteBatch.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>Render</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -198,6 +207,12 @@
       <Filter>Render</Filter>
     </ClCompile>
     <ClCompile Include="LineBatch.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Window</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteBatch.cpp">
       <Filter>Render</Filter>
     </ClCompile>
   </ItemGroup>

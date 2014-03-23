@@ -43,9 +43,9 @@
     <LibraryPath>C:\local\boost_1_55_0\lib32-msvc-10.0;lib\Release\Win32\;libs\jsoncpp-src-0.5.0\build\vs71\release\lib_json\;libs\freetype-2.5.2\objs\win32\vc2010\;libs\libpng-1.6.8\projects\vstudio\Release Library\;libs\glog-0.3.3\Release;D:\Jarg\libs\glew-1.10.0\lib\Release\Win32;libs\glfw-3.0.4\lib\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental>
+    <LinkIncremental>true</LinkIncremental>
     <IncludePath>C:\local\boost_1_55_0;libs\release\glog;libs\release\utf8cpp\include;libs\release\libpng\include;libs\release\json\include;libs\release\glm\include;libs\release\glfw\include;libs\release\glew\include;libs\release\freetype\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\local\boost_1_55_0\lib32-msvc-10.0;libs\release\glog;libs\release\utf8cpp\lib;libs\release\libpng\lib;libs\release\json\lib;libs\release\glfw\lib;libs\release\glew\lib;libs\release\freetype\lib;$(IncludePath);$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\local\boost_1_55_0\lib32-msvc-10.0;libs\release\glog;libs\release\utf8cpp\lib;libs\release\libpng\lib;libs\release\json\lib;libs\release\glfw\lib;libs\release\glew\lib;libs\release\freetype\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -73,15 +73,16 @@
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;freetype252.lib;libpng16.lib;zlib.lib;json_vc71_libmt.lib;glew32.lib;libglog.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <IgnoreSpecificDefaultLibraries>MSVCRT.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;libpng16.lib;zlib.lib;freetype252MT.lib;json_vc71_libmt.lib;glew32.lib;libglog.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
@@ -94,6 +95,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CoreMod.h" />
     <ClInclude Include="Cube.h" />
+    <ClInclude Include="DrawableComponent.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="FPSCounter.h" />
     <ClInclude Include="Game.h" />
@@ -114,7 +116,9 @@
     <ClInclude Include="Render.h" />
     <ClInclude Include="JargShader.h" />
     <ClInclude Include="SpriteAtlas.h" />
+    <ClInclude Include="SpriteBatch.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="Vector.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
@@ -145,7 +149,9 @@
     <ClCompile Include="Render.cpp" />
     <ClCompile Include="JargShader.cpp" />
     <ClCompile Include="SpriteAtlas.cpp" />
+    <ClCompile Include="SpriteBatch.cpp" />
     <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="Window.cpp" />
     <ClCompile Include="WindowSystem.h">
       <FileType>CppHeader</FileType>
     </ClCompile>

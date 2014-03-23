@@ -8,6 +8,15 @@
 #include "Render.h"
 #include "GameTimer.h"
 #include "SpriteAtlas.h"
+#include <ostream>
+
+template< typename T >
+std::string ToString( const T& val )
+{
+	std::stringstream iss;
+	iss << val;
+	return iss.str();
+}
 
 class Game
 {

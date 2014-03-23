@@ -157,7 +157,7 @@ void BufferArray::DeleteVideoBuffer()
 		return;
 	}
 
-	glBindVertexArray(VAO);
+	glBindVertexArray(0);
 
 	if( activeBuffers.test(BUFFER_TYPE_VERTEX) )
 	{
