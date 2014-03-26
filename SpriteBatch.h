@@ -2,6 +2,7 @@
 #define SpriteBatch_h__
 #include <glew.h>
 #include "Vector.h"
+#include "TextureManager.h"
 
 class SpriteBatch{
 private:
@@ -12,13 +13,16 @@ private:
 	float curz;
 	int curn;
 	int dc;
+	Texture currentTex;
 public:
 	SpriteBatch();
 	~SpriteBatch();
 
 	void Render();
 	void Init();
-	void DrawQuad(Vector2 pos);
+	void DrawQuad(Vector2 pos, Vector2 size, float rotation, Texture& tex, Rect sub);
+	void DrawQuad(Vector2 pos, Vector2 size, float rotation, Texture& tex, int atl);
+	void DrawQuad(Vector2 pos, Vector2 size, float rotation, Texture& tex);
 	int RenderFinally();
 };
 #endif // SpriteBatch_h__

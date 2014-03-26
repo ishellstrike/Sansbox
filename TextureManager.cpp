@@ -78,7 +78,7 @@ unsigned int GenerateOpenglBitmap(Bitmap &bitmap, bool smoothing, bool mipmap)
 	return glBitmap;
 }
 
-void GenerateTextCoord( Bitmap *bitmap, iRect *rect, Texture &texture )
+void GenerateTextCoord( Bitmap *bitmap, iRect *rect, TextureOld &texture )
 {
 	unsigned int width = bitmap->GetWidth();
 	unsigned int height = bitmap->GetHeight();
@@ -109,4 +109,41 @@ TextureManager::TextureManager(void)
 
 TextureManager::~TextureManager(void)
 {
+}
+
+Texture::Texture()
+{
+	textureId = -1;
+}
+
+Texture::~Texture()
+{
+
+}
+
+void Texture::Load(std::string a)
+{
+	name = a;
+
+	Bitmap* b = new Bitmap();
+	b->Load("spriteatlas.png");
+	textureId = GenerateOpenglBitmap(*b, false, false);
+	height = b->GetHeight();
+	width = b->GetWidth();
+	delete b;
+}
+
+Rect::Rect()
+{
+	x = y = h = w = 0;
+}
+
+Rect::Rect(float a, float b, float c, float d)
+{
+	x = a; y = b; w = c; h = d;
+}
+
+Rect::~Rect()
+{
+
 }

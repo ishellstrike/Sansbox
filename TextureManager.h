@@ -2,8 +2,9 @@
 #define TextureManager_h__
 
 #include "Bitmap.h"
+#include <glew.h>
 
-struct Texture
+struct TextureOld
 {
 	unsigned int textureId;
 	float u1;
@@ -12,10 +13,28 @@ struct Texture
 	float v2;
 };
 
+struct Texture {
+	GLuint textureId;
+	std::string name;
+	unsigned int height;
+	unsigned int width;
+	Texture();
+	~Texture();
+
+	void Load(std::string a);
+};
+
+struct Rect{
+	float x,y;
+	float h,w;
+	Rect();
+	Rect(float a,float b,float c,float d);
+	~Rect();
+};
 
 unsigned int GenerateOpenglBitmap(Bitmap &bitmap, bool smoothing, bool mipmap);
 
-void GenerateTextCoord(Bitmap *bitmap, iRect *rect, Texture &texture);
+void GenerateTextCoord(Bitmap *bitmap, iRect *rect, TextureOld &texture);
 
 class TextureManager
 {

@@ -126,6 +126,9 @@
     <ClInclude Include="Vector.h">
       <Filter>Render</Filter>
     </ClInclude>
+    <ClInclude Include="JargMath.h">
+      <Filter>Render</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">

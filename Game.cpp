@@ -27,6 +27,10 @@
 #include "JargShader.h"
 #include "CoreMod.h"
 #include "SpriteBatch.h"
+#include "WindowSystem.h"
+#include "Window.h"
+#include "Vector.h"
+#include <vector>
 
 void KeyCallbackGLFW3(GLFWwindow *win, int key, int scancode, int action, int mods)
 {
@@ -159,10 +163,8 @@ int Game::Run()
 	LoadContent();
 
 
-	Bitmap *b = new Bitmap();
-	b->Load("spriteatlas.png");
-	unsigned int a= GenerateOpenglBitmap(*b, false, false);
-	b->Free();
+	Texture atlas;
+	atlas.Load("spriteatlas.png");
 
 	// Enable depth test
 	glEnable(GL_DEPTH_TEST);
@@ -183,7 +185,7 @@ int Game::Run()
  	JRectangle geometryRectangle;
  	geometryRectangle.SetPos(vec3(0, 50, -1));
  	geometryRectangle.SetSize(100, 100);
- 	Texture tex;
+ 	TextureOld tex;
  	tex.u1 = 0.0f;
  	tex.v1 = 0.0f;
  	tex.u2 = 1.0f;
@@ -220,6 +222,10 @@ int Game::Run()
 
     SpriteBatch sb;
 	sb.Init();
+
+	WindowSystem ws(sb);
+	Window w(Vector2(100,100), Vector2(200,200));
+	ws.windows.push_back(w);
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -306,11 +312,13 @@ int Game::Run()
 
 		//ba.Draw();
 
+		ws.Draw();
+
 		glBindTexture(GL_TEXTURE_2D, 2);
 
-		for(int i =0;i<100;i++){
-			for(int j =0;j<100;j++){
-			sb.DrawQuad(Vector2(rand()%500,rand()%500));
+		for(int j =0;j<20;j++){
+			for(int i =0;i<20;i++){
+				sb.DrawQuad(Vector2(i*32,j*32), Vector2(32,32), 0, atlas, i);
 			}
 		}
 		int dc = sb.RenderFinally();

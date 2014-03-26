@@ -8,7 +8,7 @@
 class JRectangle
 {
 private:
-	Texture texture;
+	TextureOld texture;
 
 	float x, y, z;
 	float width;
@@ -23,8 +23,8 @@ public:
 	void SetSize(float width, float height);
 	void SetPos(const vec3 &pos);
 
-	void SetTexture(const Texture &texture);
-	Texture GetTexture();
+	void SetTexture(const TextureOld &texture);
+	TextureOld GetTexture();
 
 	BufferArray &GetBufferArray();
 

@@ -46,12 +46,12 @@ void JRectangle::SetPos( const vec3 &_pos )
 	z = _pos[2];
 }
 
-void JRectangle::SetTexture( const Texture &_texture )
+void JRectangle::SetTexture( const TextureOld &_texture )
 {
 	texture = _texture;
 }
 
-Texture JRectangle::GetTexture()
+TextureOld JRectangle::GetTexture()
 {
 	return texture;
 }

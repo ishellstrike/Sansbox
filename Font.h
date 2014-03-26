@@ -19,7 +19,7 @@
 
 struct FontTexture
 {
-	Texture texture;
+	TextureOld texture;
 	unsigned int width;
 	unsigned int height;
 	int offsetDown;

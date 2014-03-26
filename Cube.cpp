@@ -50,7 +50,7 @@ Cube::~Cube(void)
 
 }
 
-void Cube::SetTextureAllSide(const Texture &_texture)
+void Cube::SetTextureAllSide(const TextureOld &_texture)
 {
 	for(unsigned int i = 0; i < 6; i++)
 	{
@@ -60,7 +60,7 @@ void Cube::SetTextureAllSide(const Texture &_texture)
 
 void Cube::SetFromAtlasAllSide(int num)
 {
-	Texture _texture;
+	TextureOld _texture;
 	float us = SpriteAtlas::Instance().SpriteW;
 	float vs = SpriteAtlas::Instance().SpriteH;
 	_texture.u1 = (num%64)*us;

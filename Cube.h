@@ -12,7 +12,7 @@ private:
 	BufferArray buffer;
 
 	float x, y, z;
-	Texture texture[6];
+	TextureOld texture[6];
 
 public:
 	Cube(void);
@@ -22,7 +22,7 @@ public:
 
 	BufferArray &GetBufferArray();
 
-	void SetTextureAllSide(const Texture &texture);
+	void SetTextureAllSide(const TextureOld &texture);
 	void SetFromAtlasAllSide(int num);
 };
 

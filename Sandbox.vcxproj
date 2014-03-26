@@ -104,6 +104,7 @@
     <ClInclude Include="GameTimer.h" />
     <ClInclude Include="GraphicText.h" />
     <ClInclude Include="ImageAtlas.h" />
+    <ClInclude Include="JargMath.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="LineBatch.h" />
     <ClInclude Include="Map.h" />
