@@ -126,11 +126,11 @@ void Texture::Load(std::string a)
 	name = a;
 
 	Bitmap* b = new Bitmap();
-	b->Load("spriteatlas.png");
+	b->Load(a);
 	textureId = GenerateOpenglBitmap(*b, false, false);
 	height = b->GetHeight();
 	width = b->GetWidth();
-	delete b;
+	b->Free();
 }
 
 Rect::Rect()

@@ -23,6 +23,7 @@ public:
 	void DrawQuad(Vector2 pos, Vector2 size, float rotation, Texture& tex, Rect sub);
 	void DrawQuad(Vector2 pos, Vector2 size, float rotation, Texture& tex, int atl);
 	void DrawQuad(Vector2 pos, Vector2 size, float rotation, Texture& tex);
+	void DrawQuad(Vector2 pos, Vector2 size, Texture& tex);
 	int RenderFinally();
 };
 #endif // SpriteBatch_h__

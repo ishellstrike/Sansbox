@@ -140,12 +140,43 @@ void SpriteBatch::DrawQuad(Vector2 pos, Vector2 size, float rotation, Texture& t
 	curz+=0.001f;
 }
 
+void SpriteBatch::DrawQuad(Vector2 pos, Vector2 size, Texture& tex)
+{
+	if(curn == 1000){
+		Render();
+		DrawQuad(pos, size, tex);
+		return;
+	}
+	if(tex.textureId != currentTex.textureId){
+		Render();
+		glBindTexture(GL_TEXTURE_2D, tex.textureId);
+		currentTex = tex;
+	}
+	vertex[4*curn+0] = Vector3(pos.x,        pos.y, curz);
+	vertex[4*curn+1] = Vector3(pos.x + size.x, pos.y, curz);
+	vertex[4*curn+2] = Vector3(pos.x,        pos.y + size.y, curz);
+	vertex[4*curn+3] = Vector3(pos.x + size.x, pos.y + size.y, curz);
+	uv[4*curn+3] = Vector2(0,0);
+	uv[4*curn+2] = Vector2(1,0);
+	uv[4*curn+1] = Vector2(0,1);
+	uv[4*curn+0] = Vector2(1,1);
+	index[6*curn+0] = 4*curn+0;
+	index[6*curn+1] = 4*curn+1;
+	index[6*curn+2] = 4*curn+2;
+	index[6*curn+3] = 4*curn+1;
+	index[6*curn+4] = 4*curn+2;
+	index[6*curn+5] = 4*curn+3;
+	curn++;
+	curz+=0.001f;
+}
+
 int SpriteBatch::RenderFinally()
 {
 	if(curn == 0) {
 		return 0;
 	}
 	glBindVertexArray(vao);
+	glBindTexture(GL_TEXTURE_2D, currentTex.textureId);
 
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(Vector3)*curn*4, vertex, GL_DYNAMIC_DRAW);

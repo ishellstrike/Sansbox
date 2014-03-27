@@ -27,10 +27,11 @@
 #include "JargShader.h"
 #include "CoreMod.h"
 #include "SpriteBatch.h"
-#include "WindowSystem.h"
-#include "Window.h"
 #include "Vector.h"
 #include <vector>
+#include <istream>
+#include "WinS.h"
+#include "Win.h"
 
 void KeyCallbackGLFW3(GLFWwindow *win, int key, int scancode, int action, int mods)
 {
@@ -223,9 +224,9 @@ int Game::Run()
     SpriteBatch sb;
 	sb.Init();
 
-	WindowSystem ws(sb);
-	Window w(Vector2(100,100), Vector2(200,200));
-	ws.windows.push_back(w);
+	WinS* ws = new WinS(&sb);
+	Win w(Vector2(100,100), Vector2(200,200));
+	ws->windows.push_back(w);
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -312,15 +313,9 @@ int Game::Run()
 
 		//ba.Draw();
 
-		ws.Draw();
+		ws->Draw();
+		
 
-		glBindTexture(GL_TEXTURE_2D, 2);
-
-		for(int j =0;j<20;j++){
-			for(int i =0;i<20;i++){
-				sb.DrawQuad(Vector2(i*32,j*32), Vector2(32,32), 0, atlas, i);
-			}
-		}
 		int dc = sb.RenderFinally();
 
 		fps.Update(gt);

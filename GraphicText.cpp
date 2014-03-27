@@ -39,7 +39,6 @@ void StringBatch::CreateBuffer(Font* font)
 	for(unsigned int i = 0; i < utf32text.size(); i++)
 	{
 		fontTexture = font->GetGlyphTexture(utf32text[i]);
-
 		geometryRectangle.SetPos(vec3(glyphX, glyphY + stringHeight - fontTexture.height - fontTexture.offsetDown, z));
 		geometryRectangle.SetSize((float)fontTexture.width, (float)fontTexture.height);
 		geometryRectangle.SetTexture(fontTexture.texture);
