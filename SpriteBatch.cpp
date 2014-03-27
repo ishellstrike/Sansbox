@@ -175,24 +175,24 @@ int SpriteBatch::RenderFinally()
 	if(curn == 0) {
 		return 0;
 	}
-	glBindVertexArray(vao);
-	glBindTexture(GL_TEXTURE_2D, currentTex.textureId);
+	//glBindVertexArray(vao);
+	//glBindTexture(GL_TEXTURE_2D, currentTex.textureId);
 
-	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Vector3)*curn*4, vertex, GL_DYNAMIC_DRAW);
-	glEnableVertexAttribArray(BUFFER_TYPE_VERTEX);
-	glVertexAttribPointer(BUFFER_TYPE_VERTEX, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3), 0);
+	//glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(Vector3)*curn*4, vertex, GL_DYNAMIC_DRAW);
+	//glEnableVertexAttribArray(BUFFER_TYPE_VERTEX);
+	//glVertexAttribPointer(BUFFER_TYPE_VERTEX, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3), 0);
 
-	glBindBuffer(GL_ARRAY_BUFFER, m_textureBuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Vector2)*curn*4, uv, GL_DYNAMIC_DRAW);
-	glEnableVertexAttribArray(BUFFER_TYPE_TEXTCOORD);
-	glVertexAttribPointer(BUFFER_TYPE_TEXTCOORD, 2, GL_FLOAT, GL_FALSE, sizeof(Vector2), 0);
+	//glBindBuffer(GL_ARRAY_BUFFER, m_textureBuffer);
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(Vector2)*curn*4, uv, GL_DYNAMIC_DRAW);
+	//glEnableVertexAttribArray(BUFFER_TYPE_TEXTCOORD);
+	//glVertexAttribPointer(BUFFER_TYPE_TEXTCOORD, 2, GL_FLOAT, GL_FALSE, sizeof(Vector2), 0);
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indecesBuffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint)*curn*6, index, GL_DYNAMIC_DRAW);
+	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indecesBuffer);
+	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint)*curn*6, index, GL_DYNAMIC_DRAW);
 
 
-	glDrawElements(GL_TRIANGLES, curn*6, GL_UNSIGNED_INT, NULL);
+	//glDrawElements(GL_TRIANGLES, curn*6, GL_UNSIGNED_INT, NULL);
 	curz = -90;
 	curn = 0;
 	dc++;
@@ -203,23 +203,23 @@ int SpriteBatch::RenderFinally()
 			
 void SpriteBatch::Render()
 {
-	glBindVertexArray(vao);
+	//glBindVertexArray(vao);
 
-	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Vector3)*curn*4, vertex, GL_DYNAMIC_DRAW);
-	glEnableVertexAttribArray(BUFFER_TYPE_VERTEX);
-	glVertexAttribPointer(BUFFER_TYPE_VERTEX, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3), 0);
+	//glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(Vector3)*curn*4, vertex, GL_DYNAMIC_DRAW);
+	//glEnableVertexAttribArray(BUFFER_TYPE_VERTEX);
+	//glVertexAttribPointer(BUFFER_TYPE_VERTEX, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3), 0);
 
-	glBindBuffer(GL_ARRAY_BUFFER, m_textureBuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Vector2)*curn*4, uv, GL_DYNAMIC_DRAW);
-	glEnableVertexAttribArray(BUFFER_TYPE_TEXTCOORD);
-	glVertexAttribPointer(BUFFER_TYPE_TEXTCOORD, 2, GL_FLOAT, GL_FALSE, sizeof(Vector2), 0);
+	//glBindBuffer(GL_ARRAY_BUFFER, m_textureBuffer);
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(Vector2)*curn*4, uv, GL_DYNAMIC_DRAW);
+	//glEnableVertexAttribArray(BUFFER_TYPE_TEXTCOORD);
+	//glVertexAttribPointer(BUFFER_TYPE_TEXTCOORD, 2, GL_FLOAT, GL_FALSE, sizeof(Vector2), 0);
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indecesBuffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint)*curn*6, index, GL_DYNAMIC_DRAW);
+	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indecesBuffer);
+	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint)*curn*6, index, GL_DYNAMIC_DRAW);
 
 
-	glDrawElements(GL_TRIANGLES, curn*6, GL_UNSIGNED_INT, NULL);
+	//glDrawElements(GL_TRIANGLES, curn*6, GL_UNSIGNED_INT, NULL);
 	curn = 0;
 	dc++;
 }

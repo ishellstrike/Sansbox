@@ -45,7 +45,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>C:\local\boost_1_55_0;libs\release\glog;libs\release\utf8cpp\include;libs\release\libpng\include;libs\release\json\include;libs\release\glm\include;libs\release\glfw\include;libs\release\glew\include;libs\release\freetype\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\local\boost_1_55_0\lib32-msvc-10.0;libs\release\glog;libs\release\utf8cpp\lib;libs\release\libpng\lib;libs\release\json\lib;libs\release\glfw\lib;libs\release\glew\lib;libs\release\freetype\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\local\boost_1_55_0\lib32-msvc-10.0;libs\release\glog\lib;libs\release\utf8cpp\lib;libs\release\libpng\lib;libs\release\json\lib;libs\release\glfw\lib;libs\release\glew\lib;libs\release\freetype\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

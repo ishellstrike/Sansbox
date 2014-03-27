@@ -114,7 +114,7 @@ bool Font::CreateFromConfig( std::string configFileName )
 	if ( !parsingSuccessful )
 	{
 		configFile.close();
-		LOG(FATAL) << configFile << " font config file corrupted.";
+		//LOG(FATAL) << configFile << " font config file corrupted.";
 		return false;
 	}
 
@@ -128,7 +128,7 @@ bool Font::CreateFromConfig( std::string configFileName )
 		if (FT_New_Face( library, fontFileName.c_str(), 0, &face ))
 		{
 			configFile.close();
-			LOG(FATAL) << fontFileName << " not opened. Font cant be build.";
+			//LOG(FATAL) << fontFileName << " not opened. Font cant be build.";
 			return false;
 		}
 

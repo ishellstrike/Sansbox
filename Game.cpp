@@ -18,9 +18,7 @@
 #include "FPSCounter.h"
 #include "SpriteAtlas.h"
 
-#include <ostream>
 #include "GraphicText.h"
-#include <fstream>
 #include "glog/logging.h"
 #include "GameLevel.h"
 #include <boost/thread/thread.hpp>
@@ -29,9 +27,9 @@
 #include "SpriteBatch.h"
 #include "Vector.h"
 #include <vector>
-#include <istream>
 #include "WinS.h"
 #include "Win.h"
+#include <string>
 
 void KeyCallbackGLFW3(GLFWwindow *win, int key, int scancode, int action, int mods)
 {
@@ -157,7 +155,7 @@ int Game::Run()
 
 	if(!Initialize()) 
 	{
-		//LOG(LOG_ERROR, "Инициализация завершилась с ошибками.");
+		LOG(ERROR) << "Инициализация завершилась с ошибками.";
 		return -1;
 	}
 
@@ -302,7 +300,7 @@ int Game::Run()
 		glUniform1i(textureLocation, 1);
 
 		glBindTexture(GL_TEXTURE_2D, 2);
-		map.Draw();
+		//map.Draw();
 
 		MVP = render->GetOrthoProjection();
 
@@ -313,15 +311,17 @@ int Game::Run()
 
 		//ba.Draw();
 
-		ws->Draw();
+		//ws->Draw();
 		
+		for (int i=0; i<10000; i++)
+		{
+			sb.DrawQuad(Vector2(0,0), Vector2(0,0), 0, atlas);
+		}
 
 		int dc = sb.RenderFinally();
 
 		fps.Update(gt);
-		std::stringstream iss;
-		iss << fps.GetCount() << " SbDC = " << dc;
-		glfwSetWindowTitle(window, iss.str().c_str());
+		glfwSetWindowTitle(window, std::to_string(fps.GetCount()).c_str());
 		//fpsText.Draw(a, 10, 10, big);
 		//fpsText.Draw("cho cho, mnogo shriftov lolol 123123123 wertyuidfghjvbn", 40, 10, smallf);
 		//fpsText.Draw("giant", 100, 100, giantf);
