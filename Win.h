@@ -1,19 +1,20 @@
 #pragma once
-#include "Vector.h"
 #ifndef Win_h__
 #define Win_h__
-
+#include "Vector.h"
+#include <detail\type_vec.hpp>
+#include <glm.hpp>
 class Win
 {
 public:
 	Win(void);
-	Win(Vector2 p, Vector2 s);
+	Win(glm::vec2 p, glm::vec2 s);
 	~Win(void);
 
 	void Draw();
 
-	Vector2 size;
-	Vector2 pos;
+	glm::vec2 size;
+	glm::vec2 pos;
 };
 
 #endif // Win_h__

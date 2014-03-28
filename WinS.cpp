@@ -5,11 +5,12 @@ WinS::WinS()
 
 }
 
-WinS::WinS(SpriteBatch* sb_)
+WinS::WinS(Batched* sb_, Font* fnt)
 {
 	WinS::sb = sb_;
 	WinS::bp = new Texture();
 	WinS::bp->Load("wp.png");
+	font = fnt;
 }
 
 WinS::~WinS()
@@ -27,7 +28,9 @@ void WinS::Draw()
 	}
 }
 
+Font* WinS::font;
+
 Texture* WinS::bp;
 
-SpriteBatch* WinS::sb;
+Batched* WinS::sb;
 

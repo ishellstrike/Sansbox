@@ -176,10 +176,17 @@ int Game::Run()
 	ShaderID->LoadFromFile("shaders/t2.fs", "shaders/t2.vs");
 	unsigned int mvpID = ShaderID->LocateVars("MVP");
 
+	JargShader* ShaderLines = new JargShader();
+	ShaderLines->LoadFromFile("shaders/lines.fs", "shaders/lines.vs");
+	ShaderLines->BindProgram();
+	unsigned int mvpLine = ShaderLines->LocateVars("MVP");
+	glm::mat4 MVP = render->GetOrthoProjection();
+	glUniformMatrix4fv(mvpID, 1, GL_FALSE, &MVP[0][0]);
+
 	Camera camera;
 	camera.SetWindowSize(width, height);
 	glm::mat4 model = glm::mat4(1.0f);
-	glm::mat4 MVP = camera.CalculateMatrix() * model;
+	MVP = camera.CalculateMatrix() * model;
 
  	JRectangle geometryRectangle;
  	geometryRectangle.SetPos(vec3(0, 50, -1));
@@ -219,17 +226,21 @@ int Game::Run()
 	Map map;
 	map.CreateGeometry();
 
-    SpriteBatch sb;
-	sb.Init();
+    Batched sb;
+	sb.Init(ShaderID, ShaderLines);
 
-	WinS* ws = new WinS(&sb);
-	Win w(Vector2(100,100), Vector2(200,200));
-	ws->windows.push_back(w);
+	WinS* ws = new WinS(&sb, smallf);
+	Win* w;
+	for(int i = 0; i< 10; i++) {
+		w = new Win(vec2(100 +i*5, 100 +i*5), vec2(200,200));
+		ws->windows.push_back(*w);
+	}
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, 1);
+	glDisable(GL_DEPTH_TEST);
 
 	GLint textureLocation = -1;
 	textureLocation = ShaderID->LocateVars("colorTexture");
@@ -248,7 +259,7 @@ int Game::Run()
 
 		// Clear the screen
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+		glClearColor(204/255.0F, 1.0f, 1.0f, 1.0f);
 
 		if(Keyboard::isKeyDown(GLFW_KEY_W))
 		{
@@ -300,28 +311,21 @@ int Game::Run()
 		glUniform1i(textureLocation, 1);
 
 		glBindTexture(GL_TEXTURE_2D, 2);
-		//map.Draw();
+		map.Draw();
 
 		MVP = render->GetOrthoProjection();
-
-		// Use our shader
-		ShaderID->BindProgram();
 		glUniformMatrix4fv(mvpID, 1, GL_FALSE, &MVP[0][0]);
-		glUniform1i(textureLocation, 1);
-
-		//ba.Draw();
 
 		//ws->Draw();
-		
-		for (int i=0; i<10000; i++)
-		{
-			sb.DrawQuad(Vector2(0,0), Vector2(0,0), 0, atlas);
+
+		for(int i = 0; i< 10000; i++) {
+			sb.DrawString(vec2(rand()%500, rand()%500), "abcabcabcabc", *smallf);
 		}
 
 		int dc = sb.RenderFinally();
 
 		fps.Update(gt);
-		glfwSetWindowTitle(window, std::to_string(fps.GetCount()).c_str());
+		glfwSetWindowTitle(window, std::to_string((long double)fps.GetCount()).c_str());
 		//fpsText.Draw(a, 10, 10, big);
 		//fpsText.Draw("cho cho, mnogo shriftov lolol 123123123 wertyuidfghjvbn", 40, 10, smallf);
 		//fpsText.Draw("giant", 100, 100, giantf);

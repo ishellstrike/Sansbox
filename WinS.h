@@ -8,12 +8,13 @@
 class WinS{
 public:
 	WinS();
-	WinS(SpriteBatch* sb_);
+	WinS(Batched* sb_, Font* fnt);
 	~WinS();
 	std::vector<Win> windows;
 
 	void Draw();
-	static SpriteBatch* sb;
+	static Batched* sb;
 	static Texture* bp;
+	static Font* font;
 };
 #endif // WinS_h__

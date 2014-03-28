@@ -1,20 +1,15 @@
 #ifndef Vector_h__
 #define Vector_h__
 
-struct Vector2 {
+struct Color4 {
 public:
-	float x, y;
-	Vector2();
-	Vector2(float a, float b);
-	Vector2(float a);
-	~Vector2();
-};
-
-struct Vector3 {
-	float x, y, z;
-	Vector3();
-	Vector3(float a, float b, float c);
-	Vector3(float a);
-	~Vector3();
+	float r, g, b, a;
+	static Color4 White;
+	Color4();
+	Color4(float a_, float r_, float g_, float b_);
+	Color4(int a_, int r_, int g_, int b_);
+	~Color4();
+private:
+	inline int clamp(int a, int min, int max);
 };
 #endif // Vector_h__

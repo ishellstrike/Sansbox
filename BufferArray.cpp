@@ -7,7 +7,7 @@
 #define OPENGL_CHECK_ERRORS() \
 	while( unsigned int openGLError = glGetError() ) \
 { \
-	LOG(ERROR) << "OpenGL Error 0x%X", openGLError; \
+	LOG(ERROR) << "OpenGL Error "; \
 };
 
 BufferArray::BufferArray()

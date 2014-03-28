@@ -61,27 +61,24 @@ BufferArray &JRectangle::GetBufferArray()
 	buffer.vertexBuffer[0] = x;
 	buffer.vertexBuffer[1] = y;
 	buffer.vertexBuffer[2] = z;
-
 	buffer.vertexBuffer[3] = texture.u1;
 	buffer.vertexBuffer[4] = texture.v2;
+
 	buffer.vertexBuffer[5] = x;
 	buffer.vertexBuffer[6] = y + height;
 	buffer.vertexBuffer[7] = z;
-
 	buffer.vertexBuffer[8] = texture.u1;
 	buffer.vertexBuffer[9] = texture.v1;
 
 	buffer.vertexBuffer[10] = x + width;
 	buffer.vertexBuffer[11] = y + height;
 	buffer.vertexBuffer[12] = z;
-
 	buffer.vertexBuffer[13] = texture.u2;
 	buffer.vertexBuffer[14] = texture.v1;
 
 	buffer.vertexBuffer[15] = x + width;
 	buffer.vertexBuffer[16] = y;
 	buffer.vertexBuffer[17] = z;
-
 	buffer.vertexBuffer[18] = texture.u2;
 	buffer.vertexBuffer[19] = texture.v2;
 

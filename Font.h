@@ -51,7 +51,6 @@ private:
 
 	std::list<GlyphBitmap> glyphsBitmapList;
 
-	std::map<unsigned int, FontTexture> glyphsTextureMap;
 
 
 private:
@@ -62,6 +61,7 @@ private:
 	bool GenerateOpenglGlyphs( std::string configFileName);
 
 	bool GenerateEmptyGlyph();
+	Texture* tex;
 
 public:
 	Font();
@@ -74,7 +74,7 @@ public:
 	void Remove();
 
 	FontTexture GetGlyphTexture(unsigned int utf32glyph);
-
+	std::map<unsigned int, FontTexture> glyphsTextureMap;
 };
 
 

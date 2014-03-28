@@ -58,7 +58,7 @@ void JargShader::LoadFromFile(std::string fragment_file_path, std::string vertex
 	int InfoLogLength;
 
 	// Compile Vertex Shader
-	//LOG(LOG_INFO, "Compiling shader: \"" + vertex_file_path + "\".");
+	LOG(INFO) << "Compiling shader: \"" << vertex_file_path << "\".";
 	char const * VertexSourcePointer = VertexShaderCode.c_str();
 	glShaderSource(VertexShaderID, 1, &VertexSourcePointer , nullptr);
 	glCompileShader(VertexShaderID);
@@ -68,10 +68,15 @@ void JargShader::LoadFromFile(std::string fragment_file_path, std::string vertex
 	glGetShaderiv(VertexShaderID, GL_INFO_LOG_LENGTH, &InfoLogLength);
 	std::vector<char> VertexShaderErrorMessage(InfoLogLength);
 	glGetShaderInfoLog(VertexShaderID, InfoLogLength, nullptr, &VertexShaderErrorMessage[0]);
-	LOG(INFO) << &VertexShaderErrorMessage[0];
+	if(VertexShaderErrorMessage.size() == 1) 
+	{
+		LOG(INFO) << "   successful";
+	} else {
+		LOG(INFO) << &VertexShaderErrorMessage[0];
+	}
 
 	// Compile Fragment Shader
-	//LOG(LOG_INFO, "Compiling shader: \"" + fragment_file_path + "\".");
+	LOG(INFO) << "Compiling shader: \"" << fragment_file_path << "\".";
 	char const * FragmentSourcePointer = FragmentShaderCode.c_str();
 	glShaderSource(FragmentShaderID, 1, &FragmentSourcePointer , nullptr);
 	glCompileShader(FragmentShaderID);
@@ -81,10 +86,15 @@ void JargShader::LoadFromFile(std::string fragment_file_path, std::string vertex
 	glGetShaderiv(FragmentShaderID, GL_INFO_LOG_LENGTH, &InfoLogLength);
 	std::vector<char> FragmentShaderErrorMessage(InfoLogLength);
 	glGetShaderInfoLog(FragmentShaderID, InfoLogLength, nullptr, &FragmentShaderErrorMessage[0]);
-	LOG(INFO) << &FragmentShaderErrorMessage[0];
+	if(FragmentShaderErrorMessage.size() == 1) 
+	{
+		LOG(INFO) << "   successful";
+	} else {
+		LOG(INFO) << &FragmentShaderErrorMessage[0];
+	}
 
 	// Link the program
-	//LOG(LOG_INFO, "Linking program");
+	LOG(INFO) << "Linking program";
 	program = glCreateProgram();
 	glAttachShader(program, VertexShaderID);
 	glAttachShader(program, FragmentShaderID);
@@ -95,7 +105,12 @@ void JargShader::LoadFromFile(std::string fragment_file_path, std::string vertex
 	glGetProgramiv(program, GL_INFO_LOG_LENGTH, &InfoLogLength);
 	std::vector<char> ProgramErrorMessage( InfoLogLength > 1 ? InfoLogLength : 1 );
 	glGetProgramInfoLog(program, InfoLogLength, nullptr, &ProgramErrorMessage[0]);
-	LOG(INFO) << &ProgramErrorMessage[0];
+	if(ProgramErrorMessage.size() == 1) 
+	{
+		LOG(INFO) << "   successful";
+	} else {
+		LOG(INFO) << &ProgramErrorMessage[0];
+	}
 
 	glDeleteShader(VertexShaderID);
 	glDeleteShader(FragmentShaderID);
