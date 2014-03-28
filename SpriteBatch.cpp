@@ -12,15 +12,15 @@ Batched::Batched()
 	vertex = new vec3[1000*4];
 	index = new GLuint[1000*6];
 
-	suv = new vec2[1000*4];
-	svertex = new vec3[1000*4];
-	sindex = new GLuint[1000*6];
-
 	lvertex = new vec3[1000*4];
 	lindex = new GLuint[1000*6];
 	lcolor = new Color4[1000*4];
-	m_textureBuffer = m_vertexBuffer = m_indecesBuffer = l_colorBuffer = l_vertexBuffer = lvao = vao = curn = lcurn = scurn = s_vertexBuffer = s_textureBuffer = s_indecesBuffer = 0;
-	curz = -90;
+	m_textureBuffer = m_vertexBuffer = m_indecesBuffer = l_colorBuffer = l_vertexBuffer = lvao = vao = curn = lcurn = 0;
+	curz = -1;
+	blankTex = new Texture();
+	blankTex->name = "blank";
+	blankTex->textureId = 0;
+	currentTex = blankTex;
 }
 
 Batched::~Batched()
@@ -29,13 +29,11 @@ Batched::~Batched()
 	delete[] vertex;
 	delete[] index;
 
-	delete[] suv;
-	delete[] svertex;
-	delete[] sindex;
-
 	delete[] lcolor;
 	delete[] lvertex;
 	delete[] lindex;
+
+	delete blankTex;
 
 	glDeleteBuffers(1, &m_indecesBuffer);
 	glDeleteBuffers(1, &m_vertexBuffer);
@@ -48,12 +46,6 @@ Batched::~Batched()
 	glDeleteBuffers(1, &l_colorBuffer);
 	glBindVertexArray(0);
 	glDeleteVertexArrays(1, &lvao);
-
-	glDeleteBuffers(1, &s_indecesBuffer);
-	glDeleteBuffers(1, &s_vertexBuffer);
-	glDeleteBuffers(1, &s_textureBuffer);
-	glBindVertexArray(0);
-	glDeleteVertexArrays(1, &svao);
 }
 
 void Batched::Init(JargShader* tex, JargShader* col){
@@ -72,18 +64,12 @@ void Batched::Init(JargShader* tex, JargShader* col){
 	glGenBuffers(1, &l_vertexBuffer);
 	glGenBuffers(1, &l_indecesBuffer);
 	glGenBuffers(1, &l_colorBuffer);
-
-	glGenVertexArrays(1, &svao);
-	glBindVertexArray(svao);
-
-	glGenBuffers(1, &s_vertexBuffer);
-	glGenBuffers(1, &s_indecesBuffer);
-	glGenBuffers(1, &s_textureBuffer);
 }
 
 void Batched::DrawString(vec2 pos, std::string text, Font& font){
 	std::vector<uint32_t> utf32text;
-	utf8::utf8to32(text.begin(), text.end(), std::back_inserter(utf32text));
+	utf32text.push_back(117);utf32text.push_back(117);utf32text.push_back(117);utf32text.push_back(117);utf32text.push_back(117);utf32text.push_back(117);utf32text.push_back(117);utf32text.push_back(117);
+	//utf8::utf8to32(text.begin(), text.end(), std::back_inserter(utf32text));
 	currentFont = &font;
 
 	JRectangle geometryRectangle;
@@ -96,10 +82,9 @@ void Batched::DrawString(vec2 pos, std::string text, Font& font){
 	if(curn > 1000 - utf32text.size() - 1){
 		Render();
 	}
-	if(fontTexture.texture.textureId != currentTex){
+	if(font.tex->textureId != currentTex->textureId){
 		Render();
-		glBindTexture(GL_TEXTURE_2D, fontTexture.texture.textureId);
-		currentTex = fontTexture.texture.textureId;
+		currentTex = font.tex;
 	}
 	for(unsigned int i = 0; i < utf32text.size(); i++)
 	{
@@ -120,26 +105,21 @@ void Batched::DrawString(vec2 pos, std::string text, Font& font){
 		index[6*curn+4] = 4*curn+1;
 		index[6*curn+5] = 4*curn+2;
 		curn++;
-		curz+=0.001f;
 
 		glyphX += fontTexture.width;
 
 		//auto ar = geometryRectangle.GetBufferArray();
 	}
+	//curz+=0.001f;
 }
 
-inline void Batched::innerStringDraw(vec2 pos, vec2 size, float rotation, Texture& tex, Rect sub){
-
-}
-
-inline void Batched::innerDraw(vec2 pos, vec2 size, float rotation, GLuint tex, Rect sub){
+inline void Batched::innerDraw(vec2 pos, vec2 size, float rotation, Texture& tex, Rect sub){
 	if(curn == 1000){
 		Render();
 	}
-	if(tex != currentTex){
+	if(tex.textureId != currentTex->textureId){
 		Render();
-		glBindTexture(GL_TEXTURE_2D, tex);
-		currentTex = tex;
+		currentTex = &tex;
 	}
 	vertex[4*curn+0] = vec3(pos.x, pos.y, curz);
 	vertex[4*curn+1] = vec3(pos.x + size.x, pos.y, curz);
@@ -156,12 +136,12 @@ inline void Batched::innerDraw(vec2 pos, vec2 size, float rotation, GLuint tex, 
 	index[6*curn+4] = 4*curn+2;
 	index[6*curn+5] = 4*curn+3;
 	curn++;
-	curz+=0.001f;
+	//curz+=0.001f;
 }
 
 void Batched::DrawQuad(vec2 pos, vec2 size, float rotation, Texture& tex, Rect sub)
 {
-	innerDraw(pos, size, rotation, tex.textureId, sub);
+	innerDraw(pos, size, rotation, tex, sub);
 }	
 
 void Batched::DrawQuad(vec2 pos, vec2 size, float rotation, Texture& tex, int atl)
@@ -169,24 +149,22 @@ void Batched::DrawQuad(vec2 pos, vec2 size, float rotation, Texture& tex, int at
 	int i = atl%64;
 	int j = atl/64;
 	Rect aa(i/64.0, (j*32.0)/tex.height, 1/64.0, 32.0/tex.height);
-	innerDraw(pos, size, rotation, tex.textureId, aa);
+	innerDraw(pos, size, rotation, tex, aa);
 }
 
 void Batched::DrawQuad(vec2 pos, vec2 size, float rotation, Texture& tex)
 {
-	innerDraw(pos, size, rotation, tex.textureId, Rect(0,0,1,1));
+	innerDraw(pos, size, rotation, tex, Rect(0,0,1,1));
 }
 
 void Batched::DrawQuad(vec2 pos, vec2 size, Texture& tex)
 {
-	innerDraw(pos, size, 0, tex.textureId, Rect(0,0,1,1));
+	innerDraw(pos, size, 0, tex, Rect(0,0,1,1));
 }
 
 void Batched::DrawLine(vec2 from, vec2 to, float w, Color4 col){
 	if(lcurn == 1000){
 		LRender();
-		DrawLine(from, to, w, col);
-		return;
 	}
 	lvertex[4*lcurn+0] = vec3(from.x - 1, from.y + 1, curz);
 	lvertex[4*lcurn+1] = vec3(from.x + 1, from.y - 1, curz);
@@ -209,8 +187,6 @@ void Batched::DrawLine(vec2 from, vec2 to, float w, Color4 col){
 void Batched::DrawRectangle(vec2 pos, vec2 size, Color4 col){
 	if(lcurn == 1000){
 		LRender();
-		DrawRectangle(pos, size, col);
-		return;
 	}
 	lvertex[4*lcurn+0] = vec3(pos.x, pos.y, curz);
 	lvertex[4*lcurn+1] = vec3(pos.x + size.x, pos.y, curz);
@@ -235,7 +211,7 @@ int Batched::RenderFinally()
 	if(curn != 0) {
 		glBindVertexArray(vao);
 		textured->BindProgram();
-		glBindTexture(GL_TEXTURE_2D, currentTex);
+		glBindTexture(GL_TEXTURE_2D, currentTex->textureId);
 
 		glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(vec3)*curn*4, vertex, GL_DYNAMIC_DRAW);
@@ -279,7 +255,6 @@ int Batched::RenderFinally()
 	curz = -90;
 	curn = 0;
 	lcurn = 0;
-	scurn = 0;
 	int dcc = dc;
 	dc = 0;
 	return dcc;
@@ -292,6 +267,7 @@ void Batched::Render()
 	}
 	glBindVertexArray(vao);
 	textured->BindProgram();
+	glBindTexture(GL_TEXTURE_2D, currentTex->textureId);
 
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3)*curn*4, vertex, GL_DYNAMIC_DRAW);
@@ -309,34 +285,6 @@ void Batched::Render()
 
 	glDrawElements(GL_TRIANGLES, curn*6, GL_UNSIGNED_INT, NULL);
 	curn = 0;
-	dc++;
-}
-
-void Batched::SRender()
-{
-	if(scurn == 0) {
-		return;
-	}
-	glBindVertexArray(svao);
-	textured->BindProgram();
-	glBindTexture(GL_TEXTURE_2D, currentFont->glyphsTextureMap[0].texture.textureId);
-
-	glBindBuffer(GL_ARRAY_BUFFER, s_vertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3)*scurn*4, svertex, GL_DYNAMIC_DRAW);
-	glEnableVertexAttribArray(BUFFER_TYPE_VERTEX);
-	glVertexAttribPointer(BUFFER_TYPE_VERTEX, 3, GL_FLOAT, GL_FALSE, sizeof(vec3), 0);
-
-	glBindBuffer(GL_ARRAY_BUFFER, s_textureBuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vec2)*scurn*4, suv, GL_DYNAMIC_DRAW);
-	glEnableVertexAttribArray(BUFFER_TYPE_TEXTCOORD);
-	glVertexAttribPointer(BUFFER_TYPE_TEXTCOORD, 2, GL_FLOAT, GL_FALSE, sizeof(vec2), 0);
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, s_indecesBuffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint)*scurn*6, sindex, GL_DYNAMIC_DRAW);
-
-
-	glDrawElements(GL_TRIANGLES, scurn*6, GL_UNSIGNED_INT, NULL);
-	scurn = 0;
 	dc++;
 }
 

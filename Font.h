@@ -61,12 +61,13 @@ private:
 	bool GenerateOpenglGlyphs( std::string configFileName);
 
 	bool GenerateEmptyGlyph();
-	Texture* tex;
+	
 
 public:
 	Font();
 	~Font();
 	std::string name;
+	Texture* tex;
 
 	bool Init();
 

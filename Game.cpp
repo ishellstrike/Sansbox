@@ -233,17 +233,16 @@ int Game::Run()
 	Win* w;
 	for(int i = 0; i< 10; i++) {
 		w = new Win(vec2(100 +i*5, 100 +i*5), vec2(200,200));
-		ws->windows.push_back(*w);
+		ws->windows.push_back(w);
 	}
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, 1);
-	glDisable(GL_DEPTH_TEST);
 
-	GLint textureLocation = -1;
-	textureLocation = ShaderID->LocateVars("colorTexture");
+	GLint colorTextureLocation = -1;
+	colorTextureLocation = ShaderID->LocateVars("colorTexture");
 
 	float const speed = 0.05f;
 
@@ -308,7 +307,7 @@ int Game::Run()
 		// Use our shader
 		ShaderID->BindProgram();
 		glUniformMatrix4fv(mvpID, 1, GL_FALSE, &MVP[0][0]);
-		glUniform1i(textureLocation, 1);
+		glUniform1i(colorTextureLocation, 1);
 
 		glBindTexture(GL_TEXTURE_2D, 2);
 		map.Draw();
@@ -316,16 +315,14 @@ int Game::Run()
 		MVP = render->GetOrthoProjection();
 		glUniformMatrix4fv(mvpID, 1, GL_FALSE, &MVP[0][0]);
 
-		//ws->Draw();
-
-		for(int i = 0; i< 10000; i++) {
-			sb.DrawString(vec2(rand()%500, rand()%500), "abcabcabcabc", *smallf);
-		}
+		WinS::sb->DrawString(vec2(10,10), "azazazaadasdasd", *smallf);
+		ws->Draw();
+		
 
 		int dc = sb.RenderFinally();
 
 		fps.Update(gt);
-		glfwSetWindowTitle(window, std::to_string((long double)fps.GetCount()).c_str());
+		glfwSetWindowTitle(window, std::to_string((long double)fps.GetCount()).append(" ").append(std::to_string((long double)dc)).c_str());
 		//fpsText.Draw(a, 10, 10, big);
 		//fpsText.Draw("cho cho, mnogo shriftov lolol 123123123 wertyuidfghjvbn", 40, 10, smallf);
 		//fpsText.Draw("giant", 100, 100, giantf);
@@ -340,6 +337,9 @@ int Game::Run()
 	delete ShaderID;
 	big->Remove();
 	delete big;
+	delete ws;
+	delete smallf;
+	delete giantf;
 
 	glfwDestroyWindow(window);
 	glfwTerminate();

@@ -18,15 +18,11 @@ private:
 	Color4* lcolor;
 	GLuint* lindex;
 
-	GLuint s_vertexBuffer, s_textureBuffer, s_indecesBuffer, svao;
-	vec3* svertex;
-	vec2* suv;
-	GLuint* sindex;
-
 	float curz;
-	int curn, lcurn, scurn;
+	int curn, lcurn;
 	int dc;
-	GLuint currentTex;
+	Texture* currentTex;
+	Texture* blankTex;
 	Font* currentFont;
 	JargShader* textured;
 	JargShader* colored;
@@ -44,10 +40,8 @@ public:
 	void DrawLine(vec2 from, vec2 to, float w, Color4 col);
 	void DrawRectangle(vec2 from, vec2 to, Color4 col);
 private:
-	inline void innerDraw(vec2 pos, vec2 size, float rotation, GLuint tex, Rect sub);
+	inline void innerDraw(vec2 pos, vec2 size, float rotation, Texture& tex, Rect sub);
 	void LRender();
 	void Render();
-	inline void innerStringDraw(vec2 pos, vec2 size, float rotation, Texture& tex, Rect sub);
-	void SRender();
 };
 #endif // SpriteBatch_h__

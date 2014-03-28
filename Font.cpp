@@ -23,6 +23,7 @@ Font::~Font()
 		FT_Done_FreeType(library);
 		library = nullptr;
 	}
+	delete tex;
 }
 
 bool Font::Init()
@@ -286,6 +287,11 @@ bool Font::GenerateOpenglGlyphs( std::string configFileName)
 
 	// CreateAtlasOpenglTexture
 	unsigned int ogltexture = GenerateOpenglBitmap(*atlasBitmap, false, false);
+	tex = new Texture();
+	tex->textureId = ogltexture;
+	tex->name = configFileName;
+	tex->height = atlasBitmap->GetHeight();
+	tex->width = atlasBitmap->GetWidth();
 	for (auto i = glyphsTextureMap.begin(); i != glyphsTextureMap.end(); i++)
 	{
 		(*i).second.texture.textureId = ogltexture;

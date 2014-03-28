@@ -10,7 +10,7 @@ public:
 	WinS();
 	WinS(Batched* sb_, Font* fnt);
 	~WinS();
-	std::vector<Win> windows;
+	std::vector<Win*> windows;
 
 	void Draw();
 	static Batched* sb;
