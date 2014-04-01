@@ -83,7 +83,7 @@ Game::~Game(void)
 
 }
 
-CoreMod* cm;
+CoreMod* cm; 
 int Game::Initialize()
 {
 #if WIN32 && _DEBUG
