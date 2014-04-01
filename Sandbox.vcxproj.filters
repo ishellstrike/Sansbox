@@ -22,6 +22,9 @@
     <Filter Include="Registry">
       <UniqueIdentifier>{0988dfac-6012-4f24-ac26-bb541fe426ec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="WinS">
+      <UniqueIdentifier>{f10043e8-a45d-4068-ad64-3a446c7b07f0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bitmap.h">
@@ -120,10 +123,19 @@
     <ClInclude Include="JargMath.h">
       <Filter>Render</Filter>
     </ClInclude>
-    <ClInclude Include="WinS.h">
+    <ClInclude Include="VertexPositionTexture.h">
       <Filter>Render</Filter>
     </ClInclude>
-    <ClInclude Include="Win.h" />
+    <ClInclude Include="WinS.h">
+      <Filter>WinS</Filter>
+    </ClInclude>
+    <ClInclude Include="Win.h">
+      <Filter>WinS</Filter>
+    </ClInclude>
+    <ClInclude Include="WComponent.h">
+      <Filter>WinS</Filter>
+    </ClInclude>
+    <ClInclude Include="JButton.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -211,8 +223,11 @@
       <Filter>Render</Filter>
     </ClCompile>
     <ClCompile Include="WinS.cpp">
-      <Filter>Render</Filter>
+      <Filter>WinS</Filter>
     </ClCompile>
-    <ClCompile Include="Win.cpp" />
+    <ClCompile Include="Win.cpp">
+      <Filter>WinS</Filter>
+    </ClCompile>
+    <ClCompile Include="JButton.cpp" />
   </ItemGroup>
 </Project>

@@ -30,6 +30,10 @@
 #include "WinS.h"
 #include "Win.h"
 #include <string>
+#include "JButton.h"
+#include "WComponent.h"
+
+
 
 void KeyCallbackGLFW3(GLFWwindow *win, int key, int scancode, int action, int mods)
 {
@@ -44,6 +48,11 @@ void CursorPosCallbackGLFW3(GLFWwindow *window, double xpos, double ypos)
 void CursorClientAreaCallbackGLFW3(GLFWwindow *window, int entered)
 {
 	Mouse::CursorClientArea(entered);
+}
+
+void SetMouseButtonCallbackGLFW3(GLFWwindow *window, int a, int b, int c)
+{
+	Mouse::SetButton(a, b, c);
 }
 
 void WindowFocusCallbackGLFW3(GLFWwindow *window, int focused)
@@ -77,6 +86,9 @@ Game::~Game(void)
 CoreMod* cm;
 int Game::Initialize()
 {
+#if WIN32 && _DEBUG
+	system ("autoversion.cmd");
+#endif
 
 	google::InitGoogleLogging("Jarg.exe");
 	google::SetLogDestination(google::INFO, "logs/");
@@ -129,6 +141,7 @@ int Game::Initialize()
 	glfwSetCursorPosCallback(window, CursorPosCallbackGLFW3);
 	glfwSetCursorEnterCallback(window, CursorClientAreaCallbackGLFW3);	
 	glfwSetWindowFocusCallback(window, WindowFocusCallbackGLFW3);
+	glfwSetMouseButtonCallback(window, SetMouseButtonCallbackGLFW3);
 
 
 	//*******************************
@@ -224,7 +237,7 @@ int Game::Run()
 	giantf->Create("fontgiant.json");
 
 	Map map;
-	map.CreateGeometry();
+	map.CreateGeometry(&atlas);
 
     Batched sb;
 	sb.Init(ShaderID, ShaderLines);
@@ -232,8 +245,11 @@ int Game::Run()
 	WinS* ws = new WinS(&sb, smallf);
 	Win* w;
 	for(int i = 0; i< 10; i++) {
-		w = new Win(vec2(100 +i*5, 100 +i*5), vec2(200,200));
+		w = new Win(Vector2(100 +i*5, 100 +i*5), Vector2(200,200));
 		ws->windows.push_back(w);
+		JButton* jb = new JButton(Vector2(10,100), Vector2(50,20));
+		jb->parent = w;
+		w->Items.push_back(jb);
 	}
 
 	glEnable(GL_BLEND);
@@ -252,6 +268,7 @@ int Game::Run()
 
 	while(Running && !glfwWindowShouldClose(window)) 
 	{
+		glEnable(GL_DEPTH_TEST);
 		gt.Update(glfwGetTime());
 
 		//glfwSetWindowTitle(window, a.c_str());
@@ -315,10 +332,11 @@ int Game::Run()
 		MVP = render->GetOrthoProjection();
 		glUniformMatrix4fv(mvpID, 1, GL_FALSE, &MVP[0][0]);
 
-		WinS::sb->DrawString(vec2(10,10), "azazazaadasdasd", *smallf);
+		glDisable(GL_DEPTH_TEST);
+		WinS::sb->DrawString(Vector2(10,10), "azazazaadasdasd", *smallf);
+		ws->Update(gt);
 		ws->Draw();
-		
-
+		sb.DrawQuad(Vector2(10,10), Vector2(100,100), atlas);
 		int dc = sb.RenderFinally();
 
 		fps.Update(gt);
@@ -326,10 +344,11 @@ int Game::Run()
 		//fpsText.Draw(a, 10, 10, big);
 		//fpsText.Draw("cho cho, mnogo shriftov lolol 123123123 wertyuidfghjvbn", 40, 10, smallf);
 		//fpsText.Draw("giant", 100, 100, giantf);
+		Mouse::Update();
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
-		//boost::this_thread::sleep_for(boost::chrono::milliseconds(16));
+		boost::this_thread::sleep_for(boost::chrono::milliseconds(16));
 	}
 	
 

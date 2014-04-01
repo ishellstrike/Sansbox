@@ -23,7 +23,7 @@ public:
 	BufferArray &GetBufferArray();
 
 	void SetTextureAllSide(const TextureOld &texture);
-	void SetFromAtlasAllSide(int num);
+	void SetFromAtlasAllSide(int num, Texture* atlas);
 };
 
 

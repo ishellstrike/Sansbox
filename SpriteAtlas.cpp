@@ -44,6 +44,10 @@ void SpriteAtlas::Loading(char* dir)
 	int wsize = (cou/64+1)*32;
 	SpriteW = 1.0/64;
 	SpriteH = 1.0/(cou/64);
+
+	atlasTex.height = 2048;
+	atlasTex.width = cou/64 * 32;
+	atlasTex.name = "spriteatlas.png";
 	if(fs::exists("spriteatlas.png")){
 		return;
 	}

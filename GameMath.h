@@ -12,6 +12,11 @@ inline int next_p2( int a )
 	return rval;
 }
 
+template < typename T >
+inline bool inLims(T some, T min, T max){
+	return (some >= min && some <= max);
+}
+
 inline unsigned int next_p2( unsigned int a )
 {
 	unsigned int rval = 1;

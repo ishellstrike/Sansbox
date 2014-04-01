@@ -58,15 +58,19 @@ void Cube::SetTextureAllSide(const TextureOld &_texture)
 	}
 }
 
-void Cube::SetFromAtlasAllSide(int num)
+void Cube::SetFromAtlasAllSide(int num, Texture* atlas)
 {
 	TextureOld _texture;
+	_texture.textureId = atlas->textureId;
 	float us = SpriteAtlas::Instance().SpriteW;
 	float vs = SpriteAtlas::Instance().SpriteH;
-	_texture.u1 = (num%64)*us;
-	_texture.v1 = 1-(num/64.0)*vs;
-	_texture.u2 = (num%64+1)*us;
-	_texture.v2 = 1-(num/64.0+1)*vs;
+	auto tex = SpriteAtlas::Instance().atlasTex;
+	int i = num%64;
+	int j = num/64;
+	_texture.u1 = (i+0)*us;
+	_texture.v1 = (j+0)*vs;
+	_texture.u2 = (i+1)*us;
+	_texture.v2 = (j+1)*vs;
 
 
 	for(unsigned int i = 0; i < 6; i++)
@@ -84,29 +88,29 @@ BufferArray & Cube::GetBufferArray()
 		buffer.vertexBuffer[i * 20 + j++] = __vertexPositions[i * 4 + 0][1] + y;	//y
 		buffer.vertexBuffer[i * 20 + j++] = __vertexPositions[i * 4 + 0][2] + z;	//z
 
-		buffer.vertexBuffer[i * 20 + j++] = texture[i].u1;
-		buffer.vertexBuffer[i * 20 + j++] = texture[i].v1;
+		buffer.vertexBuffer[i * 20 + j++] = texture[i].u2;
+		buffer.vertexBuffer[i * 20 + j++] = texture[i].v2;
 
 		buffer.vertexBuffer[i * 20 + j++] = __vertexPositions[i * 4 + 1][0] + x;	//x
 		buffer.vertexBuffer[i * 20 + j++] = __vertexPositions[i * 4 + 1][1] + y;	//y
 		buffer.vertexBuffer[i * 20 + j++] = __vertexPositions[i * 4 + 1][2] + z;	//z
 
-		buffer.vertexBuffer[i * 20 + j++] = texture[i].u1;
-		buffer.vertexBuffer[i * 20 + j++] = texture[i].v2;
+		buffer.vertexBuffer[i * 20 + j++] = texture[i].u2;
+		buffer.vertexBuffer[i * 20 + j++] = texture[i].v1;
 
 		buffer.vertexBuffer[i * 20 + j++] = __vertexPositions[i * 4 + 2][0] + x;	//x
 		buffer.vertexBuffer[i * 20 + j++] = __vertexPositions[i * 4 + 2][1] + y;	//y
 		buffer.vertexBuffer[i * 20 + j++] = __vertexPositions[i * 4 + 2][2] + z;	//z
 
-		buffer.vertexBuffer[i * 20 + j++] = texture[i].u2;
-		buffer.vertexBuffer[i * 20 + j++] = texture[i].v2;
+		buffer.vertexBuffer[i * 20 + j++] = texture[i].u1;
+		buffer.vertexBuffer[i * 20 + j++] = texture[i].v1;
 
 		buffer.vertexBuffer[i * 20 + j++] = __vertexPositions[i * 4 + 3][0] + x;	//x
 		buffer.vertexBuffer[i * 20 + j++] = __vertexPositions[i * 4 + 3][1] + y;	//y
 		buffer.vertexBuffer[i * 20 + j++] = __vertexPositions[i * 4 + 3][2] + z;	//z
 
-		buffer.vertexBuffer[i * 20 + j++] = texture[i].u2;
-		buffer.vertexBuffer[i * 20 + j++] = texture[i].v1;
+		buffer.vertexBuffer[i * 20 + j++] = texture[i].u1;
+		buffer.vertexBuffer[i * 20 + j++] = texture[i].v2;
 	}
 
 	return buffer;

@@ -33,9 +33,9 @@ void Mouse::Init( GLFWwindow *win )
 }
 
 
-void Mouse::SetButton( int button )
+void Mouse::SetButton( int button, int state ,int c )
 {
-
+	Mouse::Buttons[button] = state;
 }
 
 void Mouse::SetCursorPos( double x, double y )
@@ -45,6 +45,10 @@ void Mouse::SetCursorPos( double x, double y )
 
 	dxpos = x - xpos;
 	dypos = y - ypos;
+	deltaxpos = dxpos;
+	deltaypos = dypos;
+	lastxpos = xpos;
+	lastypos = ypos;
 
 	if(!isCursorClientArea)
 	{
@@ -86,6 +90,11 @@ void Mouse::GetCursorPos( double &x, double &y )
 	y = ypos;
 }
 
+Vector2 Mouse::GetCursorPos()
+{
+	return Vector2(xpos, ypos);
+}
+
 void Mouse::SetFixedPosState( bool state )
 {
 	stateFixedMousePos = state;
@@ -118,6 +127,11 @@ void Mouse::CursorClientArea( int entered )
 	}
 }
 
+void Mouse::Update(){
+	deltaypos = 0;
+	deltaxpos = 0;
+}
+
 void Mouse::WindowFocus( int focused )
 {
 	if(focused == GL_TRUE)
@@ -130,4 +144,30 @@ void Mouse::WindowFocus( int focused )
 		isWindowFocused = false;
 	}
 }
+
+bool Mouse::IsRightPressed()
+{
+	return Buttons[GLFW_MOUSE_BUTTON_RIGHT] == GLFW_PRESS;
+}
+
+bool Mouse::IsLeftPressed()
+{
+	return Buttons[GLFW_MOUSE_BUTTON_LEFT] == GLFW_PRESS;
+}
+
+Vector2 Mouse::GetCursorDelta()
+{
+	return Vector2(deltaxpos, deltaypos);
+}
+
+Vector2 Mouse::GetCursorLastPos()
+{
+	return Vector2(lastxpos, lastypos);
+}
+
+double Mouse::lastypos;
+double Mouse::lastxpos;
+double Mouse::deltaypos;
+double Mouse::deltaxpos;
+int Mouse::Buttons[10];
 

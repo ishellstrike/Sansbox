@@ -2,6 +2,7 @@
 #define Map_h__
 
 #include "Cube.h"
+#include "TextureManager.h"
 
 struct B
 {
@@ -21,7 +22,7 @@ public:
 	Map(void);
 	~Map(void);
 
-	void CreateGeometry();
+	void CreateGeometry(Texture* atlas);
 
 	void Draw();
 

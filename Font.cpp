@@ -265,7 +265,7 @@ bool Font::GenerateOpenglGlyphs( std::string configFileName)
 	{
 		if( !glyphAtlas.InsertImage( (*i).bitmap, rect ) )
 		{
-			//LOG_WARNING(
+			LOG(WARNING) << "font atlass ERROR";
 			delete (*i).bitmap;
 			(*i).bitmap = nullptr;
 			continue;
@@ -295,6 +295,7 @@ bool Font::GenerateOpenglGlyphs( std::string configFileName)
 	for (auto i = glyphsTextureMap.begin(); i != glyphsTextureMap.end(); i++)
 	{
 		(*i).second.texture.textureId = ogltexture;
+		
 	}
 
 	glyphsBitmapList.clear();

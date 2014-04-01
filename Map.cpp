@@ -13,9 +13,9 @@ Map::~Map(void)
 
 }
 
-void Map::CreateGeometry()
+void Map::CreateGeometry(Texture* atlas)
 {
-	geometryCube.SetFromAtlasAllSide(1);
+	geometryCube.SetFromAtlasAllSide(80, atlas);
 	
 	for(int x = 0; x < 64; x++)
 		for(int z = 0; z < 64; z++)

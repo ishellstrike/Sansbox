@@ -24,4 +24,48 @@ Color4::~Color4()
 
 }
 
+Color4 Color4::Red(1.0F,0.0F,0.0F,1.0F);
+
 Color4 Color4::White(1.0F,1.0F,1.0F,1.0F);
+
+
+Vector2::Vector2()
+{
+	x = y = 0;
+}
+
+Vector2::Vector2(float a, float b)
+{
+	x = a; y = b;
+}
+
+Vector2::Vector2(float a)
+{
+	x = y = a;
+}
+
+Vector2::~Vector2()
+{
+
+}
+
+
+Vector3::Vector3()
+{
+	x = y = z = 0;
+}
+
+Vector3::Vector3(float a, float b, float c)
+{
+	x = a; y = b; z = c;
+}
+
+Vector3::Vector3(float a)
+{
+	x = y = z = a;
+}
+
+Vector3::~Vector3()
+{
+
+}
