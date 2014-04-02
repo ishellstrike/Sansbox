@@ -32,8 +32,8 @@
 #include <string>
 #include "JButton.h"
 #include "WComponent.h"
-
-
+#include "AutoVersion.h"
+#include "DataJsonParser.h"
 
 void KeyCallbackGLFW3(GLFWwindow *win, int key, int scancode, int action, int mods)
 {
@@ -87,10 +87,11 @@ CoreMod* cm;
 int Game::Initialize()
 {
 #if WIN32 && _DEBUG
-	system ("autoversion.cmd");
+	//system ("");
 #endif
 
 	google::InitGoogleLogging("Jarg.exe");
+	google::SetLogFilenameExtension(".txt");
 	google::SetLogDestination(google::INFO, "logs/");
 	LOG(INFO) << "Jarg initialization start";
 	glfwSetErrorCallback(errorCallbackGLFW3);
@@ -104,12 +105,16 @@ int Game::Initialize()
 		LOG(ERROR) << "glfwInit error " << glfwErrorCode;
 		return glfwErrorCode;
 	}
+
+	//Version v;
+	//v.Init();
 	
 	//glfwWindowHint(GLFW_SAMPLES, 2);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	LOG(INFO) <<"OpenGL: 3.3 glfw: " << glfwGetVersionString();
+
 
 	GLFWmonitor *monitor = nullptr;
 	if(fullscreen)
@@ -125,6 +130,7 @@ int Game::Initialize()
 		return false;
 	}
 	glfwMakeContextCurrent(window);
+	glfwSetWindowTitle(window, AutoVersion::GetTitle().c_str());
 	
 	glfwSwapInterval(0);
 
@@ -161,6 +167,35 @@ int Game::Initialize()
 void Game::LoadContent()
 {
 	SpriteAtlas::Instance().Loading("Textures/");
+
+	atlas.Load("spriteatlas.png");
+
+	ShaderID = new JargShader();
+	ShaderID->LoadFromFile("shaders/t2.fs", "shaders/t2.vs");
+	mvpID = ShaderID->LocateVars("MVP");
+
+	ShaderLines = new JargShader();
+	ShaderLines->LoadFromFile("shaders/lines.fs", "shaders/lines.vs");
+	ShaderLines->BindProgram();
+	unsigned int mvpLine = ShaderLines->LocateVars("MVP");
+	MVP = render->GetOrthoProjection();
+	glUniformMatrix4fv(mvpID, 1, GL_FALSE, &MVP[0][0]);
+
+	big = new Font();
+	big->Init();
+	big->Create("font.json");
+
+	smallf = new Font();
+	smallf->Init();
+	smallf->Create("fontsmall.json");
+
+	giantf = new Font();
+	giantf->Init();
+	giantf->Create("fontgiant.json");
+
+	sb.Init(ShaderID, ShaderLines);
+
+	DataJsonParser::ParseDirectory("Data\\Blocks");
 }
 
 int Game::Run()
@@ -174,27 +209,8 @@ int Game::Run()
 
 	LoadContent();
 
-
-	Texture atlas;
-	atlas.Load("spriteatlas.png");
-
-	// Enable depth test
 	glEnable(GL_DEPTH_TEST);
-
-	// Accept fragment if it closer to the camera than the former one
 	glDepthFunc(GL_LESS); 
-
-	// Create and compile our GLSL program from the shaders
-	JargShader* ShaderID = new JargShader();
-	ShaderID->LoadFromFile("shaders/t2.fs", "shaders/t2.vs");
-	unsigned int mvpID = ShaderID->LocateVars("MVP");
-
-	JargShader* ShaderLines = new JargShader();
-	ShaderLines->LoadFromFile("shaders/lines.fs", "shaders/lines.vs");
-	ShaderLines->BindProgram();
-	unsigned int mvpLine = ShaderLines->LocateVars("MVP");
-	glm::mat4 MVP = render->GetOrthoProjection();
-	glUniformMatrix4fv(mvpID, 1, GL_FALSE, &MVP[0][0]);
 
 	Camera camera;
 	camera.SetWindowSize(width, height);
@@ -224,23 +240,6 @@ int Game::Run()
 // 	std::vector<uint32_t> utf32result;
 // 	utf8::utf8to32(twochars, twochars + 7, std::back_inserter(utf32result));
 // 
-	Font* big = new Font();
-	big->Init();
-	big->Create("font.json");
-
-	Font* smallf = new Font();
-	smallf->Init();
-	smallf->Create("fontsmall.json");
-
-	Font* giantf = new Font();
-	giantf->Init();
-	giantf->Create("fontgiant.json");
-
-	Map map;
-	map.CreateGeometry(&atlas);
-
-    Batched sb;
-	sb.Init(ShaderID, ShaderLines);
 
 	WinS* ws = new WinS(&sb, smallf);
 	Win* w;
@@ -326,24 +325,18 @@ int Game::Run()
 		glUniformMatrix4fv(mvpID, 1, GL_FALSE, &MVP[0][0]);
 		glUniform1i(colorTextureLocation, 1);
 
-		glBindTexture(GL_TEXTURE_2D, 2);
-		map.Draw();
 
 		MVP = render->GetOrthoProjection();
 		glUniformMatrix4fv(mvpID, 1, GL_FALSE, &MVP[0][0]);
 
 		glDisable(GL_DEPTH_TEST);
-		WinS::sb->DrawString(Vector2(10,10), "azazazaadasdasd", *smallf);
+		WinS::sb->DrawString(Vector2(10,10), std::to_string((long double)fps.GetCount()), *smallf);
 		ws->Update(gt);
 		ws->Draw();
 		sb.DrawQuad(Vector2(10,10), Vector2(100,100), atlas);
 		int dc = sb.RenderFinally();
 
 		fps.Update(gt);
-		glfwSetWindowTitle(window, std::to_string((long double)fps.GetCount()).append(" ").append(std::to_string((long double)dc)).c_str());
-		//fpsText.Draw(a, 10, 10, big);
-		//fpsText.Draw("cho cho, mnogo shriftov lolol 123123123 wertyuidfghjvbn", 40, 10, smallf);
-		//fpsText.Draw("giant", 100, 100, giantf);
 		Mouse::Update();
 
 		glfwSwapBuffers(window);

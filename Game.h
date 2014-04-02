@@ -8,6 +8,10 @@
 #include "Render.h"
 #include "GameTimer.h"
 #include "SpriteAtlas.h"
+#include "Font.h"
+#include "JargShader.h"
+#include "TextureManager.h"
+#include "SpriteBatch.h"
 
 class Game
 {
@@ -27,6 +31,15 @@ protected:
 	unsigned int texture;
 
 	GameTimer gt;
+
+	//
+	Texture atlas;
+	JargShader* ShaderID;
+	JargShader* ShaderLines;
+	glm::mat4 MVP;
+	Font* big, *smallf, *giantf;
+	Batched sb;
+	unsigned int mvpID;
 
 public:
 	Game(void);

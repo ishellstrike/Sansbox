@@ -64,6 +64,13 @@
       <IgnoreSpecificDefaultLibraries>LIBCMTD.lib;MSVCRT.lib;LIBCMT.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
+    <CustomBuildStep>
+      <Command>
+      </Command>
+    </CustomBuildStep>
+    <PreBuildEvent>
+      <Command>autoversion.cmd</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -88,6 +95,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AutoVersion.h" />
     <ClInclude Include="Bitmap.h" />
     <ClInclude Include="Block.h" />
     <ClInclude Include="BlockData.h" />
@@ -96,6 +104,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CoreMod.h" />
     <ClInclude Include="Cube.h" />
+    <ClInclude Include="DataJsonParser.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="FPSCounter.h" />
     <ClInclude Include="Game.h" />
@@ -127,6 +136,7 @@
     <ClInclude Include="WinS.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AutoVersion.cpp" />
     <ClCompile Include="Bitmap.cpp" />
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="Bricks.cpp" />
@@ -134,6 +144,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CoreMod.cpp" />
     <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="DataJsonParser.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FPSCounter.cpp" />
     <ClCompile Include="Game.cpp" />

@@ -1,6 +1,7 @@
 #include "WinS.h"
 #include "GameTimer.h"
 #include <vector>
+#include <list>
 
 WinS::WinS()
 {
@@ -37,13 +38,14 @@ void WinS::Draw()
 
 void WinS::ToTop(Win* w){
 	std::vector<Win*>::iterator iter;
+	bool b = false;
 	int i =0;
-	for (iter = windows.begin() ; iter != windows.end(); ++iter){
-		if(*iter == w){
+	for (iter = windows.begin() ; iter != --windows.end(); ++iter){
+		if(*iter == w || b){
 			Win* temp = w;
-			windows[i] = windows[windows.size() - 1];
-			windows[windows.size() - 1] = temp;
-			return;
+			windows[i] = windows[i+1];
+			windows[i+1] = temp;
+			b = true;
 		}
 		i++;
 	}
@@ -53,7 +55,7 @@ void WinS::Update(GameTimer gt){
 	MouseHooked = false;
 	if(windows.size() > 0) {
 		for (int i =windows.size() - 1; i >= 0; i--) {
-			windows.at(i)->Update();
+			windows[i]->Update();
 		}
 	}
 }

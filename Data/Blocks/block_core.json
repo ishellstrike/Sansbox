@@ -1,54 +1,54 @@
-{
+[
   "0":{
     "Name":"???",
     "IsWalkable":true,
     "IsTransparent":true,
-    "MTex":"none",
+    "MTex":"none"
   },
   "error":{
-    "Name":"ОШИБКА",
+    "Name":"РћРЁРР‘РљРђ",
     "IsWalkable":true,
     "IsTransparent":true,
-    "MTex":"error",
+    "MTex":"error"
   },
   "1":{
-    "Name":"Кирпичная кладка",
+  
     "MTex":"briwall1",
-    "Wallmaker":true,
+    "Wallmaker":true
   },
   "st_wall":{
-    "Name":"Стальная стена",
+    
     "MTex":"steelwall1",
     "Wallmaker":true,
-	"AlterMtex":["steelwall6","steelwall2","steelwall3","steelwall4","steelwall5"],
+	"AlterMtex":["steelwall6","steelwall2","steelwall3","steelwall4","steelwall5"]
   },
   "w2":{
-    "Name":"Стена 2",
+    "Name":"РЎС‚РµРЅР° 2",
     "MTex":"briwall1",
-    "Wallmaker":true,
+    "Wallmaker":true
   },
   "w3":{
-    "Name":"Стена 3",
+    "Name":"РЎС‚РµРЅР° 3",
     "MTex":"briwall1",
-    "Wallmaker":true,
+    "Wallmaker":true
   },
   "shkaf":{
-    "Name":"Шкаф",
+    "Name":"РЁРєР°С„",
     "MTex":"shkaf",
-    "Flame":true,
+    "Flame":true
   },
   "shkaf2":{
-    "Name":"Шкаф",
+    "Name":"РЁРєР°С„",
     "MTex":"shkaf2",
-    "Flame":true,
+    "Flame":true
   },
   "shkaf3":{
-    "Name":"Шкаф",
+    "Name":"РЁРєР°С„",
     "MTex":"shkaf3",
-    "Flame":true,
+    "Flame":true
   },
   "stelaj_food":{
-    "Name":"Продовольственный стелаж",
+    "Name":"РџСЂРѕРґРѕРІРѕР»СЊСЃС‚РІРµРЅРЅС‹Р№ СЃС‚РµР»Р°Р¶",
     "MTex":"foodpolka",
     "AlterMtex":["foodpolka1", "foodpolka2", "foodpolka3", "foodpolka4"],
     "swide":28,
@@ -61,26 +61,26 @@
 			"Max":3, 
 			"Prob":25, 
 			"Repeat":20
-		},
+		}
 	],
-	"Type":"BlockChest",
+	"Type":"BlockChest"
   },
   "stelaj_weapon":{
-    "Name":"Оруженый стелаж",
+    "Name":"РћСЂСѓР¶РµРЅС‹Р№ СЃС‚РµР»Р°Р¶",
     "MTex":"notex",
     "swide":28,
     "SmartAction":"ActionOpenContainer",
-    "Flame":true,
+    "Flame":true
   },
   "stelaj_weapon_armored":{
-    "Name":"Бронированный стелаж с оружием",
+    "Name":"Р‘СЂРѕРЅРёСЂРѕРІР°РЅРЅС‹Р№ СЃС‚РµР»Р°Р¶ СЃ РѕСЂСѓР¶РёРµРј",
     "MTex":"notex",
     "swide":28,
     "SmartAction":"ActionOpenContainer",
-    "Flame":true,
+    "Flame":true
   },
   "stelaj_hospital":{
-    "Name":"Cтелаж с лекарствами",
+    "Name":"CС‚РµР»Р°Р¶ СЃ Р»РµРєР°СЂСЃС‚РІР°РјРё",
     "MTex":"medpolka",
     "AlterMtex":["medpolka1", "medpolka2", "medpolka3", "medpolka4"],
     "swide":28,
@@ -102,79 +102,79 @@
 			"Repeat":1
 		}
 	],
-	"Type":"BlockChest",
+	"Type":"BlockChest"
   },
   "stelaj_wear":{
-    "Name":"Cтелаж с одеждой",
+    "Name":"CС‚РµР»Р°Р¶ СЃ РѕРґРµР¶РґРѕР№",
     "MTex":"wearpolka",
     "AlterMtex":["wearpolka1", "wearpolka2", "wearpolka3", "wearpolka4"],
     "SmartAction":"ActionOpenContainer",
     "Flame":true,
-	"IsTransparent":true,
+	"IsTransparent":true
   },
   "3":{
-    "Name":"Деревянная дверь (закрыта)",
+ 
     "SmartAction":"ActionOpenClose",
     "AfterDeathId":7,
     "MTex":"door1",
     "Wallmaker":true,
-    "Flame":true,
+    "Flame":true
   },
   "6":{
-    "Name":"Деревянная дверь (закрыта)",
+    "Name":"Р”РµСЂРµРІСЏРЅРЅР°СЏ РґРІРµСЂСЊ (Р·Р°РєСЂС‹С‚Р°)",
     "SmartAction":"ActionOpenClose",
     "AfterDeathId":7,
     "MTex":"door1_open",
     "Wallmaker":true,
-    "Flame":true,
+    "Flame":true
   },
   "7":{
-    "Name":"Деревянная дверь (открыта)",
+    "Name":"Р”РµСЂРµРІСЏРЅРЅР°СЏ РґРІРµСЂСЊ (РѕС‚РєСЂС‹С‚Р°)",
     "SmartAction":"ActionOpenClose",
     "AfterDeathId":3,
     "IsWalkable":true,
     "IsTransparent":true,
     "MTex":"door1_open",
     "Wallmaker":true,
-    "Flame":true,
+    "Flame":true
   },
   "4":{
-    "Name":"Металлическая дверь (закрыта)",
+    "Name":"РњРµС‚Р°Р»Р»РёС‡РµСЃРєР°СЏ РґРІРµСЂСЊ (Р·Р°РєСЂС‹С‚Р°)",
     "SmartAction":"ActionOpenClose",
     "AfterDeathId":8,
     "MTex":"door2",
-    "Wallmaker":true,
+    "Wallmaker":true
   },
   "5":{
-    "Name":"Металлическая дверь (закрыта)",
+    "Name":"РњРµС‚Р°Р»Р»РёС‡РµСЃРєР°СЏ РґРІРµСЂСЊ (Р·Р°РєСЂС‹С‚Р°)",
     "SmartAction":"ActionOpenClose",
     "AfterDeathId":8,
     "MTex":"door2",
-    "Wallmaker":true,
+    "Wallmaker":true
   },
   "8":{
-    "Name":"Металлическая дверь (открыта)",
+    "Name":"РњРµС‚Р°Р»Р»РёС‡РµСЃРєР°СЏ РґРІРµСЂСЊ (РѕС‚РєСЂС‹С‚Р°)",
     "SmartAction":"ActionOpenClose",
     "AfterDeathId":4,
     "IsWalkable":true,
     "IsTransparent":true,
     "MTex":"door2_open",
-    "Wallmaker":true,
+    "Wallmaker":true
   },
   "9":{
-    "Name":"Консоль",
+    "Name":"РљРѕРЅСЃРѕР»СЊ",
     "AlterMtex":["9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26"],
-    "MTex":9,
+    "MTex":9
   },
   "10":{
-    "Name":"Кровать",
+    "Name":"РљСЂРѕРІР°С‚СЊ",
     "AlterMtex":["bed2", "bed3", "bed4", "bed5"],
     "IsTransparent":true,
     "MTex":"bed1",
-    "Flame":true,
+    "Flame":true
   },
   "scrapbox":{
-    "Name":"Ящик",
+    "Name":"РЇС‰РёРє",
     "SmartAction":"ActionOpenContainer",
     "AlterMtex":["crates2", "crates3"],
     "IsTransparent":true,
@@ -203,99 +203,99 @@
 			"Repeat":4
 		}
 	],
-	"Type":"BlockChest",
+	"Type":"BlockChest"
   },
   "16":{
-    "Name":"Дерево",
+    "Name":"Р”РµСЂРµРІРѕ",
     "swide":16,
     "MTex":"tree1",
-    "Flame":true,
+    "Flame":true
   },
   "18":{
-    "Name":"Небольшое дерево",
+    "Name":"РќРµР±РѕР»СЊС€РѕРµ РґРµСЂРµРІРѕ",
     "swide":16,
     "MTex":"tree2",
-    "Flame":true,
+    "Flame":true
   },
   "17":{
-    "Name":"Куст",
+    "Name":"qweqwe",
     "swide":16,
     "MTex":"bush1",
-    "Flame":true,
+    "Flame":true
   },
   "19":{
-    "Name":"Окно",
+    "Name":"РћРєРЅРѕ",
     "IsTransparent":true,
     "MTex":"glass_hor",
     "Wallmaker":true,
-    "Flame":true,
+    "Flame":true
   },
   "20":{
-    "Name":"Окно",
+    "Name":"РћРєРЅРѕ",
     "IsTransparent":true,
     "MTex":"glass_hor",
     "Wallmaker":true,
-    "Flame":true,
+    "Flame":true
   },
   "flower":{
-    "Name":"Комнатный цветок",
+    "Name":"РљРѕРјРЅР°С‚РЅС‹Р№ С†РІРµС‚РѕРє",
     "MTex":"cvet",
 	"AlterMtex":["cvet1","cvet2","cvet3"],
-    "Fame":true,
+    "Fame":true
   },
   "21":{
-    "Name":"Прилавок",
+    "Name":"РџСЂРёР»Р°РІРѕРє",
     "IsTransparent":true,
     "MTex":"table_hor_mid",
     "Flame":true,
 	"Height":0.3,
-	"Wallmaker":true,
+	"Wallmaker":true
   },
   "22":{
-    "Name":"Прилавок",
+    "Name":"РџСЂРёР»Р°РІРѕРє",
     "IsTransparent":true,
     "MTex":"table_hor_mid",
     "Flame":true,
 	"Height":0.3,
-	"Wallmaker":true,
+	"Wallmaker":true
   },
   "23":{
-    "Name":"Прилавок",
+    "Name":"РџСЂРёР»Р°РІРѕРє",
     "IsTransparent":true,
     "MTex":"table_hor_mid",
     "Flame":true,
 	"Height":0.3,
-	"Wallmaker":true,
+	"Wallmaker":true
   },
   "kustsmall":{
-    "Name":"Молодой кустарник",
+    "Name":"РњРѕР»РѕРґРѕР№ РєСѓСЃС‚Р°СЂРЅРёРє",
     "IsWalkable":true,
     "IsTransparent":true,
     "MTex":"mbush1",
     "AlterMtex":["mbush2", "mbush3"],
-    "Flame":true,
+    "Flame":true
   },
   "kustbig":{
-    "Name":"Густой кустарник",
+    "Name":"Р“СѓСЃС‚РѕР№ РєСѓСЃС‚Р°СЂРЅРёРє",
     "IsWalkable":true,
     "IsTransparent":true,
     "MTex":"bush1",
-    "Flame":true,
+    "Flame":true
   },
   "bbochka":{
-    "Name":"Горящая бочка",
+    "Name":"Р“РѕСЂСЏС‰Р°СЏ Р±РѕС‡РєР°",
     "IsTransparent":true,
-    "MTex":"bochka",
+    "MTex":"bochka"
   },
   "bath":{
-    "Name":"Ванная",
+    "Name":"Р’Р°РЅРЅР°СЏ",
     "IsTransparent":true,
     "MTex":"bath1",
     "AlterMtex":["bath2", "bath3", "bath4", "bath5"],
-    "IsTransparent":true,
+    "IsTransparent":true
   },
   "smallsafe":{
-    "Name":"Небольшой сейф",
+    "Name":"РќРµР±РѕР»СЊС€РѕР№ СЃРµР№С„",
     "IsTransparent":true,
     "MTex":"safe1",
 	"ItemSpawn": [
@@ -314,10 +314,10 @@
 			"Repeat":1
 		}
 	],
-	"Type":"BlockChest",
+	"Type":"BlockChest"
   },
   "bigsafe":{
-    "Name":"Большой сейф",
+    "Name":"Р‘РѕР»СЊС€РѕР№ СЃРµР№С„",
     "IsTransparent":true,
     "MTex":"safe2",
 	"ItemSpawn": [
@@ -336,40 +336,40 @@
 			"Repeat":1
 		}
 	],
-	"Type":"BlockChest",
+	"Type":"BlockChest"
   },
   "stul":{
-    "Name":"Стул",
+    "Name":"РЎС‚СѓР»",
     "IsTransparent":true,
     "MTex":"chair1",
     "Flame":true,
-	"BlockScript":"bs_firetest",
+	"BlockScript":"bs_firetest"
   },
   "fence_wood":{
-    "Name":"Деревянная изгородь",
+    "Name":"Р”РµСЂРµРІСЏРЅРЅР°СЏ РёР·РіРѕСЂРѕРґСЊ",
     "IsTransparent":true,
     "MTex":"fence_w",
 	"AlterMtex":["fence_w1","fence_w2"],
     "Flame":true,
 	"Height":0.5,
-	"Wallmaker":true,
+	"Wallmaker":true
   },
   "fence_steel":{
-    "Name":"Стальная изгородь",
+    "Name":"РЎС‚Р°Р»СЊРЅР°СЏ РёР·РіРѕСЂРѕРґСЊ",
     "IsTransparent":true,
     "MTex":"fence_s",
 	"AlterMtex":["fence_s1","fence_s2"],
 	"Height":0.5,
-	"Wallmaker":true,
+	"Wallmaker":true
   },
   "washer":{
-    "Name":"Стиральная машина",
+    "Name":"РЎС‚РёСЂР°Р»СЊРЅР°СЏ РјР°С€РёРЅР°",
     "IsTransparent":true,
     "MTex":"washer",
-    "Flame":true,
+    "Flame":true
   },
   "fridge":{
-    "Name":"Холодильник",
+    "Name":"РҐРѕР»РѕРґРёР»СЊРЅРёРє",
     "IsTransparent":true,
     "MTex":"fridge1",
     "Flame":true,
@@ -389,10 +389,10 @@
 			"Repeat":4
 		}
 	],
-	"Type":"BlockChest",
+	"Type":"BlockChest"
   },
   "small_fridge":{
-    "Name":"Небольшой холодильник",
+    "Name":"РќРµР±РѕР»СЊС€РѕР№ С…РѕР»РѕРґРёР»СЊРЅРёРє",
     "IsTransparent":true,
     "MTex":"fridge2",
     "Flame":true,
@@ -412,15 +412,15 @@
 			"Repeat":2
 		}
 	],
-	"Type":"BlockChest",
+	"Type":"BlockChest"
   },
   "plita":{
-  "Name":"Газовая плита",
+  "Name":"Р“Р°Р·РѕРІР°СЏ РїР»РёС‚Р°",
   "MTex":"plita",
-  "Flame":true,
+  "Flame":true
   },
   "liq_polka":{
-    "Name":"Стелаж с алкоголем",
+    "Name":"РЎС‚РµР»Р°Р¶ СЃ Р°Р»РєРѕРіРѕР»РµРј",
     "IsTransparent":true,
     "MTex":"liqpolka",
 	"AterMtex":["liqpolka1","liqpolka2","liqpolka3"],
@@ -432,18 +432,18 @@
 			"Min":3,
 			"Prob":70,
 			"Repeat":3
-		},
+		}
 	],
-	"Type":"BlockChest",
+	"Type":"BlockChest"
   },
   "water_heater":{
-    "Name":"Водонагреватель",
+    "Name":"Р’РѕРґРѕРЅР°РіСЂРµРІР°С‚РµР»СЊ",
     "IsTransparent":true,
     "MTex":"heater",
-    "Flame":true,
+    "Flame":true
   },
   "posude_shkaf":{
-    "Name":"Стойка с посудой",
+    "Name":"РЎС‚РѕР№РєР° СЃ РїРѕСЃСѓРґРѕР№",
     "IsTransparent":true,
     "MTex":"glass_hor",
     "Flame":true,
@@ -454,12 +454,12 @@
 			"Min":1,
 			"Prob":80,
 			"Repeat":3
-		},
+		}
 	],
-	"Type":"BlockChest",
+	"Type":"BlockChest"
   },
   "trash_can":{
-    "Name":"Мусорное ведро",
+    "Name":"РњСѓСЃРѕСЂРЅРѕРµ РІРµРґСЂРѕ",
     "IsTransparent":true,
     "MTex":"trashcan",
 	"AlterMtex":["trashcan1"],
@@ -473,22 +473,22 @@
 			"Repeat":4
 		}
 	],
-	"Type":"BlockChest",
+	"Type":"BlockChest"
   },
   "table":{
-    "Name":"Стол",
+    "Name":"РЎС‚РѕР»",
     "IsTransparent":true,
     "MTex":"table1",
-    "Flame":true,
+    "Flame":true
   },
   "tumba_televisor":{
-    "Name":"Тумбочка с телевизором",
+    "Name":"РўСѓРјР±РѕС‡РєР° СЃ С‚РµР»РµРІРёР·РѕСЂРѕРј",
     "IsTransparent":true,
     "MTex":"glass_hor",
-    "Flame":true,
+    "Flame":true
   },
   "tumba":{
-    "Name":"Тумбочка",
+    "Name":"РўСѓРјР±РѕС‡РєР°",
     "IsTransparent":true,
 	"AlterMtex":["tumba2"],
     "MTex":"tumba1",
@@ -502,10 +502,10 @@
 			"Repeat":1
 		}
 	],
-	"Type":"BlockChest",
+	"Type":"BlockChest"
   },
   "rakovina":{
-    "Name":"Раковина",
+    "Name":"Р Р°РєРѕРІРёРЅР°",
     "IsTransparent":true,
 	"AlterMtex":["rakovina2", "rakovina3", "rakovina4"],
     "MTex":"rakovina",
@@ -519,12 +519,12 @@
 			"Repeat":1
 		}
 	],
-	"Type":"BlockChest",
+	"Type":"BlockChest"
   },
   "lavka":{
-    "Name":"Лавка",
+    "Name":"Р›Р°РІРєР°",
     "IsTransparent":true,
     "MTex":"notex",
-    "Flame":true,
-  },
-}
+    "Flame":true
+  }
+]

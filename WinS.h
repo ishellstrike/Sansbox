@@ -5,6 +5,7 @@
 #include <vector>
 #include "Win.h"
 #include "GameTimer.h"
+#include <list>
 
 class WinS{
 public:

@@ -136,6 +136,10 @@
       <Filter>WinS</Filter>
     </ClInclude>
     <ClInclude Include="JButton.h" />
+    <ClInclude Include="AutoVersion.h">
+      <Filter>MainPart</Filter>
+    </ClInclude>
+    <ClInclude Include="DataJsonParser.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -229,5 +233,9 @@
       <Filter>WinS</Filter>
     </ClCompile>
     <ClCompile Include="JButton.cpp" />
+    <ClCompile Include="AutoVersion.cpp">
+      <Filter>MainPart</Filter>
+    </ClCompile>
+    <ClCompile Include="DataJsonParser.cpp" />
   </ItemGroup>
 </Project>
