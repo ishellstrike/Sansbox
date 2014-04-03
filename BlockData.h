@@ -2,7 +2,18 @@
 #ifndef BlockData_h__
 #define BlockData_h__
 #include <vector>
+class DropGroup {
+public:
+	std::vector<std::string> Ids;
+	int Min, Max, Prob, Repeat;
+	DropGroup(){};
+	~DropGroup(){};
+};
+
 class BlockData {
+public:
+	BlockData(){};
+	~BlockData(){};
 	std::string Id;
 
 	std::string AfterDeathId;
@@ -29,10 +40,5 @@ class BlockData {
 		}
 		return MTex;
 	}
-}
-
-class DropGroup {
-	std::vector<std::string> Ids;
-	int Min, Max, Prob, Repeat;
-}
+};
 #endif // BlockData_h__

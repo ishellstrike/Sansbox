@@ -34,6 +34,7 @@
 #include "WComponent.h"
 #include "AutoVersion.h"
 #include "DataJsonParser.h"
+#include "Registry.h"
 
 void KeyCallbackGLFW3(GLFWwindow *win, int key, int scancode, int action, int mods)
 {
@@ -195,7 +196,7 @@ void Game::LoadContent()
 
 	sb.Init(ShaderID, ShaderLines);
 
-	DataJsonParser::ParseDirectory("Data\\Blocks");
+	Registry::Init();
 }
 
 int Game::Run()

@@ -6,6 +6,7 @@
 #include <boost/foreach.hpp> 
 #include <glog/logging.h>
 #include "BlockData.h"
+#include <map>
 namespace fs = boost::filesystem; 
 
 
@@ -18,7 +19,7 @@ DataJsonParser::~DataJsonParser(void)
 {
 }
 
-std::map<std::string, BlockData>* DataJsonParser::Parse(std::string s)
+bool DataJsonParser::Parse(std::string s, std::map<std::string, BlockData*>* blocks)
 {
 	std::ifstream configFile(s);
 	//name = configFileName;
@@ -43,14 +44,35 @@ std::map<std::string, BlockData>* DataJsonParser::Parse(std::string s)
 		LOG(INFO) << "     " << reader.getFormatedErrorMessages();
 		return nullptr;
 	} else {
-		for(int i =0; i< root.size(); i++){
-			auto t = root[i];
-
+		for(int i =0; i< root.size() - 2; i+= 2){
+			auto key = root[i];
+			auto value = root[i+1];
+			BlockData* data = new BlockData();
+			(*blocks)[key.asString()] = data;
+			data->Name = value.get("Name", "error").asString();
+			data->Id = key.asString();
+			auto Spawn = value["ItemSpawn"];
+			if(Spawn.size() > 0) {
+				for (auto j = Spawn.begin(); j != Spawn.end(); ++j)
+				{
+					auto SpawnGroup = (*j);
+					DropGroup dg;
+					dg.Max = SpawnGroup.get("Max", 2).asInt();
+					dg.Min = SpawnGroup.get("Min", 1).asInt();
+					dg.Repeat = SpawnGroup.get("Repeat", 1).asInt();
+					dg.Prob = SpawnGroup.get("Prob", 50).asInt();
+					auto Ids = SpawnGroup["Ids"];
+					for (auto k = Ids.begin(); k != Ids.end(); ++k)
+					{
+						dg.Ids.push_back((*k).asString());
+					}
+				}
+			}
 		}
 	}
 }
 
-std::map<std::string, BlockData> DataJsonParser::ParseDirectory(std::string s)
+void DataJsonParser::ParseDirectory(std::string s, std::map<std::string, BlockData*>* blocks)
 {
 	fs::path targetDir(s); 
 
@@ -59,7 +81,7 @@ std::map<std::string, BlockData> DataJsonParser::ParseDirectory(std::string s)
 	{ 
 		if(is_regular_file(p) && p.extension() == ".json")
 		{
-			Parse(p.relative_path().string());
+			Parse(p.relative_path().string(), blocks);
 		} 
 	}
 }
