@@ -10,7 +10,7 @@ Camera::Camera(void)
 	windowHeight = 1;
 	aspect = float(windowWidth) / float(windowHeight);
 	zNear = 0.1f;
-	zFar = 100.f;
+	zFar = 1000.f;
 
 	perspectiveProjection = glm::perspective(fov, aspect, zNear, zFar);
 	view = glm::lookAt

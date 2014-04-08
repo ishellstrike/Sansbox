@@ -16,9 +16,6 @@
     <Filter Include="Render\Геометрия">
       <UniqueIdentifier>{4d3e6b30-268f-4569-943f-72e9f38e1395}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MapPart">
-      <UniqueIdentifier>{d9914293-401a-432c-9ba8-2e115f0f741c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Registry">
       <UniqueIdentifier>{0988dfac-6012-4f24-ac26-bb541fe426ec}</UniqueIdentifier>
     </Filter>
@@ -63,20 +60,8 @@
     <ClInclude Include="Map.h">
       <Filter>MainPart</Filter>
     </ClInclude>
-    <ClInclude Include="Block.h">
-      <Filter>MapPart</Filter>
-    </ClInclude>
     <ClInclude Include="GameTimer.h">
       <Filter>MainPart</Filter>
-    </ClInclude>
-    <ClInclude Include="MapSector.h">
-      <Filter>MapPart</Filter>
-    </ClInclude>
-    <ClInclude Include="GameLevel.h">
-      <Filter>MapPart</Filter>
-    </ClInclude>
-    <ClInclude Include="Point.h">
-      <Filter>MapPart</Filter>
     </ClInclude>
     <ClInclude Include="SpriteAtlas.h">
       <Filter>Render</Filter>
@@ -90,17 +75,8 @@
     <ClInclude Include="JargShader.h">
       <Filter>Render</Filter>
     </ClInclude>
-    <ClInclude Include="MapGeneration.h">
-      <Filter>MapPart</Filter>
-    </ClInclude>
     <ClInclude Include="Registry.h">
       <Filter>Registry</Filter>
-    </ClInclude>
-    <ClInclude Include="CoreMod.h">
-      <Filter>MapPart</Filter>
-    </ClInclude>
-    <ClInclude Include="Bricks.h">
-      <Filter>MapPart</Filter>
     </ClInclude>
     <ClInclude Include="LineBatch.h">
       <Filter>Render</Filter>
@@ -148,6 +124,10 @@
       <Filter>Render\Геометрия</Filter>
     </ClInclude>
     <ClInclude Include="SphereTesselator.h" />
+    <ClInclude Include="Cube.h">
+      <Filter>Render\Геометрия</Filter>
+    </ClInclude>
+    <ClInclude Include="DotEntity.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -198,23 +178,8 @@
     <ClCompile Include="JargShader.cpp">
       <Filter>Render</Filter>
     </ClCompile>
-    <ClCompile Include="MapGeneration.cpp">
-      <Filter>MapPart</Filter>
-    </ClCompile>
-    <ClCompile Include="MapSector.cpp">
-      <Filter>MapPart</Filter>
-    </ClCompile>
-    <ClCompile Include="Block.cpp">
-      <Filter>MapPart</Filter>
-    </ClCompile>
     <ClCompile Include="Registry.cpp">
       <Filter>Registry</Filter>
-    </ClCompile>
-    <ClCompile Include="CoreMod.cpp">
-      <Filter>MapPart</Filter>
-    </ClCompile>
-    <ClCompile Include="Bricks.cpp">
-      <Filter>MapPart</Filter>
     </ClCompile>
     <ClCompile Include="BufferArray.cpp">
       <Filter>Render</Filter>
@@ -253,5 +218,9 @@
       <Filter>Render\Геометрия</Filter>
     </ClCompile>
     <ClCompile Include="SphereTesselator.cpp" />
+    <ClCompile Include="Cube.cpp">
+      <Filter>Render\Геометрия</Filter>
+    </ClCompile>
+    <ClCompile Include="DotEntity.cpp" />
   </ItemGroup>
 </Project>

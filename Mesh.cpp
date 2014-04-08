@@ -22,6 +22,9 @@ Mesh::Mesh(void)
 
 Mesh::~Mesh(void)
 {
+	if(vao == -1) {
+		return;
+	}
 	glDeleteBuffers(2, vbo);
 	glBindVertexArray(0);
 	glDeleteVertexArrays(1, &vao);
