@@ -1,3 +1,4 @@
+#pragma once
 #ifndef SpriteAtlas_h__
 #define SpriteAtlas_h__
 

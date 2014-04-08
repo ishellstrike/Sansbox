@@ -17,11 +17,12 @@ private:
 	float rotx;
 	float roty;
 	mat4 perspectiveProjection;
-	mat4 view;
+
 
 	mat4 rotatex;
 
 public:
+		mat4 view;
 	Camera(void);
 	~Camera(void);
 

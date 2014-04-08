@@ -12,7 +12,7 @@ private:
 public:
 	JargShader();
 	~JargShader(void);
-
+	std::vector<int> vars;
 	void LoadFromFile(std::string fragment, std::string vertex);
 	void BindProgram();
 	int LocateVars(std::string s);

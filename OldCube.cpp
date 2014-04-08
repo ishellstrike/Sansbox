@@ -1,4 +1,4 @@
-#include "Cube.h"
+#include "OldCube.h"
 #include "SpriteAtlas.h"
 
 #define VERTEXCOUNT 24
@@ -24,7 +24,7 @@ static const uint32_t __vertexIndex[INDEXCOUNT] =
 	20,23,22, 22,21,20 // right
 };
 
-Cube::Cube(void)
+OldCube::OldCube(void)
 {
 	buffer.Create(false, true, false, VERTEXCOUNT, INDEXCOUNT);
 	x = 0.0f;
@@ -45,12 +45,12 @@ Cube::Cube(void)
 }
 
 
-Cube::~Cube(void)
+OldCube::~OldCube(void)
 {
 
 }
 
-void Cube::SetTextureAllSide(const TextureOld &_texture)
+void OldCube::SetTextureAllSide(const TextureOld &_texture)
 {
 	for(unsigned int i = 0; i < 6; i++)
 	{
@@ -58,7 +58,7 @@ void Cube::SetTextureAllSide(const TextureOld &_texture)
 	}
 }
 
-void Cube::SetFromAtlasAllSide(int num, Texture* atlas)
+void OldCube::SetFromAtlasAllSide(int num, Texture* atlas)
 {
 	TextureOld _texture;
 	_texture.textureId = atlas->textureId;
@@ -79,7 +79,7 @@ void Cube::SetFromAtlasAllSide(int num, Texture* atlas)
 	}
 }
 
-BufferArray & Cube::GetBufferArray()
+BufferArray & OldCube::GetBufferArray()
 {
 	for(unsigned int i = 0; i < 6; i++)
 	{
@@ -116,7 +116,7 @@ BufferArray & Cube::GetBufferArray()
 	return buffer;
 }
 
-void Cube::SetPos( const vec3 &pos )
+void OldCube::SetPos( const vec3 &pos )
 {
 	x = pos[0];
 	y = pos[1];

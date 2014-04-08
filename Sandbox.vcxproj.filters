@@ -45,9 +45,6 @@
     <ClInclude Include="Camera.h">
       <Filter>Render</Filter>
     </ClInclude>
-    <ClInclude Include="Cube.h">
-      <Filter>Render\Геометрия</Filter>
-    </ClInclude>
     <ClInclude Include="Mouse.h">
       <Filter>MainPart</Filter>
     </ClInclude>
@@ -140,6 +137,17 @@
       <Filter>MainPart</Filter>
     </ClInclude>
     <ClInclude Include="DataJsonParser.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="OldCube.h">
+      <Filter>Render\Геометрия</Filter>
+    </ClInclude>
+    <ClInclude Include="Icosahedron.h">
+      <Filter>Render\Геометрия</Filter>
+    </ClInclude>
+    <ClInclude Include="Quad.h">
+      <Filter>Render\Геометрия</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereTesselator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -171,9 +179,6 @@
     </ClCompile>
     <ClCompile Include="Mouse.cpp">
       <Filter>MainPart</Filter>
-    </ClCompile>
-    <ClCompile Include="Cube.cpp">
-      <Filter>Render\Геометрия</Filter>
     </ClCompile>
     <ClCompile Include="Map.cpp">
       <Filter>MainPart</Filter>
@@ -237,5 +242,16 @@
       <Filter>MainPart</Filter>
     </ClCompile>
     <ClCompile Include="DataJsonParser.cpp" />
+    <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="OldCube.cpp">
+      <Filter>Render\Геометрия</Filter>
+    </ClCompile>
+    <ClCompile Include="Icosahedron.cpp">
+      <Filter>Render\Геометрия</Filter>
+    </ClCompile>
+    <ClCompile Include="Quad.cpp">
+      <Filter>Render\Геометрия</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereTesselator.cpp" />
   </ItemGroup>
 </Project>

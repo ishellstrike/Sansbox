@@ -1,4 +1,5 @@
 #pragma once
+#pragma once
 #ifndef JButton_h__
 #define JButton_h__
 #include "WComponent.h"

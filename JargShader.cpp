@@ -20,12 +20,15 @@ JargShader::~JargShader(void)
 
 void JargShader::BindProgram()
 {
+
 	glUseProgram(program);
 }
 
 GLint JargShader::LocateVars(std::string s)
 {
-	return glGetUniformLocation(program, s.c_str());
+	GLint a = glGetUniformLocation(program, s.c_str());
+	vars.push_back(a);
+	return a;
 }
 
 void JargShader::LoadFromFile(std::string fragment_file_path, std::string vertex_file_path)

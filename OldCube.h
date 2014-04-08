@@ -6,7 +6,7 @@
 #include "TextureManager.h"
 
 
-class Cube
+class OldCube
 {
 private:
 	BufferArray buffer;
@@ -15,8 +15,8 @@ private:
 	TextureOld texture[6];
 
 public:
-	Cube(void);
-	~Cube(void);
+	OldCube(void);
+	~OldCube(void);
 
 	void SetPos(const vec3 &pos);
 

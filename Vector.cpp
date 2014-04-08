@@ -1,4 +1,5 @@
 #include "Vector.h"
+#include <math.h>
 
 Color4::Color4()
 {
@@ -68,4 +69,12 @@ Vector3::Vector3(float a)
 Vector3::~Vector3()
 {
 
+}
+
+void Vector3::Normalize()
+{
+	float inv_length = 1.0f / sqrt(x*x + y*y + z*z);
+	x *= inv_length;
+	y *= inv_length;
+	z *= inv_length;
 }

@@ -5,7 +5,7 @@
 #include "Font.h"
 
 #include <vector>
-#include "Cube.h"
+#include "OldCube.h"
 #include "Camera.h"
 #define GLM_FORCE_RADIANS
 #include <gtc/matrix_transform.hpp>
@@ -35,6 +35,10 @@
 #include "AutoVersion.h"
 #include "DataJsonParser.h"
 #include "Registry.h"
+#include "Mesh.h"
+#include "Icosahedron.h"
+#include "Quad.h"
+#include "SphereTesselator.h"
 
 void KeyCallbackGLFW3(GLFWwindow *win, int key, int scancode, int action, int mods)
 {
@@ -170,10 +174,12 @@ void Game::LoadContent()
 	SpriteAtlas::Instance().Loading("Textures/");
 
 	atlas.Load("spriteatlas.png");
+	test.Load("img.png");
 
 	ShaderID = new JargShader();
 	ShaderID->LoadFromFile("shaders/t2.fs", "shaders/t2.vs");
 	mvpID = ShaderID->LocateVars("MVP");
+	worldID = ShaderID->LocateVars("World");
 
 	ShaderLines = new JargShader();
 	ShaderLines->LoadFromFile("shaders/lines.fs", "shaders/lines.vs");
@@ -218,6 +224,9 @@ int Game::Run()
 	glm::mat4 model = glm::mat4(1.0f);
 	MVP = camera.CalculateMatrix() * model;
 
+	glm::mat4 Identity(1.0f);
+	glm::mat4 World(1.0f);
+
  	JRectangle geometryRectangle;
  	geometryRectangle.SetPos(vec3(0, 50, -1));
  	geometryRectangle.SetSize(100, 100);
@@ -226,6 +235,7 @@ int Game::Run()
  	tex.v1 = 0.0f;
  	tex.u2 = 1.0f;
  	tex.v2 = 1.0f;
+	tex.textureId = test.textureId;
  	geometryRectangle.SetTexture(tex);
 
 	BufferArray ba;
@@ -233,9 +243,15 @@ int Game::Run()
 	ba.PushBack(geometryRectangle.GetBufferArray());
 	ba.CreateVideoBuffer();
 
-//	Cube geometryCube;
-//	geometryCube.SetTextureAllSide(tex);
-//	geometryCube.GetBufferArray().CreateVideoBuffer();
+	OldCube geometryCube;
+	geometryCube.SetPos(vec3(0,0,0));
+	geometryCube.SetTextureAllSide(tex);
+
+	BufferArray ba2;
+	ba2.Create(false, true, false);
+	ba2.PushBack(geometryCube.GetBufferArray());
+	ba2.CreateVideoBuffer();
+
 // 
 // 	char* twochars = "abggcde";
 // 	std::vector<uint32_t> utf32result;
@@ -260,11 +276,21 @@ int Game::Run()
 	GLint colorTextureLocation = -1;
 	colorTextureLocation = ShaderID->LocateVars("colorTexture");
 
+
+	Mesh* ico = Icosahedron::GetMesh();
+	ico->Bind();
+	ico->texture = &test;
+	ico->shader = ShaderID;
+	ico->World = glm::scale(glm::mat4(1.0f), vec3(1,6,6));
+
+	Mesh* mm = ico;
+
 	float const speed = 0.05f;
 
 	FPSCounter fps;
 
 	StringBatch fpsText;
+	int tesse = 1;
 
 	while(Running && !glfwWindowShouldClose(window)) 
 	{
@@ -307,34 +333,72 @@ int Game::Run()
 			camera.MoveX(-speed);
 		}
 
-		float dx = float(Mouse::IsMoveCursorX());
-		if( dx != 0)
-		{
-			camera.RotateX( dx );
+		if(Keyboard::isKeyPress(GLFW_KEY_F2)){
+			if(wire){
+				glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
+				wire = false;
+			} else {
+				glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+				wire = true;
+			}
 		}
 
-		float dy = float(Mouse::IsMoveCursorY());
-		if( dy != 0)
-		{
-			camera.RotateY( dy );
+		if(Keyboard::isKeyPress(GLFW_KEY_F4)){
+			tesse++;
+			//delete mm;
+			mm = Tesselator::SphereTesselate(tesse, *ico);
+			mm->Bind();
+			mm->texture = &test;
+			mm->shader = ShaderID;
+			mm->World = glm::scale(glm::mat4(1.0f), vec3(6,6,6));
 		}
-		
+
+		if(Keyboard::isKeyPress(GLFW_KEY_F3)){
+			tesse--;
+			if(tesse == -1) {
+				tesse = 0;
+			}
+			mm = Tesselator::SphereTesselate(tesse, *ico);
+			mm->Bind();
+			mm->texture = &test;
+			mm->shader = ShaderID;
+			mm->World = glm::scale(glm::mat4(1.0f), vec3(6,6,6));
+		}
+
+// 		float dx = float(Mouse::IsMoveCursorX());
+// 		if( dx != 0)
+// 		{
+// 			camera.RotateX( dx );
+// 		}
+
+// 		float dy = float(Mouse::IsMoveCursorY());
+// 		if( dy != 0)
+// 		{
+// 			camera.RotateY( dy );
+// 		}
+		camera.view = glm::lookAt(vec3(10,10,10), vec3(0,0,0), vec3(0,0,1));
 
 		MVP = camera.CalculateMatrix() * model;
+	
+		
 		// Use our shader
 		ShaderID->BindProgram();
 		glUniformMatrix4fv(mvpID, 1, GL_FALSE, &MVP[0][0]);
 		glUniform1i(colorTextureLocation, 1);
 
+		mm->World = glm::rotate(mm->World, (float)gt.elapsed, vec3(1,0,1));
+		mm->Render();
 
 		MVP = render->GetOrthoProjection();
 		glUniformMatrix4fv(mvpID, 1, GL_FALSE, &MVP[0][0]);
+		glUniformMatrix4fv(worldID, 1, GL_FALSE, &Identity[0][0]);
 
 		glDisable(GL_DEPTH_TEST);
-		WinS::sb->DrawString(Vector2(10,10), std::to_string((long double)fps.GetCount()), *smallf);
-		ws->Update(gt);
-		ws->Draw();
-		sb.DrawQuad(Vector2(10,10), Vector2(100,100), atlas);
+
+		WinS::sb->DrawString(Vector2(10,10), std::to_string((long double)fps.GetCount()).append(" ").append(std::to_string((long double)tesse)), *smallf);
+		//ws->Update(gt);
+		//ws->Draw();
+		//sb.DrawQuad(Vector2(10,10), Vector2(100,100), atlas);
 		int dc = sb.RenderFinally();
 
 		fps.Update(gt);
@@ -377,9 +441,9 @@ void Game::UnloadContent()
 
 void Game::ResizeWindow( unsigned int _width, unsigned int _height )
 {
-	/*
-	width = _width;
-	height = _height;
-	render->ResizeWindow(width, height);
-	*/
+	
+// 	width = _width;
+// 	height = _height;
+// 	render->ResizeWindow(width, height);
+	
 }

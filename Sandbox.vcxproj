@@ -93,6 +93,9 @@
       </IgnoreSpecificDefaultLibraries>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
+    <PreBuildEvent>
+      <Command>autoversion.cmd</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AutoVersion.h" />
@@ -103,7 +106,8 @@
     <ClInclude Include="BufferArray.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CoreMod.h" />
-    <ClInclude Include="Cube.h" />
+    <ClInclude Include="Icosahedron.h" />
+    <ClInclude Include="OldCube.h" />
     <ClInclude Include="DataJsonParser.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="FPSCounter.h" />
@@ -120,12 +124,15 @@
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapGeneration.h" />
     <ClInclude Include="MapSector.h" />
+    <ClInclude Include="Mesh.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="JRectangle.h" />
+    <ClInclude Include="Quad.h" />
     <ClInclude Include="Registry.h" />
     <ClInclude Include="Render.h" />
     <ClInclude Include="JargShader.h" />
+    <ClInclude Include="SphereTesselator.h" />
     <ClInclude Include="SpriteAtlas.h" />
     <ClInclude Include="SpriteBatch.h" />
     <ClInclude Include="TextureManager.h" />
@@ -143,7 +150,8 @@
     <ClCompile Include="BufferArray.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CoreMod.cpp" />
-    <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="Icosahedron.cpp" />
+    <ClCompile Include="OldCube.cpp" />
     <ClCompile Include="DataJsonParser.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FPSCounter.cpp" />
@@ -160,11 +168,14 @@
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapGeneration.cpp" />
     <ClCompile Include="MapSector.cpp" />
+    <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="JRectangle.cpp" />
+    <ClCompile Include="Quad.cpp" />
     <ClCompile Include="Registry.cpp" />
     <ClCompile Include="Render.cpp" />
     <ClCompile Include="JargShader.cpp" />
+    <ClCompile Include="SphereTesselator.cpp" />
     <ClCompile Include="SpriteAtlas.cpp" />
     <ClCompile Include="SpriteBatch.cpp" />
     <ClCompile Include="TextureManager.cpp" />

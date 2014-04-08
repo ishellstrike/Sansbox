@@ -1,7 +1,7 @@
 #ifndef Map_h__
 #define Map_h__
 
-#include "Cube.h"
+#include "OldCube.h"
 #include "TextureManager.h"
 
 struct B
@@ -16,7 +16,7 @@ private:
 	BufferArray buffer;
 	B map[64][1][64];
 	
-	Cube geometryCube;
+	OldCube geometryCube;
 
 public:
 	Map(void);

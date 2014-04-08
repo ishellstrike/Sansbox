@@ -1,3 +1,4 @@
+#pragma once
 #ifndef Game_h__
 #define Game_h__
 
@@ -33,13 +34,15 @@ protected:
 	GameTimer gt;
 
 	//
-	Texture atlas;
+	Texture atlas, test;
 	JargShader* ShaderID;
 	JargShader* ShaderLines;
 	glm::mat4 MVP;
 	Font* big, *smallf, *giantf;
 	Batched sb;
-	unsigned int mvpID;
+	unsigned int mvpID, worldID;
+
+	bool wire;
 
 public:
 	Game(void);
