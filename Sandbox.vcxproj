@@ -39,13 +39,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\local\boost_1_55_0;libs\glew-1.10.0\include\GL\;libs\jsoncpp-src-0.5.0\include;libs\utf8_v2_3_4\source\;libs\freetype-2.5.2\include\;libs\glm\glm\;libs\glfw-3.0.4\include\GLFW\;libs\glog-0.3.3\src\windows;libs\libpng-1.6.8;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\local\boost_1_55_0\lib32-msvc-10.0;lib\Release\Win32\;libs\jsoncpp-src-0.5.0\build\vs71\release\lib_json\;libs\freetype-2.5.2\objs\win32\vc2010\;libs\libpng-1.6.8\projects\vstudio\Release Library\;libs\glog-0.3.3\Release;libs\glew-1.10.0\lib\Release\Win32;libs\glfw-3.0.4\lib\;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\local\boost_1_55_0;libs\glew-1.10.0\include\GL\;libs\jsoncpp-src-0.5.0\include;libs\utf8_v2_3_4\source\;libs\freetype-2.5.2\include\;libs\glm\glm\;libs\glfw-3.0.4\include\GLFW\;libs\glog-0.3.3\src\windows;libs\libpng-1.6.8;libs\bullet3-master\src;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\local\boost_1_55_0\lib32-msvc-10.0;lib\Release\Win32\;libs\jsoncpp-src-0.5.0\build\vs71\release\lib_json\;libs\freetype-2.5.2\objs\win32\vc2010\;libs\libpng-1.6.8\projects\vstudio\Release Library\;libs\glog-0.3.3\Release;libs\glew-1.10.0\lib\Release\Win32;libs\glfw-3.0.4\lib\;libs\bullet3-master\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\local\boost_1_55_0;libs\release\glog;libs\release\utf8cpp\include;libs\release\libpng\include;libs\release\json\include;libs\release\glm\include;libs\release\glfw\include;libs\release\glew\include;libs\release\freetype\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\local\boost_1_55_0\lib32-msvc-10.0;libs\release\glog\lib;libs\release\utf8cpp\lib;libs\release\libpng\lib;libs\release\json\lib;libs\release\glfw\lib;libs\release\glew\lib;libs\release\freetype\lib;D:\Jarg\libs\release\glog;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\local\boost_1_55_0;libs\release\glog;libs\release\utf8cpp\include;libs\release\libpng\include;libs\release\json\include;libs\release\glm\include;libs\release\glfw\include;libs\release\glew\include;libs\release\freetype\include;libs\release\bullet\src;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\local\boost_1_55_0\lib32-msvc-10.0;libs\release\glog\lib;libs\release\utf8cpp\lib;libs\release\libpng\lib;libs\release\json\lib;libs\release\glfw\lib;libs\release\glew\lib;libs\release\freetype\lib;libs\release\glog;libs\release\bullet\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -54,15 +54,18 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PreprocessToFile>false</PreprocessToFile>
+      <FloatingPointModel>Fast</FloatingPointModel>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;libpng16.lib;zlib.lib;freetype252.lib;json_vc71_libmt.lib;glew32.lib;libglog.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;libpng16.lib;zlib.lib;freetype252.lib;json_vc71_libmt.lib;glew32.lib;libglog.lib;BulletDynamics_vs2010_debug.lib;LinearMath_vs2010_debug.lib;BulletCollision_vs2010_debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>LIBCMTD.lib;MSVCRT.lib;LIBCMT.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
+      <IgnoreAllDefaultLibraries>
+      </IgnoreAllDefaultLibraries>
     </Link>
     <CustomBuildStep>
       <Command>
@@ -88,7 +91,7 @@
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;libpng16.lib;zlib.lib;freetype252MT.lib;json_vc71_libmt.lib;glew32.lib;libglog.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;libpng16.lib;zlib.lib;freetype252MT.lib;json_vc71_libmt.lib;glew32.lib;libglog.lib;BulletDynamics_vs2010.lib;BulletCollision_vs2010.lib;LinearMath_vs2010.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
@@ -101,9 +104,13 @@
     <ClInclude Include="AutoVersion.h" />
     <ClInclude Include="Bitmap.h" />
     <ClInclude Include="BlockData.h" />
+    <ClInclude Include="bpBase.h" />
+    <ClInclude Include="bpPlane.h" />
+    <ClInclude Include="bpSphere.h" />
     <ClInclude Include="BufferArray.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Cube.h" />
+    <ClInclude Include="debugDraw.h" />
     <ClInclude Include="Icosahedron.h" />
     <ClInclude Include="OldCube.h" />
     <ClInclude Include="DataJsonParser.h" />
@@ -140,9 +147,12 @@
   <ItemGroup>
     <ClCompile Include="AutoVersion.cpp" />
     <ClCompile Include="Bitmap.cpp" />
+    <ClCompile Include="bpPlane.cpp" />
+    <ClCompile Include="bpSphere.cpp" />
     <ClCompile Include="BufferArray.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="debugDraw.cpp" />
     <ClCompile Include="Icosahedron.cpp" />
     <ClCompile Include="OldCube.cpp" />
     <ClCompile Include="DataJsonParser.cpp" />

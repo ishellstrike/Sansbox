@@ -22,6 +22,9 @@
     <Filter Include="WinS">
       <UniqueIdentifier>{f10043e8-a45d-4068-ad64-3a446c7b07f0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="World">
+      <UniqueIdentifier>{03ff2aa2-03e1-49ce-ba81-284c44a07165}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bitmap.h">
@@ -128,6 +131,14 @@
       <Filter>Render\Геометрия</Filter>
     </ClInclude>
     <ClInclude Include="DotEntity.h" />
+    <ClInclude Include="bpPlane.h">
+      <Filter>World</Filter>
+    </ClInclude>
+    <ClInclude Include="bpBase.h">
+      <Filter>World</Filter>
+    </ClInclude>
+    <ClInclude Include="bpSphere.h" />
+    <ClInclude Include="debugDraw.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -222,5 +233,10 @@
       <Filter>Render\Геометрия</Filter>
     </ClCompile>
     <ClCompile Include="DotEntity.cpp" />
+    <ClCompile Include="bpPlane.cpp">
+      <Filter>World</Filter>
+    </ClCompile>
+    <ClCompile Include="bpSphere.cpp" />
+    <ClCompile Include="debugDraw.cpp" />
   </ItemGroup>
 </Project>

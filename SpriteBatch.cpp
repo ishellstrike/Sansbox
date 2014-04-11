@@ -16,6 +16,11 @@ Batched::Batched()
 	lindex = new GLuint[1000*6];
 	lcolor = new Color4[1000*4];
 	m_textureBuffer = m_vertexBuffer = m_indecesBuffer = l_colorBuffer = l_vertexBuffer = lvao = vao = curn = lcurn = 0;
+	dcurn = 0;
+	dvao = 0; dvbo = nullptr;
+	dvertex = new VertexPositionColor[1000*4];
+	dindex = new GLuint[1000*4];
+
 	curz = -1;
 	blankTex = new Texture();
 	blankTex->name = "blank";
@@ -33,6 +38,9 @@ Batched::~Batched()
 	delete[] lvertex;
 	delete[] lindex;
 
+	delete[] dindex;
+	delete[] dvertex;
+
 	delete blankTex;
 
 	glDeleteBuffers(1, &m_indecesBuffer);
@@ -46,6 +54,10 @@ Batched::~Batched()
 	glDeleteBuffers(1, &l_colorBuffer);
 	glBindVertexArray(0);
 	glDeleteVertexArrays(1, &lvao);
+
+	glDeleteBuffers(2, dvbo);
+	glBindVertexArray(dvao);
+	glDeleteVertexArrays(1, &dvao);
 }
 
 void Batched::Init(JargShader* tex, JargShader* col){
@@ -64,6 +76,11 @@ void Batched::Init(JargShader* tex, JargShader* col){
 	glGenBuffers(1, &l_vertexBuffer);
 	glGenBuffers(1, &l_indecesBuffer);
 	glGenBuffers(1, &l_colorBuffer);
+
+	glGenVertexArrays(1, &dvao);
+	glBindVertexArray(dvao);
+	dvbo = new GLuint[2];
+	glGenBuffers(2, dvbo);
 }
 
 void Batched::DrawString(Vector2 pos, std::string text, Font& font){
@@ -103,7 +120,6 @@ void Batched::DrawString(Vector2 pos, std::string text, Font& font){
 		curn++;
 
 		glyphX += fontTexture.width;
-
 	}
 	curz+=0.001f;
 }
@@ -131,7 +147,7 @@ inline void Batched::innerDraw(Vector2 pos, Vector2 size, float rotation, Textur
 	index[6*curn+4] = 4*curn+2;
 	index[6*curn+5] = 4*curn+3;
 	curn++;
-	//curz+=0.001f;
+	curz+=0.001f;
 }
 
 void Batched::DrawQuad(Vector2 pos, Vector2 size, float rotation, Texture& tex, Rect sub)
@@ -179,6 +195,19 @@ void Batched::DrawLine(Vector2 from, Vector2 to, float w, Color4 col){
 	curz+=0.001f;
 }
 
+void Batched::DrawLine3d(Vector3 from, Vector3 to, Color4 col){
+	if(dcurn >= 1000){
+		DRender();
+	}
+	dvertex[2*dcurn+0].pos = from;
+	dvertex[2*dcurn+1].pos = to;
+	dvertex[2*dcurn+0].col = col;
+	dvertex[2*dcurn+1].col = col;
+	dindex[2*dcurn+0] = 2*dcurn+0;
+	dindex[2*dcurn+1] = 2*dcurn+1;
+	dcurn++;
+}
+
 void Batched::DrawRectangle(Vector2 pos, Vector2 size, Color4 col){
 	if(lcurn >= 1000){
 		LRender();
@@ -199,6 +228,34 @@ void Batched::DrawRectangle(Vector2 pos, Vector2 size, Color4 col){
 	lindex[6*lcurn+5] = 4*lcurn+3;
 	lcurn++;
 	curz+=0.001f;
+}
+
+int Batched::RenderFinallyWorld()
+{
+	if(dcurn != 0){
+		glBindVertexArray(dvao);
+		colored->BindProgram();
+
+		GLuint stride = sizeof(VertexPositionColor);
+		GLuint offset = 0;
+		glBindBuffer(GL_ARRAY_BUFFER, dvbo[0]);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(VertexPositionColor)*dcurn*2, &dvertex[0], GL_STATIC_DRAW);
+		glEnableVertexAttribArray(BUFFER_TYPE_VERTEX);
+		glVertexAttribPointer(BUFFER_TYPE_VERTEX, 3, GL_FLOAT, GL_FALSE, stride, (void*)(offset)); offset += sizeof(Vector3);
+		glEnableVertexAttribArray(BUFFER_TYPE_COLOR);
+		glVertexAttribPointer(BUFFER_TYPE_COLOR, 4, GL_FLOAT, GL_FALSE, stride, (void*)(offset));
+
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, dvbo[1]);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint)*dcurn*2, &dindex[0], GL_STATIC_DRAW);
+
+
+		glPointSize(3);
+		glDrawElements(GL_LINES, dcurn*2, GL_UNSIGNED_INT, NULL);
+		glDrawElements(GL_POINTS, dcurn*2, GL_UNSIGNED_INT, NULL);
+		dc++; dc++;
+	}
+ 	dcurn = 0;
+	return dc;
 }
 
 int Batched::RenderFinally()
@@ -302,10 +359,36 @@ void Batched::LRender()
 	glVertexAttribPointer(BUFFER_TYPE_COLOR, 2, GL_FLOAT, GL_FALSE, sizeof(Color4), 0);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, l_indecesBuffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint)*lcurn*6, lindex, GL_DYNAMIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint)*lcurn*6, lindex, GL_STATIC_DRAW);
 
 
 	glDrawElements(GL_TRIANGLES, lcurn*6, GL_UNSIGNED_INT, NULL);
 	dc++;
 	lcurn = 0;
 }
+
+void Batched::DRender()
+{
+	glBindVertexArray(dvao);
+	colored->BindProgram();
+
+	GLuint stride = sizeof(VertexPositionColor);
+	GLuint offset = 0;
+	glBindBuffer(GL_ARRAY_BUFFER, dvbo[0]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(VertexPositionColor)*dcurn*2, &dvertex[0], GL_DYNAMIC_DRAW);
+	glEnableVertexAttribArray(BUFFER_TYPE_VERTEX);
+	glVertexAttribPointer(BUFFER_TYPE_VERTEX, 3, GL_FLOAT, GL_FALSE, stride, (void*)(offset)); offset += sizeof(Vector3);
+	glEnableVertexAttribArray(BUFFER_TYPE_COLOR);
+	glVertexAttribPointer(BUFFER_TYPE_COLOR, 4, GL_FLOAT, GL_FALSE, stride, (void*)(offset));
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, dvbo[1]);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint)*dcurn*2, &dindex[0], GL_DYNAMIC_DRAW);
+
+	glPointSize(3);
+	glDrawElements(GL_LINES, dcurn*2, GL_UNSIGNED_INT, NULL);
+	glDrawElements(GL_POINTS, dcurn*2, GL_UNSIGNED_INT, NULL);
+	dc++; dc++;
+ 	dcurn = 0;
+}
+
+

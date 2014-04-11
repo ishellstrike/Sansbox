@@ -11,4 +11,10 @@ public:
 	VertexPositionTexture operator + (VertexPositionTexture a){ VertexPositionTexture b; b.pos = pos + a.pos; b.uv = a.uv + uv; return b; }
 	VertexPositionTexture operator / (float a){ VertexPositionTexture b; b.pos = pos / a; b.uv = uv / a; return b; }
 };
+
+struct VertexPositionColor{
+public:
+	Vector3 pos;
+	Color4 col;
+};
 #endif // VertexPositionTexture_h__

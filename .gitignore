@@ -31,6 +31,9 @@ ipch/
 *.dll
 *.ttf
 *.sdf
+*.tar
+*.tar.gz
+*.gz
 
 Sandbox.opensdf
 font.json.png

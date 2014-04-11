@@ -40,10 +40,10 @@ protected:
 	glm::mat4 MVP;
 	Font* big, *smallf, *giantf;
 	Batched sb;
-	unsigned int mvpID, worldID;
+	unsigned int mvpBasic, worldID;
 
-	bool wire;
-
+	int wire;
+	GLuint mvpLine;
 public:
 	Game(void);
 	~Game(void);

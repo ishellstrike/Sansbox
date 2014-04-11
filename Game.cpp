@@ -39,6 +39,11 @@
 #include "SphereTesselator.h"
 #include "Cube.h"
 #include "DotEntity.h"
+#include <btBulletDynamicsCommon.h>
+#include <BulletCollision/Gimpact/btGImpactCollisionAlgorithm.h>
+#include "bpPlane.h"
+#include "bpSphere.h"
+#include "debugDraw.h"
 
 #define sqr(x)(x)*(x)
 
@@ -147,7 +152,7 @@ int Game::Initialize()
 	glfwSetCursorEnterCallback(window, CursorClientAreaCallbackGLFW3);	
 	glfwSetWindowFocusCallback(window, WindowFocusCallbackGLFW3);
 	glfwSetMouseButtonCallback(window, SetMouseButtonCallbackGLFW3);
-
+	wire = 0;
 
 	//*******************************
 
@@ -165,22 +170,23 @@ int Game::Initialize()
 
 void Game::LoadContent()
 {
-	SpriteAtlas::Instance().Loading("Textures/");
+	//SpriteAtlas::Instance().Loading("Textures/");
 
 	atlas.Load("spriteatlas.png");
 	test.Load("img.png");
 
 	ShaderID = new JargShader();
 	ShaderID->LoadFromFile("shaders/t2.fs", "shaders/t2.vs");
-	mvpID = ShaderID->LocateVars("MVP");
+	mvpBasic = ShaderID->LocateVars("MVP");
 	worldID = ShaderID->LocateVars("World");
 
 	ShaderLines = new JargShader();
 	ShaderLines->LoadFromFile("shaders/lines.fs", "shaders/lines.vs");
-	ShaderLines->BindProgram();
-	unsigned int mvpLine = ShaderLines->LocateVars("MVP");
+	mvpLine = ShaderLines->LocateVars("MVP");
+
+
 	MVP = render->GetOrthoProjection();
-	glUniformMatrix4fv(mvpID, 1, GL_FALSE, &MVP[0][0]);
+	glUniformMatrix4fv(mvpBasic, 1, GL_FALSE, &MVP[0][0]);
 
 	big = new Font();
 	big->Init();
@@ -247,7 +253,7 @@ int Game::Run()
 	ico->World = glm::scale(glm::mat4(1.0f), vec3(6));
 
 	Mesh* mm = ico;
-	mm = Tesselator::SphereTesselate(3, *ico);
+	mm = Tesselator::SphereTesselate(2, *ico);
 	mm->Bind();
 	mm->texture = &test;
 	mm->shader = ShaderID;
@@ -267,6 +273,27 @@ int Game::Run()
 	ent.push_back(DotEntity(Vector3(20,20,0), Vector3(1,1,0), 100));
 	ent.push_back(DotEntity(Vector3(-20,20,0), Vector3(1,0,0), 100));
 	ent.push_back(DotEntity(Vector3(20,-20,0), Vector3(0,1,0), 100));
+
+
+	btBroadphaseInterface* broadphase = new btDbvtBroadphase();
+	btDefaultCollisionConfiguration* collisionConfiguration = new btDefaultCollisionConfiguration();
+	btCollisionDispatcher* dispatcher = new btCollisionDispatcher(collisionConfiguration);
+	btGImpactCollisionAlgorithm::registerAlgorithm(dispatcher);
+	btSequentialImpulseConstraintSolver* solver = new btSequentialImpulseConstraintSolver;
+	btDiscreteDynamicsWorld* dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,broadphase,solver,collisionConfiguration);
+	dynamicsWorld->setGravity(btVector3(0,-9.8,0));
+	GLDebugDrawer* drawer = new GLDebugDrawer();
+	drawer->setDebugMode(true);
+	dynamicsWorld->setDebugDrawer(drawer);
+	drawer->SetBatched(&sb);
+
+	std::vector<bpSphere*> spheres;
+	bpSphere* sphere1 = new bpSphere();
+	sphere1->bpRegister(dynamicsWorld);
+	spheres.push_back(sphere1);
+
+	bpPlane* plane1 = new bpPlane();
+	plane1->bpRegister(dynamicsWorld);
 
 	while(Running && !glfwWindowShouldClose(window)) 
 	{
@@ -310,48 +337,57 @@ int Game::Run()
 		}
 
 		if(Keyboard::isKeyPress(GLFW_KEY_F2)){
-			if(wire){
-				glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
-				wire = false;
-			} else {
+			switch(wire){
+			case 0:
 				glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
-				wire = true;
+				wire = 1;
+				break;	
+			case 1:
+				glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
+				wire = 2;
+				break;
+			default:
+				glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
+				wire = 0;
+				break;
 			}
 		}
 		
 		if(Keyboard::isKeyPress(GLFW_KEY_F3)){
 			ent.clear();
-			ent.push_back(DotEntity(Vector3(0,0,0), Vector3(0), 10000));
+			ent.push_back(DotEntity(Vector3(0,0,0), Vector3(0), 1.98892e+30));
 			for(int i =0; i< 10; i++){
-				ent.push_back(DotEntity(Vector3(rand()%60-30,rand()%60-30,rand()%60-30), Vector3(0,0,0), rand()%20+10));
+				ent.push_back(DotEntity(Vector3(i*149597871000,i*149597871000,0), Vector3(29783,0,0), 5.972e+24));
 			}
 		}
 
 		if(Keyboard::isKeyPress(GLFW_KEY_F4)){
-			ent.push_back(DotEntity(Vector3(20,-20,0), Vector3(0,1,0), 100));
+			bpSphere* sphere1 = new bpSphere();
+			sphere1->bpRegister(dynamicsWorld);
+			spheres.push_back(sphere1);
 		}
 
-		for (int i=0; i< ent.size(); i++)
-		{
-			DotEntity& p0 = ent[i];
-			for (int j=0; j< ent.size(); j++)
-			{
-				if(i!=j){
-					DotEntity& p = ent[j];
-					float d = sqrt(sqr(p0.pos.x - p.pos.x) + sqr(p0.pos.y - p.pos.y) + sqr(p0.pos.z - p.pos.z));
-					if(d > 6){
-						p0.vel.x += 0.007 * p.mass /d /d * (p.pos.x - p0.pos.x)/d;
-						p0.vel.y += 0.007 * p.mass /d /d * (p.pos.y - p0.pos.y)/d;
-						p0.vel.z += 0.007 * p.mass /d /d * (p.pos.z - p0.pos.z)/d;
-					}
-					/*if(d < 3) {
-						p0.vel = (p.vel*2*p.mass+p0.vel*(p0.mass-p.mass))/(p0.mass+p.mass);
-						p.vel = (p0.vel*2*p0.mass+p.vel*(p.mass-p0.mass))/(p0.mass+p.mass);
-					}*/
-				}
-			}
-			p0.pos += p0.vel * gt.elapsed;
-		}
+		//for (int i=0; i< ent.size(); i++)
+		//{
+		//	DotEntity& p0 = ent[i];
+		//	for (int j=0; j< ent.size(); j++)
+		//	{
+		//		if(i!=j){
+		//			DotEntity& p = ent[j];
+		//			float d = sqrt(sqr(p0.pos.x - p.pos.x) + sqr(p0.pos.y - p.pos.y) + sqr(p0.pos.z - p.pos.z));
+		//			if(d > 3){
+		//				p0.vel.x += 6.67545e-23 * p.mass /d /d * (p.pos.x - p0.pos.x)/d;
+		//				p0.vel.y += 6.67545e-23 * p.mass /d /d * (p.pos.y - p0.pos.y)/d;
+		//				p0.vel.z += 6.67545e-23 * p.mass /d /d * (p.pos.z - p0.pos.z)/d;
+		//			}
+		//			/*if(d < 3) {
+		//				p0.vel = (p.vel*2*p.mass+p0.vel*(p0.mass-p.mass))/(p0.mass+p.mass);
+		//				p.vel = (p0.vel*2*p0.mass+p.vel*(p.mass-p0.mass))/(p0.mass+p.mass);
+		//			}*/
+		//		}
+		//	}
+		//	p0.pos += p0.vel * gt.elapsed * 1000;
+		//}
 
 // 		float dx = float(Mouse::IsMoveCursorX());
 // 		if( dx != 0)
@@ -364,35 +400,67 @@ int Game::Run()
 // 		{
 // 			camera.RotateY( dy );
 // 		}
-		camera.view = glm::lookAt(vec3(200,200,200), vec3(0,0,0), vec3(0,0,1));
+		camera.view = glm::lookAt(vec3(20,20,20), vec3(0,0,0), vec3(0,1,0));
 
 		MVP = camera.CalculateMatrix() * model;
 	
 		
 		// Use our shader
 		ShaderID->BindProgram();
-		glUniformMatrix4fv(mvpID, 1, GL_FALSE, &MVP[0][0]);
+		glUniformMatrix4fv(mvpBasic, 1, GL_FALSE, &MVP[0][0]);
 		glUniform1i(colorTextureLocation, 1);
 
 		//mm->World = glm::rotate(mm->World, (float)gt.elapsed, vec3(1,0,1));
-		for (int i =0; i< ent.size(); i++)
+		/*for (int i =0; i< ent.size(); i++)
 		{
-			mm->World = glm::scale(Identity, vec3(6,6,6));
-			mm->World = glm::translate(mm->World, vec3(ent[i].pos.x,ent[i].pos.y,ent[i].pos.z));
+		mm->World = glm::scale(Identity, vec3(6,6,6));
+		mm->World = glm::translate(mm->World, vec3(ent[i].pos.x/10000000.0,ent[i].pos.y/10000000.0,ent[i].pos.z/100000000.0));
+		mm->Render();
+		}*/
+
+		if(wire != 2)
+		for (unsigned int i =0; i< spheres.size(); i++)
+		{
+			
+			btTransform trans;
+			spheres[i]->fallRigidBody->getMotionState()->getWorldTransform(trans);
+			auto q = trans.getRotation();
+			auto t = trans.getOrigin();
+			mm->World = glm::translate(Identity, vec3(t.getX(),t.getY(),t.getZ()));
+			mm->World = glm::rotate(mm->World, q.getAngle(), vec3(q.getAxis().x(), q.getAxis().y(), q.getAxis().z()));
+			mm->World = glm::scale(mm->World, vec3(1,1,1));
 			mm->Render();
 		}
 
-		MVP = render->GetOrthoProjection();
-		glUniformMatrix4fv(mvpID, 1, GL_FALSE, &MVP[0][0]);
+		//glDisable(GL_DEPTH_TEST);
 		glUniformMatrix4fv(worldID, 1, GL_FALSE, &Identity[0][0]);
 
-		glDisable(GL_DEPTH_TEST);
+
+		if(wire == 2) {
+			
+			ShaderLines->BindProgram();
+			glUniformMatrix4fv(mvpLine, 1, GL_FALSE, &MVP[0][0]);
+			dynamicsWorld->debugDrawWorld();
+			sb.RenderFinallyWorld();
+		}
+		//after debug draw calc
+		dynamicsWorld->stepSimulation(gt.elapsed,10);
+
+		//glDisable(GL_DEPTH_TEST);
+		MVP = render->GetOrthoProjection();
+		glUniformMatrix4fv(mvpBasic, 1, GL_FALSE, &MVP[0][0]);
+		ShaderLines->BindProgram();
+		glUniformMatrix4fv(mvpLine, 1, GL_FALSE, &MVP[0][0]);
+
+		
 
 		WinS::sb->DrawString(Vector2(10,10), std::to_string((long double)fps.GetCount()).append(" ").append(std::to_string((long double)tesse)).append(" ").append(std::to_string((long double)mm->indeces.size()/3)), *smallf);
-		//ws->Update(gt);
-		//ws->Draw();
+		ws->Update(gt);
+		ws->Draw();
 		//sb.DrawQuad(Vector2(10,10), Vector2(100,100), atlas);
 		int dc = sb.RenderFinally();
+
+
 
 		fps.Update(gt);
 		Mouse::Update();
@@ -410,6 +478,23 @@ int Game::Run()
 	delete ws;
 	delete smallf;
 	delete giantf;
+
+	for (unsigned int i =0; i< spheres.size(); i++)
+	{
+		spheres[i]->bpUnregister(dynamicsWorld);
+		delete spheres[i];
+	}
+	spheres.clear();
+
+	plane1->bpUnregister(dynamicsWorld);
+	delete plane1;
+
+	delete dynamicsWorld;
+	delete solver;
+	delete dispatcher;
+	delete collisionConfiguration;
+	delete broadphase;
+
 
 	glfwDestroyWindow(window);
 	glfwTerminate();

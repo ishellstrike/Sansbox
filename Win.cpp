@@ -36,11 +36,13 @@ void Win::Draw()
 	WinS::sb->DrawQuad(Vector2(pos.x, pos.y + size.y - 2), Vector2(size.x, 2), 0, *WinS::bp);*/
 
 	Batched& sb = *WinS::sb;
-	sb.DrawRectangle(pos, size, Color4(0.0F,0.5F,0.5F,0.5F));
-	sb.DrawLine(pos, Vector2(pos.x, pos.y + size.y), 2, Color4::White);
+	
+	sb.DrawRectangle(pos, size, Color4(1.F,0.F,0.F,0.5F));
+	sb.DrawString(pos + Vector2(3,-8), "azazazaadasdasd", *WinS::font);
+	sb.DrawLine(pos, Vector2(pos.x, pos.y + size.y), 2, Color4(1.F,1.F,1.F,0.5F));
+
 	sb.DrawLine(pos, Vector2(pos.x + size.x, pos.y), 2, Color4::White);
 	sb.DrawLine(pos + Vector2(0,20), Vector2(pos.x + size.x, pos.y + 20), 2, Color4::White);
-	sb.DrawString(pos + Vector2(3,-8), "azazazaadasdasd", *WinS::font);
 	sb.DrawLine(Vector2(pos.x, pos.y + size.y), pos + size, 2, Color4::White);
 	sb.DrawLine(Vector2(pos.x + size.x, pos.y), pos + size, 2, Color4::White);
 
@@ -49,6 +51,8 @@ void Win::Draw()
 			Items[i]->Draw();
 		}
 	}
+
+
 }
 
 void Win::Update()

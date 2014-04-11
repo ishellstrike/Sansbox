@@ -5,6 +5,7 @@
 #include "TextureManager.h"
 #include "JargShader.h"
 #include "Font.h"
+#include "VertexPositionTexture.h"
 
 class Batched{
 private:
@@ -18,8 +19,13 @@ private:
 	Color4* lcolor;
 	GLuint* lindex;
 
+	GLuint dvao;
+	GLuint* dvbo;
+	VertexPositionColor* dvertex;
+	GLuint* dindex;
+
 	float curz;
-	int curn, lcurn;
+	int curn, lcurn, dcurn;
 	int dc;
 	Texture* currentTex;
 	Texture* blankTex;
@@ -41,9 +47,13 @@ public:
 	int RenderFinally();
 	void DrawLine(Vector2 from, Vector2 to, float w, Color4 col);
 	void DrawRectangle(Vector2 from, Vector2 to, Color4 col);
+	void DrawLine3d(Vector3 from, Vector3 to, Color4 col);
+		int RenderFinallyWorld();
 private:
 	inline void innerDraw(Vector2 pos, Vector2 size, float rotation, Texture& tex, Rect sub);
 	void LRender();
 	void Render();
+	void DRender();
+
 };
 #endif // SpriteBatch_h__
