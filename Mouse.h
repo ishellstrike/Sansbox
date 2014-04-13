@@ -8,27 +8,27 @@
 class Mouse
 {
 private:
-	static GLFWwindow *window;
+	static GLFWwindow *sm_window;
 
-	static double xpos;
-	static double ypos;
+	static double sm_xpos;
+	static double sm_ypos;
 
-	static double dxpos;
-	static double dypos;
+	static double sm_dxpos;
+	static double sm_dypos;
 
-	static double lastxpos;
-	static double lastypos;
+	static double sm_lastxpos;
+	static double sm_lastypos;
 
-	static double deltaxpos;
-	static double deltaypos;
+	static double sm_deltaxpos;
+	static double sm_deltaypos;
 
-	static unsigned int windowWidth;
-	static unsigned int windowHeight;
+	static unsigned int sm_windowWidth;
+	static unsigned int sm_windowHeight;
 
-	static bool stateFixedMousePos;
-	static bool isCursorClientArea;
-	static bool isWindowFocused;
-	static int Buttons[10];
+	static bool sm_stateFixedMousePos;
+	static bool sm_isCursorClientArea;
+	static bool sm_isWindowFocused;
+	static int sm_buttons[10];
 
 public:
 
@@ -37,13 +37,13 @@ public:
 	static void SetCursorPos(double xpos, double ypos);
 	static void WindowFocus(int focused);
 
-	static void Init( GLFWwindow *win );
+	static void Initialize( GLFWwindow *win );
 
 	static void SetFixedPosState( bool state);
 
 	static bool GetFixedPosState()
 	{
-		return stateFixedMousePos;
+		return sm_stateFixedMousePos;
 	}
 
 	static void SetWindowSize(unsigned int width, unsigned int height);

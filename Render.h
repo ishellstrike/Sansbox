@@ -19,7 +19,7 @@ public:
 	Render(void);
 	~Render(void);
 
-	bool Init();
+	bool Initialize();
 
 	void SetWindowSize(unsigned int width, unsigned int height);
 

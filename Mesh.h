@@ -12,18 +12,18 @@ class Mesh
 public:
 	Mesh(void);
 	~Mesh(void);
-	void Create(std::vector<VertexPositionTexture> v, std::vector<GLuint> i);
+	void Create(std::vector<VertexPositionTexture> verteces, std::vector<GLuint> indeces);
 	void Bind();
 	void Render();
 	void Combine();
-	std::vector<VertexPositionTexture> verteces;
-	std::vector<GLuint> indeces;
-	Texture* texture;
-	JargShader* shader;
+	std::vector<VertexPositionTexture> Verteces;
+	std::vector<GLuint> Indeces;
+	JargShader* Shader;
+	Texture* Texture;
 	mat4 World;
 private:
-	GLuint vao;
-	GLuint* vbo;
+	GLuint m_vao;
+	GLuint* m_vbo;
 };
 #endif // Mesh_h__
 

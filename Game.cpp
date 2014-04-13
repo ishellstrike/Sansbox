@@ -139,13 +139,13 @@ int Game::Initialize()
 	glfwSwapInterval(0);
 
 	render = new Render;
-	render->Init();
+	render->Initialize();
 	render->SetWindowSize(width, height);
 
-	Keyboard::Init();
+	Keyboard::Initialize();
 	glfwSetKeyCallback(window, KeyCallbackGLFW3);
 
-	Mouse::Init(window);
+	Mouse::Initialize(window);
 	Mouse::SetWindowSize(width, height);
 //	Mouse::SetFixedPosState(true);
 	glfwSetCursorPosCallback(window, CursorPosCallbackGLFW3);
@@ -189,20 +189,20 @@ void Game::LoadContent()
 	glUniformMatrix4fv(mvpBasic, 1, GL_FALSE, &MVP[0][0]);
 
 	big = new Font();
-	big->Init();
+	big->Initialize();
 	big->Create("font.json");
 
 	smallf = new Font();
-	smallf->Init();
+	smallf->Initialize();
 	smallf->Create("fontsmall.json");
 
 	giantf = new Font();
-	giantf->Init();
+	giantf->Initialize();
 	giantf->Create("fontgiant.json");
 
-	sb.Init(ShaderID, ShaderLines);
+	sb.Initialize(ShaderID, ShaderLines);
 
-	Registry::Init();
+	Registry::Initialize();
 }
 
 int Game::Run()
@@ -246,17 +246,17 @@ int Game::Run()
 	colorTextureLocation = ShaderID->LocateVars("colorTexture");
 
 
-	Mesh* ico = Cube::GetMesh();
+	Mesh* ico = Cube::getMesh();
 	ico->Bind();
-	ico->texture = &test;
-	ico->shader = ShaderID;
+	ico->Texture = &test;
+	ico->Shader = ShaderID;
 	ico->World = glm::scale(glm::mat4(1.0f), vec3(6));
 
 	Mesh* mm = ico;
 	mm = Tesselator::SphereTesselate(2, *ico);
 	mm->Bind();
-	mm->texture = &test;
-	mm->shader = ShaderID;
+	mm->Texture = &test;
+	mm->Shader = ShaderID;
 	mm->World = glm::scale(glm::mat4(1.0f), vec3(6));
 
 	float const speed = 0.05f;
@@ -454,7 +454,7 @@ int Game::Run()
 
 		
 
-		WinS::sb->DrawString(Vector2(10,10), std::to_string((long double)fps.GetCount()).append(" ").append(std::to_string((long double)tesse)).append(" ").append(std::to_string((long double)mm->indeces.size()/3)), *smallf);
+		WinS::sb->DrawString(Vector2(10,10), std::to_string((long double)fps.GetCount()).append(" ").append(std::to_string((long double)tesse)).append(" ").append(std::to_string((long double)mm->Indeces.size()/3)), *smallf);
 		ws->Update(gt);
 		ws->Draw();
 		//sb.DrawQuad(Vector2(10,10), Vector2(100,100), atlas);
@@ -467,7 +467,9 @@ int Game::Run()
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
-		boost::this_thread::sleep_for(boost::chrono::milliseconds(16));
+		if(gt.elapsed < 0.16) {
+			boost::this_thread::sleep_for(boost::chrono::milliseconds(16));
+		}
 	}
 	
 

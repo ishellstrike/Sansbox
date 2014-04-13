@@ -26,7 +26,7 @@ Font::~Font()
 	delete tex;
 }
 
-bool Font::Init()
+bool Font::Initialize()
 {
 	if (FT_Init_FreeType( &library ))
 	{

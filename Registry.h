@@ -10,6 +10,6 @@ class Registry{
 private:
 	static std::map<std::string, BlockData*>* Blocks;
 public:
-	static void Init();
+	static void Initialize();
 };
 #endif // Registry_h__

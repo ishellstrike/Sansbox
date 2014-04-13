@@ -9,8 +9,8 @@ class DataJsonParser
 public:
 	DataJsonParser(void);
 	~DataJsonParser(void);
-	static bool Parse(std::string s, std::map<std::string, BlockData*>* blocks);
-	static void ParseDirectory(std::string s, std::map<std::string, BlockData*>* blocks);
+	static bool Parse(std::string fileName, std::map<std::string, BlockData*>* blockDataBase);
+	static void ParseDirectory(std::string directoryName, std::map<std::string, BlockData*>* blockDataBase);
 };
 #endif // DataJsonParser_h__
 

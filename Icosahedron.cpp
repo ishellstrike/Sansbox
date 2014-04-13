@@ -33,8 +33,11 @@ static const GLuint __indeces[INDEXCOUNT] =
 	10,	6,	1
 };
 
-Mesh* Icosahedron::GetMesh()
+Mesh Icosahedron::getMesh()
 {
+	if(sm_mesh != nullptr){
+		return *sm_mesh;
+	}
 	Mesh* m = new Mesh();
 	float magicAngle = M_PI * 26.565 / 180;
 	float segmentAngle = M_PI * 72 / 180;
@@ -60,19 +63,22 @@ Mesh* Icosahedron::GetMesh()
 		currentAngle += segmentAngle;
 	}
 
-	m->verteces.resize(VERTEXCOUNT);
-	m->indeces.resize(INDEXCOUNT);
+	m->Verteces.resize(VERTEXCOUNT);
+	m->Indeces.resize(INDEXCOUNT);
 
 	for (int i=0; i < VERTEXCOUNT; i++)
 	{
-		m->verteces[i].pos = v[i];
-		m->verteces[i].uv =  Vector2(rand()%100/100.0,rand()%100/100.0);
+		m->Verteces[i].pos = v[i];
+		m->Verteces[i].uv =  Vector2(rand()%100/100.0,rand()%100/100.0);
 	}
 
 	for (int i=0; i < INDEXCOUNT; i++)
 	{
-		m->indeces[i] = __indeces[i];
+		m->Indeces[i] = __indeces[i];
 	}
 
-	return m;
+	Icosahedron::sm_mesh = m;
+	return *m;
 }
+
+Mesh* Icosahedron::sm_mesh = nullptr;

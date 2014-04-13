@@ -39,7 +39,7 @@ public:
 	Texture* atlasTex;
 
 	void DrawString(Vector2 pos, std::string text, Font& font);
-	void Init(JargShader* tex, JargShader* col);
+	void Initialize(JargShader* tex, JargShader* col);
 	void DrawQuad(Vector2 pos, Vector2 size, float rotation, Texture& tex, Rect sub);
 	void DrawQuad(Vector2 pos, Vector2 size, float rotation, Texture& tex, int atl);
 	void DrawQuad(Vector2 pos, Vector2 size, float rotation, Texture& tex);

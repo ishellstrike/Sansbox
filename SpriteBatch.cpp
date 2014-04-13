@@ -60,7 +60,7 @@ Batched::~Batched()
 	glDeleteVertexArrays(1, &dvao);
 }
 
-void Batched::Init(JargShader* tex, JargShader* col){
+void Batched::Initialize(JargShader* tex, JargShader* col){
 	textured = tex;
 	colored = col;
 	glGenVertexArrays(1, &vao);

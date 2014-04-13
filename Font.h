@@ -69,7 +69,7 @@ public:
 	std::string name;
 	Texture* tex;
 
-	bool Init();
+	bool Initialize();
 
 	bool Create(std::string configFileName);
 	void Remove();

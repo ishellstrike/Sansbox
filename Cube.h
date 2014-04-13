@@ -3,6 +3,8 @@
 class Cube
 {
 public:
-	static Mesh* GetMesh();
+	static Mesh getMesh();
+private:
+	static Mesh* sm_mesh;
 };
 

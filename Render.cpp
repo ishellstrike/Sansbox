@@ -16,7 +16,7 @@ Render::~Render(void)
 {
 }
 
-bool Render::Init()
+bool Render::Initialize()
 {
 
 	glewExperimental=true; // Needed in core profile

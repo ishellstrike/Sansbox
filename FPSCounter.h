@@ -9,8 +9,8 @@ class FPSCounter
 private:
 	//std::list<double> fpsStack;
 
-	int fps, fpsC;
-	double fpsTime;
+	int sm_fps, sm_fpsC;
+	double sm_fpsTime;
 
 public:
 	FPSCounter(void);

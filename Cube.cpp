@@ -26,30 +26,37 @@ static const GLuint __vertexIndex[INDEXCOUNT] =
 	20,23,22, 22,21,20 // right
 };
 
-Mesh* Cube::GetMesh()
+Mesh Cube::getMesh()
 {
+	if(sm_mesh != nullptr){
+		return *sm_mesh;
+	}
+
 	Mesh* m = new Mesh();
-	m->indeces.resize(INDEXCOUNT);
-	m->verteces.resize(VERTEXCOUNT);
+	m->Indeces.resize(INDEXCOUNT);
+	m->Verteces.resize(VERTEXCOUNT);
 	for(unsigned int i = 0; i < 6; i++)
 	{
-		m->verteces[i*4].pos = __vertexPositions[i * 4 + 0];
-		m->verteces[i*4].uv = Vector2(1,1);
+		m->Verteces[i*4].pos = __vertexPositions[i * 4 + 0];
+		m->Verteces[i*4].uv = Vector2(1,1);
 
-		m->verteces[i*4 + 1].pos = __vertexPositions[i * 4 + 1];
-		m->verteces[i*4 + 1].uv = Vector2(1,0);
+		m->Verteces[i*4 + 1].pos = __vertexPositions[i * 4 + 1];
+		m->Verteces[i*4 + 1].uv = Vector2(1,0);
 
-		m->verteces[i*4 + 2].pos = __vertexPositions[i * 4 + 2];
-		m->verteces[i*4 + 2].uv = Vector2(0,0);
+		m->Verteces[i*4 + 2].pos = __vertexPositions[i * 4 + 2];
+		m->Verteces[i*4 + 2].uv = Vector2(0,0);
 
-		m->verteces[i*4 + 3].pos = __vertexPositions[i * 4 + 3];
-		m->verteces[i*4 + 3].uv = Vector2(0,1);
+		m->Verteces[i*4 + 3].pos = __vertexPositions[i * 4 + 3];
+		m->Verteces[i*4 + 3].uv = Vector2(0,1);
 	}
 
 	for (int i =0; i< INDEXCOUNT; i++)
 	{
-		m->indeces.push_back(__vertexIndex[i]);
+		m->Indeces.push_back(__vertexIndex[i]);
 	}
 
-	return m;
+	sm_mesh = m;
+	return *m;
 }
+
+Mesh* Cube::sm_mesh = nullptr;

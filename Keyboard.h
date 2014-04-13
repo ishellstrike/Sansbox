@@ -6,11 +6,11 @@
 class Keyboard
 {
 private:
-	static int keys[GLFW_KEY_LAST];
+	static int sm_keys[GLFW_KEY_LAST];
 
 public:
 
-	static void Init();
+	static void Initialize();
 
 	static void SetKey(int key, int scancode, int action, int mods);
 

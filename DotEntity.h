@@ -4,10 +4,10 @@ struct DotEntity
 {
 public:
 	DotEntity(void);
-	DotEntity(Vector3 p ,Vector3 v, float m);
+	DotEntity(Vector3 position, Vector3 velocity, float mass);
 	~DotEntity(void);
-	Vector3 pos;
-	Vector3 vel;
-	float mass;
+	Vector3 Position;
+	Vector3 Velocity;
+	float Mass;
 };
 

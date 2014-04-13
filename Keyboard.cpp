@@ -1,26 +1,26 @@
 #include "Keyboard.h"
 
-int Keyboard::keys[GLFW_KEY_LAST];
+int Keyboard::sm_keys[GLFW_KEY_LAST];
 
-void Keyboard::Init()
+void Keyboard::Initialize()
 {
 	for(unsigned int i = 0; i < GLFW_KEY_LAST; i++)
 	{
-		keys[i] = GLFW_RELEASE;
+		sm_keys[i] = GLFW_RELEASE;
 	}
 }
 
 
 void Keyboard::SetKey( int key, int scancode, int action, int mods )
 {
-	keys[key] = action;
+	sm_keys[key] = action;
 }
 
 bool Keyboard::isKeyPress( int key )
 {
-	if(keys[key] == GLFW_PRESS)
+	if(sm_keys[key] == GLFW_PRESS)
 	{
-		keys[key] = GLFW_REPEAT;
+		sm_keys[key] = GLFW_REPEAT;
 		return true;
 	}
 	return false;
@@ -28,14 +28,14 @@ bool Keyboard::isKeyPress( int key )
 
 bool Keyboard::isKeyUp( int key )
 {
-	if(keys[key] == GLFW_RELEASE)
+	if(sm_keys[key] == GLFW_RELEASE)
 		return true;
 	return false;
 }
 
 bool Keyboard::isKeyDown( int key )
 {
-	if(keys[key] == GLFW_REPEAT || keys[key] == GLFW_PRESS)
+	if(sm_keys[key] == GLFW_REPEAT || sm_keys[key] == GLFW_PRESS)
 		return true;
 	return false;
 }
